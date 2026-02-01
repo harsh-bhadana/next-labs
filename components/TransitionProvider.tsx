@@ -107,3 +107,8 @@ export function useViewTransition() {
   }
   return context;
 }
+
+
+// Code Separation & Documentation - 2026-01-31 [2:26:31 pm]
+// Feature: View Transitions
+// Update: Added separation markers and logic summary comments.
