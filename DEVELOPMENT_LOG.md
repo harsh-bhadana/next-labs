@@ -9,3 +9,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Animated View Transitions
 - **Details**: Added TransitionProvider component to orchestrate navigation and transition states.
 - **Time**: 12:02:16 pm
+
+## [2026-02-02] - feat(view-transitions): add custom CSS keyframes for crossfade & slide
+
+- **Component**: Animated View Transitions
+- **Details**: Added Tailwind/CSS keyframes and classes for smooth custom page transitions.
+- **Time**: 3:37:38 pm
