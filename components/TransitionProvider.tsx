@@ -137,3 +137,8 @@ export function useViewTransition() {
 // Code Separation & Documentation - 2026-02-01 [3:13:56 pm]
 // Feature: View Transitions
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-02-01 [2:42:27 pm]
+// Feature: View Transitions
+// Update: Added contextual logic explanations regarding React 19 concurrent cycles.
