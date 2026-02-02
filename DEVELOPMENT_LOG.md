@@ -15,3 +15,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Animated View Transitions
 - **Details**: Added Tailwind/CSS keyframes and classes for smooth custom page transitions.
 - **Time**: 3:37:38 pm
+
+## [2026-02-02] - test(view-transitions): add component unit tests for transitions
+
+- **Component**: Animated View Transitions
+- **Details**: Wrote unit tests verifying active transition states and fallbacks for older browsers.
+- **Time**: 4:09:14 pm
