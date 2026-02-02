@@ -147,3 +147,8 @@ export function useViewTransition() {
 // Code Separation & Documentation - 2026-02-01 [2:58:54 pm]
 // Feature: View Transitions
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-02-01 [1:49:56 pm]
+// Feature: View Transitions
+// Update: Documented API fetch recovery options and error scenarios.
