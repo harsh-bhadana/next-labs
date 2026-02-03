@@ -21,3 +21,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Animated View Transitions
 - **Details**: Wrote unit tests verifying active transition states and fallbacks for older browsers.
 - **Time**: 4:09:14 pm
+
+## [2026-02-03] - feat(routing-lab): setup parallel intercepting routes layout
+
+- **Component**: Modal Gallery (Parallel & Intercepting Routes)
+- **Details**: Created @modal slot and intercepting folder (..)photo to capture routing gallery views.
+- **Time**: 1:57:39 pm
