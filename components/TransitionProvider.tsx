@@ -172,3 +172,8 @@ export function useViewTransition() {
 // Code Separation & Documentation - 2026-02-03 [4:17:51 pm]
 // Feature: View Transitions
 // Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
+
+
+// Code Separation & Documentation - 2026-02-03 [12:20:24 pm]
+// Feature: View Transitions
+// Update: Added JSDoc headers clarifying variables scope.
