@@ -27,3 +27,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Modal Gallery (Parallel & Intercepting Routes)
 - **Details**: Created @modal slot and intercepting folder (..)photo to capture routing gallery views.
 - **Time**: 1:57:39 pm
+
+## [2026-02-04] - feat(routing-lab): build interactive gallery grid layout
+
+- **Component**: Modal Gallery (Parallel & Intercepting Routes)
+- **Details**: Implemented modal overlays and close button handlers mapping to Next.js router transitions.
+- **Time**: 10:08:42 am
