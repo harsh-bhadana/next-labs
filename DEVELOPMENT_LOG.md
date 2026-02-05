@@ -33,3 +33,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Modal Gallery (Parallel & Intercepting Routes)
 - **Details**: Implemented modal overlays and close button handlers mapping to Next.js router transitions.
 - **Time**: 10:08:42 am
+
+## [2026-02-05] - test(routing-lab): add accessibility specs for interception modal
+
+- **Component**: Modal Gallery (Parallel & Intercepting Routes)
+- **Details**: Verified ESC key closing, focus trapping inside the modal view, and backbutton popstate.
+- **Time**: 10:10:40 am
