@@ -202,3 +202,8 @@ export function useViewTransition() {
 // Code Separation & Documentation - 2026-02-04 [4:45:31 pm]
 // Feature: View Transitions
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-02-05 [4:38:04 pm]
+// Feature: View Transitions
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
