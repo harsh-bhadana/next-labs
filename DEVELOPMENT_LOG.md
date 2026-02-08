@@ -63,3 +63,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Optimistic Mutations
 - **Details**: Added React 19 useOptimistic hook for instant status toggling during network roundtrips.
 - **Time**: 5:33:02 pm
+
+## [2026-02-08] - perf(performance-lab): add synthetic latency throttling for testing
+
+- **Component**: Optimistic Mutations
+- **Details**: Added artificial delay to mock server actions to profile visual lag behavior.
+- **Time**: 10:27:20 am
