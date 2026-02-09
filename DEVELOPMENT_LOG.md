@@ -69,3 +69,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Optimistic Mutations
 - **Details**: Added artificial delay to mock server actions to profile visual lag behavior.
 - **Time**: 10:27:20 am
+
+## [2026-02-09] - feat(performance-lab): integrate useDeferredValue for log list filtering
+
+- **Component**: Search-as-you-go Filter
+- **Details**: Setup useDeferredValue hook to offload list updates without locking character key inputs.
+- **Time**: 10:38:37 am
