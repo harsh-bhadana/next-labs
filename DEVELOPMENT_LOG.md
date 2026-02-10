@@ -75,3 +75,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Search-as-you-go Filter
 - **Details**: Setup useDeferredValue hook to offload list updates without locking character key inputs.
 - **Time**: 10:38:37 am
+
+## [2026-02-10] - test(performance-lab): simulate high load performance with 10k items
+
+- **Component**: Search-as-you-go Filter
+- **Details**: Profiled memory footprints and frame-rates with large datasets under deferred state rendering.
+- **Time**: 12:47:05 pm
