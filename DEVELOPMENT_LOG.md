@@ -87,3 +87,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: The Memo-Free Dashboard
 - **Details**: Enabled Next.js experimental compiler optimization flags and resolved local compilation warnings.
 - **Time**: 12:12:19 pm
+
+## [2026-02-11] - refactor(performance-lab): remove manual useMemo optimization hooks
+
+- **Component**: The Memo-Free Dashboard
+- **Details**: Cleaned up obsolete useMemo and useCallback hooks in dashboard cards to delegate optimizations.
+- **Time**: 4:26:01 pm
