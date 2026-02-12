@@ -67,3 +67,8 @@ export function TransitionLink({ children, href, className, ...props }: Transiti
 // Code Separation & Documentation - 2026-02-10 [9:00:56 am]
 // Feature: Transition Link
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-02-11 [10:33:38 am]
+// Feature: Transition Link
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
