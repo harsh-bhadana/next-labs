@@ -97,3 +97,8 @@ export function TransitionLink({ children, href, className, ...props }: Transiti
 // Code Separation & Documentation - 2026-02-12 [5:16:38 pm]
 // Feature: Transition Link
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-02-12 [1:48:47 pm]
+// Feature: Transition Link
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
