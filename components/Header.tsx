@@ -57,3 +57,8 @@ export function Header() {
 // Code Separation & Documentation - 2026-02-15 [9:19:33 am]
 // Feature: Global Header Navigation
 // Update: Added JSDoc headers clarifying variables scope.
+
+
+// Code Separation & Documentation - 2026-02-15 [2:25:20 pm]
+// Feature: Global Header Navigation
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
