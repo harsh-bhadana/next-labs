@@ -129,3 +129,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: BFF Stock Ticker
 - **Details**: Added API unit testing for geo-location response codes and caching controls.
 - **Time**: 12:16:34 pm
+
+## [2026-02-16] - feat(rendering): handle dynamic searchParams filtering on server side
+
+- **Component**: Zero-JS Data Table
+- **Details**: Bound search, sort, and pagination triggers entirely to URL parameters.
+- **Time**: 2:52:12 pm
