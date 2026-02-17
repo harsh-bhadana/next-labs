@@ -141,3 +141,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Zero-JS Data Table
 - **Details**: Built zero-JS tabular grids featuring CSS-driven sorting indicators and fallback loading layouts.
 - **Time**: 12:50:04 pm
+
+## [2026-02-17] - feat(rendering): configure experimental Partial Prerendering on server
+
+- **Component**: PPR Dashboard
+- **Details**: Enabled dynamicIO and ppr features in next.config.ts framework options.
+- **Time**: 10:35:53 am
