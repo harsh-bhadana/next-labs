@@ -147,3 +147,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: PPR Dashboard
 - **Details**: Enabled dynamicIO and ppr features in next.config.ts framework options.
 - **Time**: 10:35:53 am
+
+## [2026-02-17] - feat(rendering): place slow-loading cards in Suspense boundaries
+
+- **Component**: PPR Dashboard
+- **Details**: Orchestrated nested Suspense fallback layouts to check incremental streaming order.
+- **Time**: 4:17:13 pm
