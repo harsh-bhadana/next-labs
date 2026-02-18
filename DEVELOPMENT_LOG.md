@@ -159,3 +159,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: PPR Dashboard
 - **Details**: Used DevTools profiling to measure performance improvements of PPR vs full dynamic rendering.
 - **Time**: 1:17:11 pm
+
+## [2026-02-18] - feat(rendering): implement cacheLife profiles on specimen data hooks
+
+- **Component**: The 'use cache' Directive
+- **Details**: Applied experimental 'use cache' directive to optimize database functions.
+- **Time**: 3:20:07 pm
