@@ -153,3 +153,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: PPR Dashboard
 - **Details**: Orchestrated nested Suspense fallback layouts to check incremental streaming order.
 - **Time**: 4:17:13 pm
+
+## [2026-02-18] - perf(rendering): profile initial static shell TTFB load speeds
+
+- **Component**: PPR Dashboard
+- **Details**: Used DevTools profiling to measure performance improvements of PPR vs full dynamic rendering.
+- **Time**: 1:17:11 pm
