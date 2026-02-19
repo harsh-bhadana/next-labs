@@ -165,3 +165,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: The 'use cache' Directive
 - **Details**: Applied experimental 'use cache' directive to optimize database functions.
 - **Time**: 3:20:07 pm
+
+## [2026-02-19] - test(rendering): verify caching eviction times on dynamic segments
+
+- **Component**: The 'use cache' Directive
+- **Details**: Added caching test suites to check automated cache-eviction lifetimes.
+- **Time**: 12:23:35 pm
