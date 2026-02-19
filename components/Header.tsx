@@ -77,3 +77,8 @@ export function Header() {
 // Code Separation & Documentation - 2026-02-18 [9:47:56 am]
 // Feature: Global Header Navigation
 // Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
+
+
+// Code Separation & Documentation - 2026-02-18 [5:17:46 pm]
+// Feature: Global Header Navigation
+// Update: Added separation markers and logic summary comments.
