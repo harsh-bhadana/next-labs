@@ -92,3 +92,8 @@ export function Header() {
 // Code Separation & Documentation - 2026-02-19 [12:40:14 pm]
 // Feature: Global Header Navigation
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-02-19 [4:17:54 pm]
+// Feature: Global Header Navigation
+// Update: Added JSDoc headers clarifying variables scope.
