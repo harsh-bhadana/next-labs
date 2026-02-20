@@ -82,3 +82,8 @@ export function Header() {
 // Code Separation & Documentation - 2026-02-18 [5:17:46 pm]
 // Feature: Global Header Navigation
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-02-19 [2:40:01 pm]
+// Feature: Global Header Navigation
+// Update: Documented boundary recovery options and custom error scenarios.
