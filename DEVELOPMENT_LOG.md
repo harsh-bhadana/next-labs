@@ -177,3 +177,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Infinite Scroll Native
 - **Details**: Added dynamic observer triggering server list loading using progressive enhancement.
 - **Time**: 3:23:11 pm
+
+## [2026-02-20] - style(rendering): polish loading skeletons and scroll threshold
+
+- **Component**: Infinite Scroll Native
+- **Details**: Integrated observer intersections and formatted visual pending spinner animations.
+- **Time**: 3:36:48 pm
