@@ -201,3 +201,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Pure Next.js i18n
 - **Details**: Created dictionary loaders for English and Spanish locales mapping to [locale] routes.
 - **Time**: 5:29:21 pm
+
+## [2026-02-24] - feat(routing-lab): integrate edge middleware language detection
+
+- **Component**: Pure Next.js i18n
+- **Details**: Redirect client visits dynamically based on Accept-Language browser headers.
+- **Time**: 3:22:53 pm
