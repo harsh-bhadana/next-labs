@@ -38,3 +38,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+// Code Separation & Documentation - 2026-02-23 [10:42:03 am]
+// Feature: Root Layout configuration
+// Update: Documented boundary recovery options and custom error scenarios.
