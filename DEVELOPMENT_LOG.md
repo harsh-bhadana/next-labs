@@ -207,3 +207,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Pure Next.js i18n
 - **Details**: Redirect client visits dynamically based on Accept-Language browser headers.
 - **Time**: 3:22:53 pm
+
+## [2026-02-24] - feat(i18n-edge-lab): switch route configurations to edge runtime
+
+- **Component**: Edge Runtime RSC
+- **Details**: Set runtime = 'edge' on dynamic routes for global caching improvements.
+- **Time**: 1:20:37 pm
