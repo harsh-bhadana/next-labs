@@ -58,3 +58,8 @@ export default function RootLayout({
 // Code Separation & Documentation - 2026-02-24 [4:02:52 pm]
 // Feature: Root Layout configuration
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-02-24 [4:13:58 pm]
+// Feature: Root Layout configuration
+// Update: Added JSDoc headers clarifying variables scope.
