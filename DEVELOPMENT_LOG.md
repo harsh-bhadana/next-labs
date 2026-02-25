@@ -213,3 +213,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Edge Runtime RSC
 - **Details**: Set runtime = 'edge' on dynamic routes for global caching improvements.
 - **Time**: 1:20:37 pm
+
+## [2026-02-25] - perf(i18n-edge-lab): optimize edge-caching TTL headers
+
+- **Component**: Edge Runtime RSC
+- **Details**: Optimized server responses with Cache-Control headers optimized for CDN edge caching.
+- **Time**: 4:13:03 pm
