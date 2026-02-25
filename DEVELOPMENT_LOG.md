@@ -219,3 +219,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Edge Runtime RSC
 - **Details**: Optimized server responses with Cache-Control headers optimized for CDN edge caching.
 - **Time**: 4:13:03 pm
+
+## [2026-02-25] - feat(devx-lab): implement instrumentation server hooks
+
+- **Component**: Instrumentation & Tracing
+- **Details**: Configured register() hook to profile runtime startup performance.
+- **Time**: 4:12:57 pm
