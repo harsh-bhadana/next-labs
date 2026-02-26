@@ -225,3 +225,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Instrumentation & Tracing
 - **Details**: Configured register() hook to profile runtime startup performance.
 - **Time**: 4:12:57 pm
+
+## [2026-02-26] - feat(devx-lab): capture server-side error events
+
+- **Component**: Instrumentation & Tracing
+- **Details**: Hooked into onRequestError to stream exceptions to diagnostic loggers.
+- **Time**: 1:51:18 pm
