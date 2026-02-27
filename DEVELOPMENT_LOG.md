@@ -237,3 +237,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Custom 404 Routing
 - **Details**: Designed contextual not-found.tsx pages to customize error bounds per route folder.
 - **Time**: 11:02:30 am
+
+## [2026-02-27] - test(devx-lab): write routing tests for notFound redirection
+
+- **Component**: Custom 404 Routing
+- **Details**: Wrote integration test routes triggering programmatic notFound() assertions.
+- **Time**: 9:35:56 am
