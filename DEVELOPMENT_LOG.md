@@ -231,3 +231,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Instrumentation & Tracing
 - **Details**: Hooked into onRequestError to stream exceptions to diagnostic loggers.
 - **Time**: 1:51:18 pm
+
+## [2026-02-27] - feat(devx-lab): add segment level not-found handlers
+
+- **Component**: Custom 404 Routing
+- **Details**: Designed contextual not-found.tsx pages to customize error bounds per route folder.
+- **Time**: 11:02:30 am
