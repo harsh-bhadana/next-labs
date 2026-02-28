@@ -93,3 +93,8 @@ export default function RootLayout({
 // Code Separation & Documentation - 2026-02-27 [3:57:50 pm]
 // Feature: Root Layout configuration
 // Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
+
+
+// Code Separation & Documentation - 2026-02-27 [2:26:51 pm]
+// Feature: Root Layout configuration
+// Update: Added separation markers and logic summary comments.
