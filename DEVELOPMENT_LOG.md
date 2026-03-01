@@ -249,3 +249,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Drag-and-Drop Kanban
 - **Details**: Built draggable Kanban task columns mapping list components to reactive array states.
 - **Time**: 2:57:09 pm
+
+## [2026-03-01] - feat(interactive-ui): connect task drag-drops to server persistence
+
+- **Component**: Drag-and-Drop Kanban
+- **Details**: Optimized updates using useOptimistic states to prevent latency on board reorder actions.
+- **Time**: 9:35:59 am
