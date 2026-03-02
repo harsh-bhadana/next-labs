@@ -255,3 +255,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Drag-and-Drop Kanban
 - **Details**: Optimized updates using useOptimistic states to prevent latency on board reorder actions.
 - **Time**: 9:35:59 am
+
+## [2026-03-02] - test(interactive-ui): verify drop position sorting assertions
+
+- **Component**: Drag-and-Drop Kanban
+- **Details**: Wrote unit checks asserting correct array element rearrangements after drops.
+- **Time**: 10:16:02 am
