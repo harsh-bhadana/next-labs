@@ -261,3 +261,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Drag-and-Drop Kanban
 - **Details**: Wrote unit checks asserting correct array element rearrangements after drops.
 - **Time**: 10:16:02 am
+
+## [2026-03-02] - feat(performance-lab): draw particle animation on Canvas API
+
+- **Component**: Concurrent Priority Scheduler
+- **Details**: Setup interactive 60fps canvas simulation tracking live UI updates.
+- **Time**: 3:36:18 pm
