@@ -267,3 +267,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Concurrent Priority Scheduler
 - **Details**: Setup interactive 60fps canvas simulation tracking live UI updates.
 - **Time**: 3:36:18 pm
+
+## [2026-03-03] - feat(performance-lab): wrap task filtering in useTransition hooks
+
+- **Component**: Concurrent Priority Scheduler
+- **Details**: Assigned list computations lower priority to keep animations smooth and clean.
+- **Time**: 9:23:00 am
