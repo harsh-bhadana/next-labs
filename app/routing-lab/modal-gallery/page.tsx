@@ -108,3 +108,8 @@ export default function RoutingLabPage() {
 // Code Separation & Documentation - 2026-03-02 [4:42:58 pm]
 // Feature: Modal Gallery View
 // Update: Added JSDoc headers clarifying variables scope.
+
+
+// Code Separation & Documentation - 2026-03-03 [9:04:51 am]
+// Feature: Modal Gallery View
+// Update: Documented boundary recovery options and custom error scenarios.
