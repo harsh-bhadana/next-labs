@@ -273,3 +273,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Concurrent Priority Scheduler
 - **Details**: Assigned list computations lower priority to keep animations smooth and clean.
 - **Time**: 9:23:00 am
+
+## [2026-03-04] - feat(performance-lab): design Jank Mode comparison toggle
+
+- **Component**: Concurrent Priority Scheduler
+- **Details**: Built dynamic toggle showing the visual differences between sync and deferred states.
+- **Time**: 3:41:57 pm
