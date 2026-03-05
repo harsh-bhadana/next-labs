@@ -118,3 +118,8 @@ export default function RoutingLabPage() {
 // Code Separation & Documentation - 2026-03-03 [10:17:57 am]
 // Feature: Modal Gallery View
 // Update: Added JSDoc headers clarifying variables scope.
+
+
+// Code Separation & Documentation - 2026-03-04 [9:54:32 am]
+// Feature: Modal Gallery View
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
