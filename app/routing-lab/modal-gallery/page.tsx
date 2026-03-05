@@ -123,3 +123,8 @@ export default function RoutingLabPage() {
 // Code Separation & Documentation - 2026-03-04 [9:54:32 am]
 // Feature: Modal Gallery View
 // Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
+
+
+// Code Separation & Documentation - 2026-03-04 [5:34:19 pm]
+// Feature: Modal Gallery View
+// Update: Documented boundary recovery options and custom error scenarios.
