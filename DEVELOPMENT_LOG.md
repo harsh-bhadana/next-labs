@@ -291,3 +291,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Progressive Form Wizard
 - **Details**: Configured standard HTML post fallbacks when client scripts are deactivated.
 - **Time**: 4:04:23 pm
+
+## [2026-03-05] - test(interactive-ui): check cookie session data restoration
+
+- **Component**: Progressive Form Wizard
+- **Details**: Verified multi-step values are properly loaded across browser sessions.
+- **Time**: 2:47:27 pm
