@@ -309,3 +309,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated framework tooling packages to match React 19 stable versions.
 - **Time**: 9:37:13 am
+
+## [2026-03-07] - docs: update API setup instructions inside readme
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated project specs and localized translation options in readme.md docs.
+- **Time**: 1:31:50 pm
