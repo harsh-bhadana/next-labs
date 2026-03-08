@@ -143,3 +143,8 @@ export default function RoutingLabPage() {
 // Code Separation & Documentation - 2026-03-06 [2:36:09 pm]
 // Feature: Modal Gallery View
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-03-07 [5:54:46 pm]
+// Feature: Modal Gallery View
+// Update: Added JSDoc headers clarifying variables scope.
