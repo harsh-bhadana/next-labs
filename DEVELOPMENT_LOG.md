@@ -321,3 +321,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Aligned typescript checks and linter options in eslint config files.
 - **Time**: 2:13:17 pm
+
+## [2026-03-09] - docs: update API setup instructions inside readme
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated project specs and localized translation options in readme.md docs.
+- **Time**: 9:46:59 am
