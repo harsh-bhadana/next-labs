@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Experiments
+
+### 🔬 [Zero-JS Data Table](file:///d:/Code/next-labs/app/experiments/zero-js-table/page.tsx)
+A high-performance data table featuring:
+- **0kb Client JS**: Core filtering logic runs entirely on the server.
+- **Next.js 15+ Pattern**: Utilizes `async searchParams` for modern RSC handling.
+- **Pure Dark Theme**: Optimized for a professional, distraction-free lab environment.
+
+---
+
 ## Getting Started
 
 First, run the development server:
