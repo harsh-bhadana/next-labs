@@ -345,3 +345,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated framework tooling packages to match React 19 stable versions.
 - **Time**: 4:50:56 pm
+
+## [2026-03-11] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 1:43:38 pm
