@@ -171,3 +171,8 @@ export default async function ServerCrudPage() {
     </div>
   );
 }
+
+
+// Code Separation & Documentation - 2026-03-11 [9:10:54 am]
+// Feature: Zero-State Server CRUD
+// Update: Segmented container layout blocks with inline separator comments.
