@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "Specimen Lab | Zero-JS Data Table",
@@ -35,7 +37,14 @@ export default async function ZeroJSTable({ searchParams }: { searchParams: any 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-slate-100 p-8 md:p-16 lg:p-24 flex flex-col items-center">
             <div className="w-full max-w-4xl space-y-12">
-                <header className="text-center space-y-4">
+                <header className="text-center space-y-4 flex flex-col items-center">
+                    <Link
+                        href="/"
+                        className="group flex w-fit items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition-colors mb-2"
+                    >
+                        <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+                        Back to Lab
+                    </Link>
                     <h1 className="text-5xl font-black tracking-tight text-white">
                         Specimen Lab
                     </h1>
