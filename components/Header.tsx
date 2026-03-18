@@ -9,7 +9,7 @@ export function Header() {
 
   const links = [
     { href: "/", label: "Rendering Labs", icon: FlaskConical },
-    { href: "/performance-lab/search-as-you-go", label: "The Performance Lab", icon: Zap },
+    { href: "/performance-lab", label: "The Performance Lab", icon: Zap },
   ];
 
   return (
