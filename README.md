@@ -1,12 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NextJS Labs
 
-## Experiments
+A collection of experiments and demonstrations exploring modern Next.js and React 19 capabilities. This repository isolates unique edge-cases, performance optimization techniques, and new API specimens.
 
-### 🔬 [Zero-JS Data Table](file:///d:/Code/next-labs/app/experiments/zero-js-table/page.tsx)
-A high-performance data table featuring:
-- **0kb Client JS**: Core filtering logic runs entirely on the server.
-- **Next.js 15+ Pattern**: Utilizes `async searchParams` for modern RSC handling.
-- **Pure Dark Theme**: Optimized for a professional, distraction-free lab environment.
+## 🧪 The Labs
+
+### 🎭 Interactive UI Lab
+- **[View Transitions](app/interactive-ui-lab/view-transitions/page.tsx)**: Utilizing the native CSS View Transitions API for seamless layout morphing across Next.js routing.
+
+### ⚡ Performance Lab
+- **[Optimistic Like Button](app/performance-lab/optimistic-like/page.tsx)**: Leveraging React 19's `useOptimistic` hook paired with Server Actions to create a highly responsive user interface.
+- **[Search-as-you-go](app/performance-lab/search-as-you-go/page.tsx)**: Showcasing the power of React 19's `useDeferredValue` hook to maintain a snappy UI while processing heavy operations.
+
+### 🧬 The Rendering Lab
+- **[Infinite Scroll Native](app/the-rendering/infinite-scroll/page.tsx)**: Server-side focused infinite scrolling using Server Actions and `useActionState` without client-side data fetching libraries.
+- **[PPR Dashboard](app/the-rendering/ppr-dashboard/page.tsx)**: Demonstrating Partial Prerendering (PPR) to stream dynamic data into instantly loaded static shells.
+- **[The `use cache` Specimen](app/the-rendering/use-cache-specimen/page.tsx)**: Exploring component-level caching introduced in Next.js 15+ using the `"use cache"` directive.
+- **[Zero-JS Data Table](app/the-rendering/zero-js-table/page.tsx)**: A high-performance server-filtered data table using Next.js 15 asynchronous searchParams, requiring 0kb of client-side JavaScript.
 
 ---
 
@@ -16,31 +25,7 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# or yarn dev / pnpm dev / bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000] with your browser to explore the root lab selection menu.
