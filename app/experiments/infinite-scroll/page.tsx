@@ -1,5 +1,7 @@
 import { InfiniteScrollList } from "./infinite-scroll-list";
 import { fetchMoreItems } from "./actions";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default async function InfiniteScrollPage() {
   const initialState = await fetchMoreItems({
@@ -11,13 +13,22 @@ export default async function InfiniteScrollPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 font-[family-name:var(--font-geist-sans)]">
       <div className="max-w-2xl mx-auto px-6 py-24 space-y-12">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">
-            Infinite Scroll
-          </h1>
-          <p className="text-lg text-neutral-500 dark:text-neutral-400">
-            A list that fetches more items using Server Actions and `useActionState`, managing pending state natively without any client-side data fetching library.
-          </p>
+        <div className="space-y-4 flex flex-col items-start">
+          <Link
+            href="/"
+            className="group flex w-fit items-center gap-2 text-sm font-medium text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors mb-2"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Back to Lab
+          </Link>
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white">
+              Infinite Scroll
+            </h1>
+            <p className="text-lg text-neutral-500 dark:text-neutral-400">
+              A list that fetches more items using Server Actions and `useActionState`, managing pending state natively without any client-side data fetching library.
+            </p>
+          </div>
         </div>
 
         <InfiniteScrollList initialState={initialState} />
