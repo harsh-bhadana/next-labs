@@ -5,7 +5,7 @@ const experiments = [
   {
     name: "Zero-JS Data Table",
     description: "A high-performance grid using Server Components and URL SearchParams (async) for fetching and filtering.",
-    href: "/experiments/zero-js-table",
+    href: "/the-rendering/zero-js-table",
     icon: <Database className="w-5 h-5" />,
     color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
     borderColor: "border-blue-500/20"
@@ -13,7 +13,7 @@ const experiments = [
   {
     name: "PPR Dashboard",
     description: "Uses the stable experimental.ppr to serve a static shell instantly while streaming dynamic user data into Suspense holes.",
-    href: "/experiments/ppr-dashboard",
+    href: "/the-rendering/ppr-dashboard",
     icon: <LayoutTemplate className="w-5 h-5" />,
     color: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
     borderColor: "border-purple-500/20"
@@ -21,7 +21,7 @@ const experiments = [
   {
     name: 'The "use cache" Specimen',
     description: "Demonstrates component-level caching using the new use cache directive and cacheLife profiles.",
-    href: "/experiments/use-cache-specimen",
+    href: "/the-rendering/use-cache-specimen",
     icon: <Zap className="w-5 h-5" />,
     color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
     borderColor: "border-amber-500/20"
@@ -29,7 +29,7 @@ const experiments = [
   {
     name: "Infinite Scroll w/ useActionState",
     description: "A list that fetches more items using Server Actions, managing pending state and data without a separate library.",
-    href: "/experiments/infinite-scroll",
+    href: "/the-rendering/infinite-scroll",
     icon: <RefreshCw className="w-5 h-5" />,
     color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
     borderColor: "border-emerald-500/20"
