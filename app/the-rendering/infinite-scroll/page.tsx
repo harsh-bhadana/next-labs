@@ -1,15 +1,22 @@
 import { InfiniteScrollList } from "./infinite-scroll-list";
 import { fetchMoreItems } from "./actions";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { Suspense } from "react";
 
-export default async function InfiniteScrollPage() {
+// --- Dynamic Content Component ---
+async function InfiniteScrollContent() {
   const initialState = await fetchMoreItems({
     items: [],
     page: -1,
     hasMore: true,
   });
 
+  return <InfiniteScrollList initialState={initialState} />;
+}
+
+// --- Main Page ---
+export default function InfiniteScrollPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 font-[family-name:var(--font-geist-sans)]">
       <div className="max-w-2xl mx-auto px-6 py-24 space-y-12">
@@ -31,7 +38,14 @@ export default async function InfiniteScrollPage() {
           </div>
         </div>
 
-        <InfiniteScrollList initialState={initialState} />
+        <Suspense fallback={
+          <div className="flex flex-col items-center justify-center p-12 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+             <Loader2 className="w-8 h-8 animate-spin text-zinc-400 mb-2" />
+             <p className="text-sm text-zinc-500">Retrieving stream...</p>
+          </div>
+        }>
+          <InfiniteScrollContent />
+        </Suspense>
       </div>
     </div>
   );

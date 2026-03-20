@@ -33,7 +33,9 @@ async function CachedComponent() {
       <div className="flex flex-col gap-2 font-mono text-sm">
         <div className="flex justify-between items-center py-2 px-3 bg-white dark:bg-black rounded-lg border border-zinc-200 dark:border-zinc-800">
           <span className="text-zinc-500">Timestamp:</span>
-          <span className="text-zinc-900 dark:text-zinc-100 font-semibold">{new Date(data.timestamp).toLocaleTimeString()}</span>
+          <span className="text-zinc-900 dark:text-zinc-100 font-semibold" suppressHydrationWarning>
+            {new Date(data.timestamp).toLocaleTimeString()}
+          </span>
         </div>
         <div className="flex justify-between items-center py-2 px-3 bg-white dark:bg-black rounded-lg border border-zinc-200 dark:border-zinc-800">
           <span className="text-zinc-500">Random ID:</span>

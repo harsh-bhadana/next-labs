@@ -10,6 +10,7 @@ A collection of experiments and demonstrations exploring modern Next.js and Reac
 ### ⚡ Performance Lab
 - **[Optimistic Like Button](app/performance-lab/optimistic-like/page.tsx)**: Leveraging React 19's `useOptimistic` hook paired with Server Actions to create a highly responsive user interface.
 - **[Search-as-you-go](app/performance-lab/search-as-you-go/page.tsx)**: Showcasing the power of React 19's `useDeferredValue` hook to maintain a snappy UI while processing heavy operations.
+- **[Specimen 06: The Memo-Free UI](app/performance-lab/memo-free/page.tsx)**: A high-density dashboard proving 60fps performance via the React Compiler without `useMemo` or `useCallback`.
 
 ### 🧬 The Rendering Lab
 - **[Infinite Scroll Native](app/the-rendering/infinite-scroll/page.tsx)**: Server-side focused infinite scrolling using Server Actions and `useActionState` without client-side data fetching libraries.
