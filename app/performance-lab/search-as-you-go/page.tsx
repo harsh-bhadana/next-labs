@@ -4,12 +4,12 @@ import { useState, useDeferredValue, useMemo, Suspense } from "react";
 import Link from "next/link";
 import { ArrowLeft, Search } from "lucide-react";
 
-// Generate heavy mocked data
+// Generate stable mocked data
 const MOCK_ITEMS = Array.from({ length: 10000 }).map((_, i) => ({
   id: i,
   title: `Performance Item ${i}`,
   category: i % 3 === 0 ? "Fast" : i % 2 === 0 ? "Medium" : "Heavy",
-  value: Math.random().toString(36).substring(7),
+  value: `VAL-${i.toString(36).padStart(4, '0')}`,
 }));
 
 export default function PerformanceLabPage() {
