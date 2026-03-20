@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw } from "lucide-react";
+import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield } from "lucide-react";
 
 const experiments = [
   {
@@ -25,6 +25,14 @@ const experiments = [
     icon: <Zap className="w-5 h-5" />,
     color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
     borderColor: "border-amber-500/20"
+  },
+  {
+    name: "Specimen 03: The proxy.ts Interceptor",
+    description: "Uses the new Next.js 16 Proxy layer for centralized JWT rotation, geo-fencing, and request fingerprinting.",
+    href: "/the-rendering/proxy-specimen",
+    icon: <Shield className="w-5 h-5" />,
+    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+    borderColor: "border-indigo-500/20"
   },
   {
     name: "Infinite Scroll w/ useActionState",

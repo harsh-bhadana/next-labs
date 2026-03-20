@@ -14,7 +14,8 @@ A collection of experiments and demonstrations exploring modern Next.js and Reac
 ### 🧬 The Rendering Lab
 - **[Infinite Scroll Native](app/the-rendering/infinite-scroll/page.tsx)**: Server-side focused infinite scrolling using Server Actions and `useActionState` without client-side data fetching libraries.
 - **[PPR Dashboard](app/the-rendering/ppr-dashboard/page.tsx)**: Demonstrating Partial Prerendering (PPR) to stream dynamic data into instantly loaded static shells.
-- **[The `use cache` Specimen](app/the-rendering/use-cache-specimen/page.tsx)**: Exploring component-level caching introduced in Next.js 15+ using the `"use cache"` directive.
+- [x] **[The `use cache` Specimen](app/the-rendering/use-cache-specimen/page.tsx)**: Exploring component-level caching introduced in Next.js 15+ using the `"use cache"` directive.
+- **[Specimen 03: The proxy.ts Interceptor](app/the-rendering/proxy-specimen/page.tsx)**: Utilizing the new Next.js 16 Proxy layer for centralized JWT rotation, geo-fencing, and request fingerprinting.
 - **[Zero-JS Data Table](app/the-rendering/zero-js-table/page.tsx)**: A high-performance server-filtered data table using Next.js 15 asynchronous searchParams, requiring 0kb of client-side JavaScript.
 
 ---
