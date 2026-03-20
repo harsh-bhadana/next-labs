@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, ThumbsUp } from "lucide-react";
+import { ArrowRight, Search, ThumbsUp, Zap } from "lucide-react";
 
 const experiments = [
   {
@@ -17,6 +17,14 @@ const experiments = [
     icon: <ThumbsUp className="w-5 h-5" />,
     color: "bg-pink-500/10 text-pink-600 dark:text-pink-400",
     borderColor: "border-pink-500/20"
+  },
+  {
+    name: "Specimen 06: The Memo-Free UI",
+    description: "A dashboard with 50+ auto-updating elements, proving 60fps performance via the React Compiler without useMemo or useCallback.",
+    href: "/performance-lab/memo-free",
+    icon: <Zap className="w-5 h-5 text-amber-500" />,
+    color: "bg-zinc-900 text-zinc-100",
+    borderColor: "border-zinc-800"
   }
 ];
 
