@@ -453,3 +453,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Added developer documentation detailing async status states.
 - **Time**: 1:12:45 pm
+
+## [2026-03-22] - docs: update API setup instructions inside readme
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated project specs and localized translation options in readme.md docs.
+- **Time**: 9:54:44 am
