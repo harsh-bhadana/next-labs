@@ -471,3 +471,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Merged conflicting styles in globals.css variables.
 - **Time**: 10:15:25 am
+
+## [2026-03-24] - docs: add inline comments explaining useActionState
+
+- **Component**: Refinement & Maintenance
+- **Details**: Added developer documentation detailing async status states.
+- **Time**: 2:22:33 pm
