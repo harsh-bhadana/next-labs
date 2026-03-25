@@ -158,3 +158,8 @@ export default function OptimisticLikePage() {
 // Code Separation & Documentation - 2026-03-23 [12:35:20 pm]
 // Feature: Optimistic Mutations Likes
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-03-24 [2:20:56 pm]
+// Feature: Optimistic Mutations Likes
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
