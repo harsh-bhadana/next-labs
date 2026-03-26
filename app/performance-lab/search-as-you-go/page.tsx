@@ -115,3 +115,8 @@ export default function PerformanceLabPage() {
     </div>
   );
 }
+
+
+// Code Separation & Documentation - 2026-03-25 [2:05:40 pm]
+// Feature: Search-as-you-go Filter
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
