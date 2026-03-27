@@ -489,3 +489,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Merged conflicting styles in globals.css variables.
 - **Time**: 1:58:01 pm
+
+## [2026-03-27] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 1:00:52 pm
