@@ -513,3 +513,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated project specs and localized translation options in readme.md docs.
 - **Time**: 5:37:18 pm
+
+## [2026-03-30] - chore: update build script triggers and linter rules
+
+- **Component**: Refinement & Maintenance
+- **Details**: Aligned typescript checks and linter options in eslint config files.
+- **Time**: 4:51:33 pm
