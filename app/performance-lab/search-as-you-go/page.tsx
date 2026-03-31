@@ -180,3 +180,8 @@ export default function PerformanceLabPage() {
 // Code Separation & Documentation - 2026-03-29 [12:15:40 pm]
 // Feature: Search-as-you-go Filter
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-03-30 [11:21:04 am]
+// Feature: Search-as-you-go Filter
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
