@@ -519,3 +519,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Aligned typescript checks and linter options in eslint config files.
 - **Time**: 4:51:33 pm
+
+## [2026-03-31] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 5:23:19 pm
