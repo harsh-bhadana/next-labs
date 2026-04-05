@@ -316,3 +316,8 @@ function SensorCard({ sensor }: { sensor: SensorData }) {
 // Code Separation & Documentation - 2026-04-04 [10:31:28 am]
 // Feature: Memo-Free Dashboard
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-04-04 [9:09:48 am]
+// Feature: Memo-Free Dashboard
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
