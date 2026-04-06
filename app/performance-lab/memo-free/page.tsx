@@ -331,3 +331,8 @@ function SensorCard({ sensor }: { sensor: SensorData }) {
 // Code Separation & Documentation - 2026-04-04 [4:28:45 pm]
 // Feature: Memo-Free Dashboard
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-04-05 [11:46:08 am]
+// Feature: Memo-Free Dashboard
+// Update: Added JSDoc headers clarifying variables scope.
