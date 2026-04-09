@@ -591,3 +591,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Polished sidebar navigation components to support mobile screen scales.
 - **Time**: 9:18:47 am
+
+## [2026-04-09] - docs: update API setup instructions inside readme
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated project specs and localized translation options in readme.md docs.
+- **Time**: 12:45:39 pm
