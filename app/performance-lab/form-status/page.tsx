@@ -466,3 +466,8 @@ export default function FormStatusPage() {
 // Code Separation & Documentation - 2026-04-11 [10:18:33 am]
 // Feature: Streaming Form Status
 // Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
+
+
+// Code Separation & Documentation - 2026-04-12 [10:00:23 am]
+// Feature: Streaming Form Status
+// Update: Documented boundary recovery options and custom error scenarios.
