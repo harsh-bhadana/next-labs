@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, ThumbsUp, Zap, FormInput } from "lucide-react";
+import { ArrowRight, Search, ThumbsUp, Zap, FormInput, RefreshCw } from "lucide-react";
 
 const experiments = [
   {
@@ -33,6 +33,14 @@ const experiments = [
     icon: <FormInput className="w-5 h-5" />,
     color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
     borderColor: "border-indigo-500/20"
+  },
+  {
+    name: "Zero-State Server CRUD",
+    description: "A full CRUD todo app where every operation (create, update, delete, reorder) is a Server Action and the page is a pure Server Component — zero client state.",
+    href: "/performance-lab/server-crud",
+    icon: <RefreshCw className="w-5 h-5" />,
+    color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    borderColor: "border-emerald-500/20"
   }
 ];
 
