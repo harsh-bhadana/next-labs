@@ -8,7 +8,7 @@ export type StepResult = {
 };
 
 // Simulate shipping calculation latency
-export async function processShipping(formData: FormData): Promise<StepResult> {
+export async function processShipping(_prev: StepResult | null, formData: FormData): Promise<StepResult> {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const fullName = formData.get("fullName") as string;
@@ -28,7 +28,7 @@ export async function processShipping(formData: FormData): Promise<StepResult> {
 }
 
 // Simulate payment gateway latency
-export async function processPayment(formData: FormData): Promise<StepResult> {
+export async function processPayment(_prev: StepResult | null, formData: FormData): Promise<StepResult> {
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const cardNumber = formData.get("cardNumber") as string;
@@ -55,7 +55,7 @@ export async function processPayment(formData: FormData): Promise<StepResult> {
 }
 
 // Simulate order confirmation
-export async function processConfirmation(formData: FormData): Promise<StepResult> {
+export async function processConfirmation(_prev: StepResult | null, formData: FormData): Promise<StepResult> {
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
   const email = formData.get("email") as string;

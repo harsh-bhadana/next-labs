@@ -1,21 +1,18 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
-import { useState, useRef } from "react";
+import { useActionState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
-  Package,
   CreditCard,
   Mail,
   Loader2,
   CheckCircle2,
   XCircle,
   ChevronRight,
-  Database,
   Truck,
   ShieldCheck,
-  PartyPopper,
 } from "lucide-react";
 import {
   processShipping,
@@ -193,35 +190,29 @@ function StepResultBanner({ result }: { result: StepResult }) {
   );
 }
 
-// ─── Step card (each wraps its own <form>) ───────────────────────────────────
-type StepConfig = {
+// ─── Self-contained Step Card ────────────────────────────────────────────────
+// Each card owns its state via useActionState — zero parent state needed.
+function StepCard({
+  number,
+  title,
+  icon,
+  accentColor,
+  serverAction,
+  fields,
+  submitLabel,
+}: {
   number: number;
   title: string;
   icon: React.ReactNode;
   accentColor: string;
-  action: (formData: FormData) => Promise<StepResult>;
+  serverAction: (prev: StepResult | null, formData: FormData) => Promise<StepResult>;
   fields: React.ReactNode;
   submitLabel: string;
-};
-
-function StepCard({
-  config,
-  result,
-  onResult,
-}: {
-  config: StepConfig;
-  result: StepResult | null;
-  onResult: (result: StepResult) => void;
 }) {
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const handleAction = async (formData: FormData) => {
-    const res = await config.action(formData);
-    onResult(res);
-    if (res.success && formRef.current) {
-      // Don't reset — keep values visible after success
-    }
-  };
+  // useActionState: the React 19 way to manage form results.
+  // The server action receives (prevState, formData) automatically.
+  // No useState, no setX, no onSubmit handler, no wrapper.
+  const [result, formAction, isPending] = useActionState(serverAction, null);
 
   const isCompleted = result?.success;
 
@@ -242,18 +233,18 @@ function StepCard({
             flex items-center justify-center w-10 h-10 rounded-xl border text-sm font-bold
             ${isCompleted
               ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-              : `${config.accentColor}`
+              : accentColor
             }
           `}
         >
-          {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : config.icon}
+          {isCompleted ? <CheckCircle2 className="w-5 h-5" /> : icon}
         </div>
         <div className="flex flex-col">
           <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">
-            Step {config.number}
+            Step {number}
           </span>
           <h3 className="text-base font-semibold tracking-tight text-zinc-100">
-            {config.title}
+            {title}
           </h3>
         </div>
         {isCompleted && (
@@ -263,17 +254,17 @@ function StepCard({
         )}
       </div>
 
-      {/* The actual <form> — useFormStatus reads from this boundary */}
-      <form ref={formRef} action={handleAction} className="p-6 flex flex-col gap-5">
-        {/* GlobalProgressBar is inside the form so it can read THIS form's status */}
+      {/* The <form> — useFormStatus children read from THIS form boundary */}
+      <form action={formAction} className="p-6 flex flex-col gap-5">
+        {/* GlobalProgressBar reads pending from this <form> */}
         <GlobalProgressBar />
 
-        {config.fields}
+        {fields}
 
         {result && <StepResultBanner result={result} />}
 
         <SubmitButton
-          label={config.submitLabel}
+          label={submitLabel}
           icon={<ChevronRight className="w-4 h-4" />}
         />
       </form>
@@ -282,79 +273,9 @@ function StepCard({
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// MAIN PAGE
+// MAIN PAGE — Zero useState. Zero setX. Pure composition.
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function FormStatusPage() {
-  const [results, setResults] = useState<Record<number, StepResult>>({});
-
-  const completedCount = Object.values(results).filter((r) => r.success).length;
-  const totalSteps = 3;
-
-  const steps: StepConfig[] = [
-    {
-      number: 1,
-      title: "Shipping Address",
-      icon: <Truck className="w-5 h-5" />,
-      accentColor: "bg-blue-500/10 border-blue-500/30 text-blue-400",
-      action: processShipping,
-      submitLabel: "Validate & Calculate Rate",
-      fields: (
-        <>
-          <FormInput label="Full Name" name="fullName" placeholder="John Doe" />
-          <FormInput label="Street Address" name="address" placeholder="123 Next.js Blvd" />
-          <div className="grid grid-cols-2 gap-4">
-            <FormInput label="City" name="city" placeholder="San Francisco" />
-            <FormInput label="ZIP Code" name="zip" placeholder="94107" />
-          </div>
-        </>
-      ),
-    },
-    {
-      number: 2,
-      title: "Payment Details",
-      icon: <CreditCard className="w-5 h-5" />,
-      accentColor: "bg-purple-500/10 border-purple-500/30 text-purple-400",
-      action: processPayment,
-      submitLabel: "Pre-Authorize Payment",
-      fields: (
-        <>
-          <FormInput
-            label="Card Number"
-            name="cardNumber"
-            placeholder="4242 4242 4242 4242"
-          />
-          <div className="grid grid-cols-2 gap-4">
-            <FormInput label="Expiry" name="expiry" placeholder="12/28" />
-            <FormInput label="CVV" name="cvv" type="password" placeholder="•••" />
-          </div>
-        </>
-      ),
-    },
-    {
-      number: 3,
-      title: "Confirm & Place Order",
-      icon: <Mail className="w-5 h-5" />,
-      accentColor: "bg-amber-500/10 border-amber-500/30 text-amber-400",
-      action: processConfirmation,
-      submitLabel: "Place Order",
-      fields: (
-        <>
-          <FormInput
-            label="Confirmation Email"
-            name="email"
-            type="email"
-            placeholder="you@example.com"
-          />
-          <FormTextarea
-            label="Order Notes (Optional)"
-            name="notes"
-            placeholder="Gift wrap, leave at door, etc."
-          />
-        </>
-      ),
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-blue-500/30">
       {/* Background */}
@@ -392,126 +313,105 @@ export default function FormStatusPage() {
               <code className="text-zinc-300 bg-zinc-800 px-1 py-0.5 rounded text-sm">
                 &lt;form&gt;
               </code>{" "}
-              with a Server Action. Submit buttons, inputs, and the global progress bar
+              with a Server Action. Submit buttons, inputs, and the progress bar
               all react to pending state via{" "}
               <code className="text-zinc-300 bg-zinc-800 px-1 py-0.5 rounded text-sm">
                 useFormStatus
               </code>{" "}
-              — without a single line of state management.
+              — with zero <code className="text-zinc-300 bg-zinc-800 px-1 py-0.5 rounded text-sm">useState</code> in the entire page.
+              Each step manages its own result via{" "}
+              <code className="text-zinc-300 bg-zinc-800 px-1 py-0.5 rounded text-sm">
+                useActionState
+              </code>.
             </p>
           </div>
         </header>
 
-        {/* Progress overview */}
-        <div className="flex items-center gap-4 p-5 rounded-2xl bg-zinc-900/50 border border-zinc-800">
-          <div
-            className={`flex items-center justify-center w-12 h-12 rounded-xl border ${
-              completedCount === totalSteps
-                ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400"
-                : "bg-blue-500/10 border-blue-500/30 text-blue-400"
-            }`}
-          >
-            {completedCount === totalSteps ? (
-              <PartyPopper className="w-6 h-6" />
-            ) : (
-              <Package className="w-6 h-6" />
-            )}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold">
-                {completedCount === totalSteps
-                  ? "All steps complete!"
-                  : `Checkout Progress`}
-              </span>
-              <span className="text-xs font-mono text-zinc-500">
-                {completedCount}/{totalSteps}
-              </span>
-            </div>
-            <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all duration-700 ease-out"
-                style={{ width: `${(completedCount / totalSteps) * 100}%` }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Step forms */}
+        {/* Step forms — each is fully self-contained */}
         <div className="flex flex-col gap-6">
-          {steps.map((step) => (
-            <StepCard
-              key={step.number}
-              config={step}
-              result={results[step.number] ?? null}
-              onResult={(res) =>
-                setResults((prev) => ({ ...prev, [step.number]: res }))
-              }
-            />
-          ))}
+          <StepCard
+            number={1}
+            title="Shipping Address"
+            icon={<Truck className="w-5 h-5" />}
+            accentColor="bg-blue-500/10 border-blue-500/30 text-blue-400"
+            serverAction={processShipping}
+            submitLabel="Validate & Calculate Rate"
+            fields={
+              <>
+                <FormInput label="Full Name" name="fullName" placeholder="John Doe" />
+                <FormInput label="Street Address" name="address" placeholder="123 Next.js Blvd" />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormInput label="City" name="city" placeholder="San Francisco" />
+                  <FormInput label="ZIP Code" name="zip" placeholder="94107" />
+                </div>
+              </>
+            }
+          />
+
+          <StepCard
+            number={2}
+            title="Payment Details"
+            icon={<CreditCard className="w-5 h-5" />}
+            accentColor="bg-purple-500/10 border-purple-500/30 text-purple-400"
+            serverAction={processPayment}
+            submitLabel="Pre-Authorize Payment"
+            fields={
+              <>
+                <FormInput
+                  label="Card Number"
+                  name="cardNumber"
+                  placeholder="4242 4242 4242 4242"
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormInput label="Expiry" name="expiry" placeholder="12/28" />
+                  <FormInput label="CVV" name="cvv" type="password" placeholder="•••" />
+                </div>
+              </>
+            }
+          />
+
+          <StepCard
+            number={3}
+            title="Confirm & Place Order"
+            icon={<Mail className="w-5 h-5" />}
+            accentColor="bg-amber-500/10 border-amber-500/30 text-amber-400"
+            serverAction={processConfirmation}
+            submitLabel="Place Order"
+            fields={
+              <>
+                <FormInput
+                  label="Confirmation Email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                />
+                <FormTextarea
+                  label="Order Notes (Optional)"
+                  name="notes"
+                  placeholder="Gift wrap, leave at door, etc."
+                />
+              </>
+            }
+          />
         </div>
 
-        {/* State Inspector */}
-        <div className="flex flex-col gap-4 p-6 bg-black/40 backdrop-blur-sm rounded-2xl border border-zinc-800 font-mono text-sm">
-          <div className="flex items-center gap-2 text-zinc-500 mb-1 font-sans font-medium uppercase tracking-wider text-xs">
-            <Database className="w-4 h-4" /> State Inspector
-          </div>
-          <p className="text-zinc-500 text-xs font-sans leading-relaxed">
-            Every component below uses{" "}
-            <code className="text-zinc-400">useFormStatus()</code> to read
-            pending state from its nearest{" "}
-            <code className="text-zinc-400">&lt;form&gt;</code> ancestor.
-            Zero props drilled. Zero context providers. Zero{" "}
-            <code className="text-zinc-400">useState</code>.
-          </p>
-          <div className="h-px bg-zinc-800" />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {steps.map((step) => {
-              const r = results[step.number];
-              return (
-                <div
-                  key={step.number}
-                  className={`flex flex-col gap-1 p-3 rounded-xl border ${
-                    r?.success
-                      ? "border-emerald-500/20 bg-emerald-500/5"
-                      : r && !r.success
-                      ? "border-red-500/20 bg-red-500/5"
-                      : "border-zinc-800 bg-zinc-900/30"
-                  }`}
-                >
-                  <span className="text-[10px] text-zinc-500 uppercase">
-                    Step {step.number}
-                  </span>
-                  <span
-                    className={`text-xs font-semibold ${
-                      r?.success
-                        ? "text-emerald-400"
-                        : r && !r.success
-                        ? "text-red-400"
-                        : "text-zinc-600"
-                    }`}
-                  >
-                    {r?.success ? "✓ Settled" : r ? "✗ Failed" : "Pending"}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Key concept callout */}
-          <div className="mt-2 p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/10 text-indigo-300/80">
-            <div className="flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5 text-indigo-400" />
-              <div className="text-xs leading-relaxed font-sans">
-                <span className="font-bold text-indigo-300">Key Insight:</span>{" "}
-                <code className="text-indigo-400">useFormStatus</code> reads the
-                pending state of the nearest parent{" "}
-                <code className="text-indigo-400">&lt;form&gt;</code>. This means
-                the <code className="text-indigo-400">SubmitButton</code>,{" "}
-                <code className="text-indigo-400">FormInput</code>, and{" "}
-                <code className="text-indigo-400">GlobalProgressBar</code> all
-                self-manage their disabled/loading state — zero prop drilling required.
-              </div>
+        {/* Architecture explainer */}
+        <div className="flex flex-col gap-4 p-6 bg-black/40 backdrop-blur-sm rounded-2xl border border-zinc-800">
+          <div className="flex items-start gap-3">
+            <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5 text-indigo-400" />
+            <div className="text-sm leading-relaxed text-zinc-400">
+              <span className="font-bold text-indigo-300">Zero useState architecture:</span>{" "}
+              Each <code className="text-indigo-400">StepCard</code> owns its result via{" "}
+              <code className="text-indigo-400">useActionState</code> — the React 19 primitive
+              that wires a Server Action directly to a form. The parent page component is a pure
+              function with no hooks at all. Meanwhile{" "}
+              <code className="text-indigo-400">SubmitButton</code>,{" "}
+              <code className="text-indigo-400">FormInput</code>, and{" "}
+              <code className="text-indigo-400">GlobalProgressBar</code> each call{" "}
+              <code className="text-indigo-400">useFormStatus()</code> to self-manage
+              their loading/disabled state from the nearest{" "}
+              <code className="text-indigo-400">&lt;form&gt;</code> boundary — zero prop drilling,
+              zero callbacks.
             </div>
           </div>
         </div>
