@@ -1,7 +1,5 @@
 import { 
   Plus, 
-  Trash2, 
-  Check, 
   ChevronUp, 
   ChevronDown, 
   ArrowLeft,
@@ -14,9 +12,6 @@ import Link from "next/link";
 import { getTodos } from "./data";
 import { 
   addTodoAction, 
-  toggleTodoAction, 
-  deleteTodoAction, 
-  reorderTodoAction 
 } from "./actions";
 import { FormStatusButton, ToggleButton, DeleteButton, ReorderButton } from "./todo-client";
 

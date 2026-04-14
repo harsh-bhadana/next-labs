@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Cpu, Activity, ShieldCheck, Database } from "lucide-react";
+import { ArrowLeft, Cpu, Activity, Database } from "lucide-react";
 import { StocksDashboard } from "./StockTicker";
 
 export default function BffStocksPage() {

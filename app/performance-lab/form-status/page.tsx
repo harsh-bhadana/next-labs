@@ -212,7 +212,7 @@ function StepCard({
   // useActionState: the React 19 way to manage form results.
   // The server action receives (prevState, formData) automatically.
   // No useState, no setX, no onSubmit handler, no wrapper.
-  const [result, formAction, isPending] = useActionState(serverAction, null);
+  const [result, formAction] = useActionState(serverAction, null);
 
   const isCompleted = result?.success;
 

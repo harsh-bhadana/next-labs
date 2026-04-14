@@ -36,7 +36,7 @@ const generateItems = (page: number): Item[] => {
   });
 };
 
-export async function fetchMoreItems(prevState: State, formData?: FormData): Promise<State> {
+export async function fetchMoreItems(prevState: State): Promise<State> {
   // Simulate network delay to make the loading state visible
   await new Promise((resolve) => setTimeout(resolve, 800));
 

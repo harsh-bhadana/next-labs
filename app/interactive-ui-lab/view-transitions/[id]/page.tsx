@@ -69,7 +69,7 @@ async function DetailContent({ params }: { params: Promise<{ id: string }> }) {
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-zinc-600 dark:text-zinc-400">
               <li><strong className="text-zinc-900 dark:text-white">viewTransitionName:</strong> Unique IDs bind the card, image, text, and badge across routes.</li>
-              <li><strong className="text-zinc-900 dark:text-white">document.startViewTransition:</strong> Captured in our custom <code>&lt;TransitionLink&gt;</code> component before resolving Next's router path.</li>
+              <li><strong className="text-zinc-900 dark:text-white">document.startViewTransition:</strong> Captured in our custom <code>&lt;TransitionLink&gt;</code> component before resolving Next&apos;s router path.</li>
             </ul>
           </div>
           

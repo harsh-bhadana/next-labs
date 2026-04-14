@@ -3,6 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPhotoById } from "../../data";
 import { ArrowLeft, Download, Share2, Info } from "lucide-react";
+import { photos } from "../../data";
+
+export function generateStaticParams() {
+  return photos.map((photo) => ({ id: photo.id }));
+}
+
 
 export default async function PhotoPage({
   params,

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Maximize2, Map, Globe, Cpu } from "lucide-react";
+import { ArrowRight, Maximize2, Map, Globe } from "lucide-react";
 
 const experiments = [
   {

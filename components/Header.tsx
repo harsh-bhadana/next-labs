@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FlaskConical, LayoutTemplate, Database, Zap, RefreshCw, Home, Sparkles, Map } from "lucide-react";
+import { FlaskConical, LayoutTemplate, Zap, Sparkles, Map } from "lucide-react";
 
 export function Header() {
   const pathname = usePathname();

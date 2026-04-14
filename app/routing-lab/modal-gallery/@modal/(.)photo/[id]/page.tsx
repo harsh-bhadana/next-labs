@@ -3,6 +3,12 @@ import { notFound } from "next/navigation";
 import { getPhotoById } from "../../../data";
 import { Modal } from "../../../modal";
 import { Info, Maximize, Share2 } from "lucide-react";
+import { photos } from "../../../data";
+
+export function generateStaticParams() {
+  return photos.map((photo) => ({ id: photo.id }));
+}
+
 
 export default async function PhotoModal({
   params,

@@ -5,8 +5,6 @@ import {
   Plus, 
   Trash2, 
   Check, 
-  ChevronUp, 
-  ChevronDown, 
   Loader2 
 } from "lucide-react";
 import { toggleTodoAction, deleteTodoAction, reorderTodoAction } from "./actions";
