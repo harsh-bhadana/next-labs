@@ -7,16 +7,13 @@ import {
   Activity,
   RefreshCw,
   ArrowLeft,
-  Maximize2,
   Gauge,
-  Timer,
-  LayoutGrid
+  Timer
 } from "lucide-react";
 import Link from "next/link";
 
 // --- Types & Constants ---
 const GRID_SIZE = 50;
-const TICK_RATE = 16;  // ~60fps
 
 type SensorData = {
   id: number;
@@ -56,7 +53,6 @@ export default function MemoFreeLab() {
   useEffect(() => {
     setHasMounted(true);
     let animationFrameId: number;
-    let lastTick = performance.now();
     let batchOffset = 0;
 
     const loop = (time: number) => {

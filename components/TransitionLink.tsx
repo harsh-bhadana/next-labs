@@ -12,7 +12,7 @@ interface TransitionLinkProps extends LinkProps, Omit<React.AnchorHTMLAttributes
 
 export function TransitionLink({ children, href, className, ...props }: TransitionLinkProps) {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const handleTransition = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();

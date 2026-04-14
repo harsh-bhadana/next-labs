@@ -1,7 +1,7 @@
 "use client";
 
 import { Home, LayoutDashboard, Settings, User, LogOut, Search } from "lucide-react";
-import { Link, Button, Input } from "@heroui/react";
+import { Link } from "@heroui/react";
 
 export function Sidebar() {
   return (

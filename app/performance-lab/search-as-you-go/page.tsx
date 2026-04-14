@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useDeferredValue, useMemo, Suspense } from "react";
+import { useState, useDeferredValue, useMemo } from "react";
 import Link from "next/link";
 import { ArrowLeft, Search } from "lucide-react";
 
@@ -23,7 +23,7 @@ export default function PerformanceLabPage() {
   const filteredItems = useMemo(() => {
     if (!deferredQuery) return MOCK_ITEMS.slice(0, 100); // just show some
 
-    let start = performance.now();
+    const start = performance.now();
     while (performance.now() - start < 20) {
       // Artificially block the thread for 20ms to simulate complex logic per render
     }

@@ -24,7 +24,11 @@ const statusStyles: Record<string, string> = {
 };
 
 // --- Dynamic Table Component ---
-async function TableContent({ searchParams }: { searchParams: Promise<any> }) {
+interface SearchParams {
+    q?: string;
+}
+
+async function TableContent({ searchParams }: { searchParams: Promise<SearchParams> }) {
     const awaitedParams = await searchParams;
     const query = awaitedParams.q?.toLowerCase() || "";
 
@@ -92,7 +96,7 @@ async function TableContent({ searchParams }: { searchParams: Promise<any> }) {
 }
 
 // --- Main Page ---
-export default function ZeroJSTable({ searchParams }: { searchParams: Promise<any> }) {
+export default function ZeroJSTable({ searchParams }: { searchParams: Promise<SearchParams> }) {
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-slate-100 p-8 md:p-16 lg:p-24 flex flex-col items-center font-sans">
             <div className="w-full max-w-4xl space-y-12">
