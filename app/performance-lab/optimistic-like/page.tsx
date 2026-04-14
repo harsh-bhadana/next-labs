@@ -32,7 +32,7 @@ export default function OptimisticLikePage() {
 
           <div className="flex flex-col gap-2">
             <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
-              Optimistic "Like" Button
+              Optimistic &quot;Like&quot; Button
             </h1>
             <p className="text-lg text-zinc-600 dark:text-zinc-400">
               Demonstrating the new React 19 <code className="bg-zinc-200 dark:bg-zinc-800 px-1 py-0.5 rounded text-sm">useOptimistic</code> hook.

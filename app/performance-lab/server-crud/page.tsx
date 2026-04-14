@@ -155,8 +155,8 @@ export default async function ServerCrudPage() {
           <div className="flex flex-col gap-1">
             <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">Why this matters?</h4>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              In traditional React, you'd need `useEffect`, `useState`, and complex sync logic. Here, the "Mental Model" is significantly simplified: <strong>Form Submission &rarr; Server Mutation &rarr; Page Re-render.</strong> 
-              It's as simple as PHP/Rails but with the performance and interactivity of React.
+              In traditional React, you&apos;d need `useEffect`, `useState`, and complex sync logic. Here, the &quot;Mental Model&quot; is significantly simplified: <strong>Form Submission &rarr; Server Mutation &rarr; Page Re-render.</strong> 
+              It&apos;s as simple as PHP/Rails but with the performance and interactivity of React.
             </p>
           </div>
         </div>

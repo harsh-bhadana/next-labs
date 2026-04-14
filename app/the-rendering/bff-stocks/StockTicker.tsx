@@ -13,8 +13,26 @@ import {
 } from "lucide-react";
 
 // --- The External Store Logic ---
+interface Stock {
+  symbol: string;
+  price: number;
+  change: number;
+}
+
+interface Source {
+  name: string;
+  latency: number;
+  status: string;
+}
+
+interface StoreData {
+  stocks: Stock[];
+  timestamp: string;
+  sources: Source[];
+}
+
 // This is a "Zero-React" store that polls the BFF every 2s
-let data: any = null;
+let data: StoreData | null = null;
 let listeners: Array<() => void> = [];
 
 const stockStore = {
@@ -66,7 +84,7 @@ export function StocksDashboard() {
     <div className="flex flex-col gap-8">
       {/* Real-time Ticker Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {store.stocks.map((stock: any) => (
+        {store.stocks.map((stock: Stock) => (
           <div 
             key={stock.symbol}
             className="p-6 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl flex flex-col gap-1 hover:shadow-lg transition-all group"
@@ -111,7 +129,7 @@ export function StocksDashboard() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {store.sources.map((source: any) => (
+            {store.sources.map((source: Source) => (
               <div key={source.name} className="flex flex-col gap-2">
                  <div className="flex items-center gap-2">
                     <Server className="w-3.5 h-3.5 text-zinc-500" />

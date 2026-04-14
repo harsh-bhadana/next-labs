@@ -71,7 +71,7 @@ export default function BffStocksPage() {
             </div>
             <h3 className="font-bold text-sm uppercase tracking-wider">Sync State</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
-              React 19's <code className="text-emerald-500">useSyncExternalStore</code> ensures the polling state is synchronized across components with zero re-render flicker.
+              React 19&apos;s <code className="text-emerald-500">useSyncExternalStore</code> ensures the polling state is synchronized across components with zero re-render flicker.
             </p>
           </div>
         </section>

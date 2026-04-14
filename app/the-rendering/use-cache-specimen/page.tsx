@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 
 // This function simulates a slow DB/API call and caches the result for 1 hour.
 // 1. It must be async
-// 2. We use 'use cache' directive to tell Next.js to cache the component's output or data.
+// 2. We use &apos;use cache&apos; directive to tell Next.js to cache the component&apos;s output or data.
 async function getCachedData() {
   "use cache";
   // cacheLife is available when 'use cache' is enabled.
