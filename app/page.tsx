@@ -1,7 +1,15 @@
 import Link from "next/link";
-import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Map } from "lucide-react";
+import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Map, Activity } from "lucide-react";
 
 const experiments = [
+  {
+    name: "Route Handler as a BFF",
+    description: "A stock ticker that polls an aggregating Route Handler, demonstrating caching and useSyncExternalStore.",
+    href: "/the-rendering/bff-stocks",
+    icon: <Activity className="w-5 h-5 text-amber-500" />,
+    color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    borderColor: "border-amber-500/20"
+  },
   {
     name: "Zero-JS Data Table",
     description: "A high-performance grid using Server Components and URL SearchParams (async) for fetching and filtering.",
