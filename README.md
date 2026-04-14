@@ -1,33 +1,56 @@
-# NextJS Labs
+# 🧪 NextJS Labs
 
-A collection of experiments and demonstrations exploring modern Next.js and React 19 capabilities. This repository isolates unique edge-cases, performance optimization techniques, and new API specimens.
-
-## 🧪 The Labs
-
-### 🎭 Interactive UI Lab
-- **[View Transitions](app/interactive-ui-lab/view-transitions/page.tsx)**: Utilizing the native CSS View Transitions API for seamless layout morphing across Next.js routing.
-
-### ⚡ Performance Lab
-- **[Optimistic Like Button](app/performance-lab/optimistic-like/page.tsx)**: Leveraging React 19's `useOptimistic` hook paired with Server Actions to create a highly responsive user interface.
-- **[Search-as-you-go](app/performance-lab/search-as-you-go/page.tsx)**: Showcasing the power of React 19's `useDeferredValue` hook to maintain a snappy UI while processing heavy operations.
-- **[Specimen 06: The Memo-Free UI](app/performance-lab/memo-free/page.tsx)**: A high-density dashboard proving 60fps performance via the React Compiler without `useMemo` or `useCallback`.
-
-### 🧬 The Rendering Lab
-- **[Infinite Scroll Native](app/the-rendering/infinite-scroll/page.tsx)**: Server-side focused infinite scrolling using Server Actions and `useActionState` without client-side data fetching libraries.
-- **[PPR Dashboard](app/the-rendering/ppr-dashboard/page.tsx)**: Demonstrating Partial Prerendering (PPR) to stream dynamic data into instantly loaded static shells.
-- [x] **[The `use cache` Specimen](app/the-rendering/use-cache-specimen/page.tsx)**: Exploring component-level caching introduced in Next.js 15+ using the `"use cache"` directive.
-- **[Specimen 03: The proxy.ts Interceptor](app/the-rendering/proxy-specimen/page.tsx)**: Utilizing the new Next.js 16 Proxy layer for centralized JWT rotation, geo-fencing, and request fingerprinting.
-- **[Zero-JS Data Table](app/the-rendering/zero-js-table/page.tsx)**: A high-performance server-filtered data table using Next.js 15 asynchronous searchParams, requiring 0kb of client-side JavaScript.
+A high-performance laboratory for experimental Next.js 15/16 and React 19 specimens. This repository isolates advanced architectural patterns, performance optimization primitives, and new API demonstrations.
 
 ---
 
-## Getting Started
+## 🔬 The Specimens
 
-First, run the development server:
+### 🎭 Interactive & UI Lab
+Focus on buttery-smooth transitions and modern browser APIs.
+*   **[View Transitions API](app/interactive-ui-lab/view-transitions/page.tsx)**: Native layout morphing across Next.js routing.
+*   **[Modal Gallery](app/routing-lab/modal-gallery/page.tsx)**: ⚡ **New** Implementation of Parallel & Intercepting Routes for a sub-frame modal experience.
 
-```bash
-npm run dev
-# or yarn dev / pnpm dev / bun dev
-```
+### ⚡ Performance Lab
+Zero-latency patterns and React Compiler proof-of-concepts.
+*   **[Specimen 07: Zero-State Server CRUD](app/performance-lab/server-crud/page.tsx)**: 🚀 **New** A CRUD application with 0kb client-side state, powered entirely by Server Actions and `revalidatePath()`.
+*   **[Optimistic Mutations](app/performance-lab/optimistic-like/page.tsx)**: Leveraging React 19's `useOptimistic` for instant feedback on server roundtrips.
+*   **[Search-as-you-go](app/performance-lab/search-as-you-go/page.tsx)**: Fluid search filtering using `useDeferredValue` to maintain 60fps under heavy load.
+*   **[The Memo-Free Dashboard](app/performance-lab/memo-free/page.tsx)**: Proving the power of the **React Compiler** without manual `useMemo` or `useCallback`.
 
-Open [http://localhost:3000] with your browser to explore the root lab selection menu.
+### 🧬 The Rendering Lab
+Server-side innovations and edge-computing experiments.
+*   **[Specimen 08: BFF Stock Ticker](app/the-rendering/bff-stocks/page.tsx)**: 📈 **New** The Backend-for-Frontend pattern using `useSyncExternalStore` for real-time aggregated feeds.
+*   **[Zero-JS Data Table](app/the-rendering/zero-js-table/page.tsx)**: High-performance server-filtered tables using asynchronous `searchParams`.
+*   **[PPR Dashboard](app/the-rendering/ppr-dashboard/page.tsx)**: **Partial Prerendering** (PPR) for instant static shells with streamed dynamic content.
+*   **[The `use cache` Directive](app/the-rendering/use-cache-specimen/page.tsx)**: Experimental component-level caching.
+*   **[Infinite Scroll Native](app/the-rendering/infinite-scroll/page.tsx)**: Progressive enhancement for infinite feeds using `useActionState`.
+*   **[Proxy Interceptors](app/the-rendering/proxy-specimen/page.tsx)**: Next.js 16 Proxy layer for JWT rotation and geo-fencing.
+
+---
+
+## 🛠️ Tech Stack & Pillars
+
+- **Next.js 16+**: Utilizing Turbopack, Partial Prerender, and Cache Components.
+- **React 19**: Powered by the React Compiler (Auto-memoization).
+- **Architecture**: Zero-JS where possible, Server Action driven mutations.
+- **Styling**: Tailwind CSS for responsive, immersive aesthetics.
+
+---
+
+## 🚀 Getting Started
+
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+2.  **Run the lab**:
+    ```bash
+    npm run dev
+    ```
+3.  **Build production profile**:
+    ```bash
+    npm run build
+    ```
+
+Open [http://localhost:3000](http://localhost:3000) to dive into the dashboard.
