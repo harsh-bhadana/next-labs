@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, ThumbsUp, Zap } from "lucide-react";
+import { ArrowRight, Search, ThumbsUp, Zap, FormInput } from "lucide-react";
 
 const experiments = [
   {
@@ -25,6 +25,14 @@ const experiments = [
     icon: <Zap className="w-5 h-5 text-amber-500" />,
     color: "bg-zinc-900 text-zinc-100",
     borderColor: "border-zinc-800"
+  },
+  {
+    name: "Streaming useFormStatus Form",
+    description: "A multi-step checkout where each <form> uses Server Actions. Buttons, inputs, and a progress bar all react via useFormStatus — zero useState.",
+    href: "/performance-lab/form-status",
+    icon: <FormInput className="w-5 h-5" />,
+    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+    borderColor: "border-indigo-500/20"
   }
 ];
 
