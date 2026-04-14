@@ -21,7 +21,7 @@ export default async function PhotoPage({
       <div className="w-full max-w-5xl flex flex-col gap-12">
         {/* Navigation */}
         <Link
-          href="/routing-lab"
+          href="/routing-lab/modal-gallery"
           className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />

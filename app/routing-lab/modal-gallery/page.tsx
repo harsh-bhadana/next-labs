@@ -9,11 +9,11 @@ export default function RoutingLabPage() {
       {/* Header */}
       <header className="flex flex-col gap-6">
         <Link
-          href="/"
+          href="/routing-lab"
           className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          Back to Labs
+          Back to Routing Lab
         </Link>
 
         <div className="flex flex-col gap-4">
@@ -42,7 +42,7 @@ export default function RoutingLabPage() {
         {photos.map((photo) => (
           <Link
             key={photo.id}
-            href={`/routing-lab/photo/${photo.id}`}
+            href={`/routing-lab/modal-gallery/photo/${photo.id}`}
             scroll={false}
             className="group relative aspect-[4/5] overflow-hidden rounded-3xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all hover:shadow-2xl hover:shadow-indigo-500/10"
           >
