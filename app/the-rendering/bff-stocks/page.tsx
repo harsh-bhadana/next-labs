@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowLeft, Cpu, Activity, Database } from "lucide-react";
 import { StocksDashboard } from "./StockTicker";
 
 export default function BffStocksPage() {
@@ -15,8 +14,7 @@ export default function BffStocksPage() {
             href="/"
             className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            Back to Labs
+            ← Back to Labs
           </Link>
 
           <div className="flex flex-col gap-4">
@@ -46,30 +44,21 @@ export default function BffStocksPage() {
         {/* Architecture Specs */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-4">
-            <div className="p-2 w-fit rounded-lg bg-blue-500/10 text-blue-500">
-               <Cpu className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-sm uppercase tracking-wider">Aggregation</h3>
+            <h3 className="font-bold text-sm uppercase tracking-wider">🖥️ Aggregation</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
               The BFF combines 3 separate requests into one. The client makes only 1 call, reducing network overhead and complexity.
             </p>
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-4">
-            <div className="p-2 w-fit rounded-lg bg-pink-500/10 text-pink-500">
-               <Database className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-sm uppercase tracking-wider">Edge Caching</h3>
+            <h3 className="font-bold text-sm uppercase tracking-wider">📦 Edge Caching</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
                Using <code className="text-pink-500">revalidate = 2</code>, the Route Handler caches the aggregated result. Even if 10,000 users poll, the upstream APIs are protected.
             </p>
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-4">
-            <div className="p-2 w-fit rounded-lg bg-emerald-500/10 text-emerald-500">
-               <Activity className="w-5 h-5" />
-            </div>
-            <h3 className="font-bold text-sm uppercase tracking-wider">Sync State</h3>
+            <h3 className="font-bold text-sm uppercase tracking-wider">🔄 Sync State</h3>
             <p className="text-xs text-zinc-500 leading-relaxed">
               React 19&apos;s <code className="text-emerald-500">useSyncExternalStore</code> ensures the polling state is synchronized across components with zero re-render flicker.
             </p>

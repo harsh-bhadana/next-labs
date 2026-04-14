@@ -7,8 +7,7 @@ import { ArrowLeft } from "lucide-react";
 // 1. It must be async
 // 2. We use &apos;use cache&apos; directive to tell Next.js to cache the component&apos;s output or data.
 async function getCachedData() {
-  "use cache";
-  // cacheLife is available when 'use cache' is enabled.
+  // Use cache directive removed as it's unstable in this environment.
   // Using a custom or predefined profile like 'hours'
   // cacheLife('hours'); // Next 15+ has experimental cacheLife profiles
 

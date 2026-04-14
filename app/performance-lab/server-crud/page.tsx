@@ -1,13 +1,3 @@
-import { 
-  Plus, 
-  ChevronUp, 
-  ChevronDown, 
-  ArrowLeft,
-  Server,
-  Database,
-  RefreshCw,
-  Info
-} from "lucide-react";
 import Link from "next/link";
 import { getTodos } from "./data";
 import { 
@@ -27,13 +17,12 @@ export default async function ServerCrudPage() {
       <div className="relative max-w-2xl mx-auto px-6 py-20 flex flex-col gap-12">
         {/* Header */}
         <header className="flex flex-col gap-6">
-          <Link
-            href="/performance-lab"
-            className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            Back to Performance Lab
-          </Link>
+            <Link
+              href="/performance-lab"
+              className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+            >
+              ← Back to Performance Lab
+            </Link>
 
           <div className="flex flex-col gap-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 w-fit rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-medium">
@@ -49,7 +38,7 @@ export default async function ServerCrudPage() {
             </h1>
             
             <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Every operation — create, update, delete, and reorder — is a <strong>Server Action</strong>. 
+              Every operation &mdash; create, update, delete, and reorder &mdash; is a <strong>Server Action</strong>. 
               The page itself is a pure <strong>Server Component</strong> that re-renders with fresh data 
               after each mutation via <code className="bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-sm text-indigo-600 dark:text-indigo-400 font-mono">revalidatePath()</code>. 
               Zero client-side state. Zero sync logic.
@@ -68,7 +57,7 @@ export default async function ServerCrudPage() {
               className="w-full pl-12 pr-32 py-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm outline-none transition-all focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500/50"
             />
             <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
-              <Plus className="w-5 h-5" />
+              ➕
             </div>
             <div className="absolute right-2 top-1/2 -translate-y-1/2">
               <FormStatusButton />
@@ -80,7 +69,7 @@ export default async function ServerCrudPage() {
         <section className="flex flex-col gap-3">
           {todos.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 px-6 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 text-zinc-500 bg-zinc-50/50 dark:bg-zinc-900/20">
-              <RefreshCw className="w-8 h-8 mb-4 opacity-20" />
+              <div className="text-3xl mb-4 opacity-20">🔄</div>
               <p className="text-sm font-medium uppercase tracking-widest opacity-50">Empty Archive</p>
             </div>
           ) : (
@@ -101,13 +90,13 @@ export default async function ServerCrudPage() {
                     id={todo.id} 
                     direction="up" 
                     disabled={index === 0}
-                    icon={<ChevronUp className="w-3 h-3" />} 
+                    icon="▲" 
                   />
                   <ReorderButton 
                     id={todo.id} 
                     direction="down" 
                     disabled={index === todos.length - 1}
-                    icon={<ChevronDown className="w-3 h-3" />} 
+                    icon="▼" 
                   />
                 </div>
 
@@ -130,8 +119,7 @@ export default async function ServerCrudPage() {
         <section className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-5 rounded-2xl bg-zinc-900/5 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-3">
             <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-              <Server className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">Server Environment</span>
+              <span className="text-xs font-bold uppercase tracking-wider">🖥️ Server Environment</span>
             </div>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               Every single line of this page is generated on the server. There is no `useState` tracking the todo list.
@@ -140,8 +128,7 @@ export default async function ServerCrudPage() {
           
           <div className="p-5 rounded-2xl bg-zinc-900/5 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-3">
             <div className="flex items-center gap-2 text-pink-600 dark:text-pink-400">
-              <Database className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">Data Hydration</span>
+              <span className="text-xs font-bold uppercase tracking-wider">💾 Data Hydration</span>
             </div>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               When an action finishes, Next.js smartly re-fetches only the data needed, resulting in a seamless UX.
@@ -151,11 +138,10 @@ export default async function ServerCrudPage() {
 
         {/* Technical Explainer */}
         <div className="flex items-start gap-3 p-5 rounded-2xl bg-indigo-500/5 border border-indigo-500/10">
-          <Info className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />
           <div className="flex flex-col gap-1">
-            <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">Why this matters?</h4>
+            <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">💡 Why this matters?</h4>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              In traditional React, you&apos;d need `useEffect`, `useState`, and complex sync logic. Here, the &quot;Mental Model&quot; is significantly simplified: <strong>Form Submission &rarr; Server Mutation &rarr; Page Re-render.</strong> 
+              In traditional React, you&apos;d need <code>useEffect</code>, <code>useState</code>, and complex sync logic. Here, the &quot;Mental Model&quot; is significantly simplified: <strong>Form Submission &mdash;&gt; Server Mutation &mdash;&gt; Page Re-render.</strong> 
               It&apos;s as simple as PHP/Rails but with the performance and interactivity of React.
             </p>
           </div>

@@ -45,6 +45,9 @@ const stockStore = {
   getSnapshot() {
     return data;
   },
+  getServerSnapshot() {
+    return null; // Return null on server to trigger skeleton
+  },
   async startPolling() {
     const fetchStocks = async () => {
       try {
@@ -69,12 +72,17 @@ if (typeof window !== "undefined") {
 }
 
 export function StocksDashboard() {
-  const store = useSyncExternalStore(stockStore.subscribe, stockStore.getSnapshot);
+  // Pass getServerSnapshot for React 18/19 compatibility
+  const store = useSyncExternalStore(
+    stockStore.subscribe, 
+    stockStore.getSnapshot,
+    stockStore.getServerSnapshot
+  );
 
   if (!store) {
     return (
       <div className="flex flex-col items-center justify-center p-20 bg-white dark:bg-zinc-900 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 animate-pulse">
-        <Zap className="w-8 h-8 text-amber-500 mb-4" />
+        <div className="text-3xl mb-4">⚡</div>
         <p className="text-zinc-500 font-medium uppercase tracking-widest text-xs">Connecting to Market BFF...</p>
       </div>
     );
@@ -94,7 +102,7 @@ export function StocksDashboard() {
                 {stock.symbol}
               </span>
               <div className={`p-1.5 rounded-lg ${stock.change > 0 ? "bg-emerald-500/10 text-emerald-500" : "bg-red-500/10 text-red-500"}`}>
-                {stock.change > 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                {stock.change > 0 ? "📈" : "📉"}
               </div>
             </div>
             <div className="text-3xl font-bold tracking-tight">
@@ -109,22 +117,18 @@ export function StocksDashboard() {
 
       {/* Aggregate Status Panel */}
       <div className="p-8 bg-zinc-900 rounded-[2.5rem] border border-zinc-800 shadow-2xl overflow-hidden relative">
-        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-          <Globe className="w-32 h-32 text-white" />
-        </div>
-
         <div className="relative flex flex-col gap-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <h3 className="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
-                <Radio className="w-4 h-4 text-emerald-500" />
-                Live BFF Aggregation Feed
+                📡 Live BFF Aggregation Feed
               </h3>
             </div>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-zinc-400">
-               <Clock className="w-3.3 h-3.3" />
-               Last Sync: {new Date(store.timestamp).toLocaleTimeString()}
+               <span suppressHydrationWarning>
+                Last Sync: {new Date(store.timestamp).toLocaleTimeString()}
+               </span>
             </div>
           </div>
 
@@ -132,8 +136,7 @@ export function StocksDashboard() {
             {store.sources.map((source: Source) => (
               <div key={source.name} className="flex flex-col gap-2">
                  <div className="flex items-center gap-2">
-                    <Server className="w-3.5 h-3.5 text-zinc-500" />
-                    <span className="text-xs font-bold text-zinc-200">{source.name}</span>
+                    <span className="text-xs font-bold text-zinc-200">🗄️ {source.name}</span>
                  </div>
                  <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
                     <div 
@@ -148,12 +151,10 @@ export function StocksDashboard() {
 
           <div className="pt-6 border-t border-white/5 flex items-center justify-between text-[11px] text-zinc-500 italic">
             <span className="flex items-center gap-2">
-              <Zap className="w-3.5 h-3.5 text-amber-500" />
-              Auto-Polling Enabled (2000ms)
+              ⚡ Auto-Polling Enabled (2000ms)
             </span>
             <span className="flex items-center gap-2">
-              <History className="w-3.5 h-3.5" />
-              Source: Edge Cached API
+              📋 Source: Edge Cached API
             </span>
           </div>
         </div>
