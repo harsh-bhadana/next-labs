@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield } from "lucide-react";
+import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Maximize2 } from "lucide-react";
 
 const experiments = [
   {
@@ -41,6 +41,14 @@ const experiments = [
     icon: <RefreshCw className="w-5 h-5" />,
     color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
     borderColor: "border-emerald-500/20"
+  },
+  {
+    name: "Modal Gallery (Advanced Routing)",
+    description: "A photo gallery where clicking an image opens an intercepted modal route, but direct linking serves a full-page view.",
+    href: "/routing-lab",
+    icon: <Maximize2 className="w-5 h-5" />,
+    color: "bg-red-500/10 text-red-600 dark:text-red-400",
+    borderColor: "border-red-500/20"
   }
 ];
 
