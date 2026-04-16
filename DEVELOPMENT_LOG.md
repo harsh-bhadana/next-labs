@@ -651,3 +651,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Polished sidebar navigation components to support mobile screen scales.
 - **Time**: 9:43:06 am
+
+## [2026-04-16] - docs: add inline comments explaining useActionState
+
+- **Component**: Refinement & Maintenance
+- **Details**: Added developer documentation detailing async status states.
+- **Time**: 2:35:40 pm
