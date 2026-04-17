@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FlaskConical, LayoutTemplate, Zap, Sparkles, Map } from "lucide-react";
+import { FlaskConical, LayoutTemplate, Zap, Sparkles, Map, Globe, Wrench } from "lucide-react";
 
 export function Header() {
   const pathname = usePathname();
@@ -11,6 +11,8 @@ export function Header() {
     { href: "/", label: "Rendering Labs", icon: FlaskConical },
     { href: "/performance-lab", label: "The Performance Lab", icon: Zap },
     { href: "/routing-lab", label: "The Routing Lab", icon: Map },
+    { href: "/i18n-edge-lab", label: "i18n & Edge Lab", icon: Globe },
+    { href: "/devx-lab", label: "DevX & Tooling", icon: Wrench },
     { href: "/interactive-ui-lab", label: "Interactive & UI Lab", icon: Sparkles },
   ];
 
