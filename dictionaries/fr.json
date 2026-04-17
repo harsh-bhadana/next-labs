@@ -1,0 +1,15 @@
+{
+  "specimen": {
+    "title": "Routage Internationalisé",
+    "description": "Cette page est rendue à l'aide de dictionnaires JSON côté serveur. Aucune bibliothèque i18n côté client n'a été utilisée.",
+    "current_locale": "Langue Sélectionnée",
+    "switch_language": "Changer de Langue",
+    "features": {
+      "middleware": "Le Middleware détecte votre langue préférée à partir de l'en-tête Accept-Language.",
+      "dynamic_routes": "Les segments dynamiques [locale] gèrent la structure du routage.",
+      "server_components": "Les Server Components récupèrent UNIQUEMENT le dictionnaire requis, réduisant ainsi la taille du bundle.",
+      "zero_js": "Zéro JavaScript côté client est requis pour la traduction initiale."
+    },
+    "back_to_lab": "Retour au Lab de Routage"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "specimen": {
+    "title": "Internationalized Routing",
+    "description": "This page is rendered using server-side JSON dictionaries. No client-side i18n libraries were used.",
+    "current_locale": "Selected Language",
+    "switch_language": "Change Language",
+    "features": {
+      "middleware": "Middleware detects your preferred language from the Accept-Language header.",
+      "dynamic_routes": "Dynamic [locale] segments handle the routing structure.",
+      "server_components": "Server Components fetch ONLY the required dictionary, reducing bundle size.",
+      "zero_js": "Zero client-side JavaScript is required for the initial translation."
+    },
+    "back_to_lab": "Back to Routing Lab"
+  }
+}

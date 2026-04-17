@@ -1,0 +1,15 @@
+{
+  "specimen": {
+    "title": "Enrutamiento Internacionalizado",
+    "description": "Esta página se renderiza utilizando diccionarios JSON del lado del servidor. No se utilizaron librerías i18n del lado del cliente.",
+    "current_locale": "Idioma Seleccionado",
+    "switch_language": "Cambiar Idioma",
+    "features": {
+      "middleware": "El Middleware detecta tu idioma preferido desde el encabezado Accept-Language.",
+      "dynamic_routes": "Los segmentos dinámicos [locale] gestionan la estructura de enrutamiento.",
+      "server_components": "Los Server Components obtienen SOLO el diccionario requerido, reduciendo el tamaño del bundle.",
+      "zero_js": "Se requiere cero JavaScript del lado del cliente para la traducción inicial."
+    },
+    "back_to_lab": "Volver al Lab de Enrutamiento"
+  }
+}

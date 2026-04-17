@@ -21,12 +21,12 @@ const experiments = [
   },
   {
     name: "Internationalized Routing",
-    description: "Coming Soon: Pure Next.js i18n without external libraries, using dynamic [locale] segments.",
-    href: "/routing-lab",
-    icon: <Map className="w-5 h-5 opacity-50" />,
-    color: "bg-zinc-500/10 text-zinc-600 dark:text-zinc-600",
-    borderColor: "border-zinc-500/10",
-    disabled: true
+    description: "Pure Next.js i18n without external libraries, using dynamic [locale] segments and middleware detection.",
+    href: "/routing-lab/i18n",
+    icon: <Map className="w-5 h-5" />,
+    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+    borderColor: "border-indigo-500/20",
+    disabled: false
   }
 ];
 
