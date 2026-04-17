@@ -68,3 +68,8 @@ export default function BffStocksPage() {
     </div>
   );
 }
+
+
+// Code Separation & Documentation - 2026-04-16 [9:18:06 am]
+// Feature: BFF Stock Ticker Stream
+// Update: Documented boundary recovery options and custom error scenarios.
