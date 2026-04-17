@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Map, Activity } from "lucide-react";
+import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Map, Activity, Globe, Wrench } from "lucide-react";
 
 const experiments = [
   {
@@ -65,6 +65,14 @@ const experiments = [
     icon: <Globe className="w-5 h-5" />,
     color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
     borderColor: "border-blue-500/20"
+  },
+  {
+    name: "DevX & Tooling Lab",
+    description: "Deep observability and developer experience experiments, from Instrumentation hooks to bundle analysis.",
+    href: "/devx-lab",
+    icon: <Wrench className="w-5 h-5" />,
+    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+    borderColor: "border-indigo-500/20"
   }
 ];
 
