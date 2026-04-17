@@ -57,6 +57,14 @@ const experiments = [
     icon: <Map className="w-5 h-5" />,
     color: "bg-red-500/10 text-red-600 dark:text-red-400",
     borderColor: "border-red-500/20"
+  },
+  {
+    name: "i18n & Edge Lab",
+    description: "High-performance internationalization leveraging the Edge Runtime for sub-50ms TTFB and global geo-detection.",
+    href: "/i18n-edge-lab",
+    icon: <Globe className="w-5 h-5" />,
+    color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+    borderColor: "border-blue-500/20"
   }
 ];
 
