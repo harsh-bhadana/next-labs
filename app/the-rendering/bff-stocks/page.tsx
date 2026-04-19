@@ -83,3 +83,8 @@ export default function BffStocksPage() {
 // Code Separation & Documentation - 2026-04-18 [10:32:36 am]
 // Feature: BFF Stock Ticker Stream
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-04-18 [4:22:45 pm]
+// Feature: BFF Stock Ticker Stream
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
