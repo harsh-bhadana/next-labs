@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Wrench, Terminal, BarChart3 } from "lucide-react";
+import { ArrowRight, Wrench, BarChart3 } from "lucide-react";
 
 const specimens = [
   {
