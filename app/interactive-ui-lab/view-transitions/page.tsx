@@ -24,57 +24,6 @@ export default function ViewTransitionsGallery() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-8 sm:p-20">
       
-      {/* Dynamic View Transition Styles */}
-      <style dangerouslySetInnerHTML={{__html: `
-        /* Default timing for all transitions */
-        ::view-transition-group(*) {
-          animation-duration: 0.6s;
-          animation-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
-        }
-
-        /* --- CROSSFADE MODE --- */
-        .vt-crossfade::view-transition-old(root) {
-          animation: fade-out 0.5s ease-in-out forwards;
-        }
-        .vt-crossfade::view-transition-new(root) {
-          animation: fade-in 0.5s ease-in-out forwards;
-        }
-
-        /* --- SLIDE MODE --- */
-        .vt-slide::view-transition-old(root) {
-          animation: slide-out-left 0.6s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-        .vt-slide::view-transition-new(root) {
-          animation: slide-in-right 0.6s cubic-bezier(0.85, 0, 0.15, 1) forwards;
-        }
-
-        /* --- MORPH MODE --- */
-        /* Morph relies on individual view-transition-names. 
-           We disable the root fade to emphasize element motion. */
-        .vt-morph::view-transition-old(root),
-        .vt-morph::view-transition-new(root) {
-          animation: none;
-          mix-blend-mode: normal;
-        }
-
-        @keyframes fade-out {
-          from { opacity: 1; }
-          to { opacity: 0; }
-        }
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes slide-out-left {
-          from { transform: translateX(0); opacity: 1; }
-          to { transform: translateX(-100px); opacity: 0; }
-        }
-        @keyframes slide-in-right {
-          from { transform: translateX(100px); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-      `}} />
-
       <div className="max-w-5xl mx-auto flex flex-col gap-10">
         
         <header className="flex flex-col gap-6">
