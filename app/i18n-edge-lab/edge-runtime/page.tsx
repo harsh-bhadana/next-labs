@@ -5,7 +5,7 @@ import { ArrowLeft, Zap, Globe, Clock, Activity, AlertTriangle, Languages } from
 export default async function EdgeRuntimePage() {
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
   const start = isBuild ? 0 : performance.now();
-  const headersList = await headers();
+  const headersList = isBuild ? new Headers() : await headers();
   
   // Simulation of some small work to ensure we track real measurement
   await new Promise(resolve => setTimeout(resolve, 5)); 
