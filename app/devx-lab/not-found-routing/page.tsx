@@ -7,7 +7,9 @@ export default async function NotFoundSpecimenPage({
 }: { 
   searchParams: Promise<{ trigger?: string }> 
 }) {
-  const params = await searchParams;
+  const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
+  const params = isBuild ? {} : await searchParams;
+  
   if (params.trigger === "root") {
     notFound();
   }

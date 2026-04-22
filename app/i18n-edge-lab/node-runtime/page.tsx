@@ -1,10 +1,8 @@
 import { headers } from "next/headers";
-import { connection } from "next/server";
 import Link from "next/link";
 import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle, Languages } from "lucide-react";
 
 export default async function NodeRuntimePage() {
-  await connection();
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
   const start = isBuild ? 0 : performance.now();
   const headersList = await headers();
