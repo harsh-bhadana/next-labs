@@ -23,7 +23,9 @@ export default function PerformanceLabPage() {
   const filteredItems = useMemo(() => {
     if (!deferredQuery) return MOCK_ITEMS.slice(0, 100); // just show some
 
+    // eslint-disable-next-line react-hooks/purity
     const start = performance.now();
+    // eslint-disable-next-line react-hooks/purity
     while (performance.now() - start < 20) {
       // Artificially block the thread for 20ms to simulate complex logic per render
     }

@@ -5,9 +5,8 @@ import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle, Languages } from "
 export const dynamic = 'force-dynamic';
 
 export default async function NodeRuntimePage() {
-  const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
-  const start = isBuild ? 0 : performance.now();
-  const headersList = isBuild ? new Headers() : await headers();
+  const start = performance.now();
+  const headersList = await headers();
   
   // Simulation of some small work to ensure we track real measurement
   await new Promise(resolve => setTimeout(resolve, 5)); 
@@ -17,7 +16,7 @@ export default async function NodeRuntimePage() {
   const region = headersList.get("x-vercel-ip-country-region") || "Unknown";
   const userLanguage = headersList.get("accept-language")?.split(",")[0] || "en-US";
   
-  const end = isBuild ? 0 : performance.now();
+  const end = performance.now();
   const ttfb = (end - start).toFixed(2);
 
   return (
@@ -146,7 +145,7 @@ export default async function NodeRuntimePage() {
         <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex gap-4 items-center">
           <AlertCircle className="w-5 h-5 text-blue-500" />
           <p className="text-xs text-blue-700 dark:text-blue-500/80 italic">
-            Did you know? Edge Runtime is often used for redirects, A/B testing, and localized rendering because it lives "closer" to the user.
+            Did you know? Edge Runtime is often used for redirects, A/B testing, and localized rendering because it lives &quot;closer&quot; to the user.
           </p>
         </div>
 

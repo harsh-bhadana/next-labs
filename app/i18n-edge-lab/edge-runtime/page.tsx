@@ -5,9 +5,8 @@ import { ArrowLeft, Zap, Globe, Clock, Activity, AlertTriangle, Languages } from
 export const dynamic = 'force-dynamic';
 
 export default async function EdgeRuntimePage() {
-  const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
-  const start = isBuild ? 0 : performance.now();
-  const headersList = isBuild ? new Headers() : await headers();
+  const start = performance.now();
+  const headersList = await headers();
   
   // Simulation of some small work to ensure we track real measurement
   await new Promise(resolve => setTimeout(resolve, 5)); 
@@ -17,7 +16,7 @@ export default async function EdgeRuntimePage() {
   const region = headersList.get("x-vercel-ip-country-region") || "Unknown";
   const userLanguage = headersList.get("accept-language")?.split(",")[0] || "en-US";
   
-  const end = isBuild ? 0 : performance.now();
+  const end = performance.now();
   const ttfb = (end - start).toFixed(2);
 
   return (

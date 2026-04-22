@@ -79,7 +79,7 @@ export function InfiniteScrollList({ initialState }: { initialState: State }) {
           animate={{ opacity: 1 }}
           className="text-center py-12 text-neutral-500 font-medium"
         >
-          You've reached the end!
+          You&apos;ve reached the end!
         </motion.div>
       )}
     </div>

@@ -85,7 +85,7 @@ export default function RoutingLabPage() {
            <h4 className="font-bold uppercase tracking-wider text-sm">Mental Model: Parallel vs Intercepting</h4>
         </div>
         <p className="text-sm text-zinc-400 leading-relaxed">
-          When you're within the gallery and click a photo, Next.js matches the <strong>intercepting segment</strong> <code className="text-indigo-300">app/routing-lab/@modal/(.)photo/[id]</code>. 
+          When you&apos;re within the gallery and click a photo, Next.js matches the <strong>intercepting segment</strong> <code className="text-indigo-300">app/routing-lab/@modal/(.)photo/[id]</code>. 
           This renders the content into the <code className="text-indigo-300">@modal</code> slot in the shared layout while keeping the background context intact. 
           However, if you reload or direct link, Next.js ignores the interceptor and renders the <strong>standard route</strong> <code className="text-zinc-100">app/routing-lab/photo/[id]</code> as a full page.
         </p>
