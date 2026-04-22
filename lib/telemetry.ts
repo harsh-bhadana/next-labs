@@ -6,7 +6,7 @@ export type TraceEvent = {
   name: string;
   duration?: number;
   timestamp: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 };
 
 // Singleton to store traces in memory during dev

@@ -2,6 +2,8 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle, Languages } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function NodeRuntimePage() {
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
   const start = isBuild ? 0 : performance.now();
