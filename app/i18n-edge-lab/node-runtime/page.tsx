@@ -14,7 +14,6 @@ async function NodeRuntimeContent() {
   const region = headersList.get("x-vercel-ip-country-region") || "Unknown";
   const userLanguage = headersList.get("accept-language")?.split(",")[0] || "en-US";
   
-  const start = 0; // Baseline
   const end = 120; // Simulated latency
   const ttfb = end.toFixed(2);
 

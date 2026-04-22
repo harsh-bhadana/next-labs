@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export async function DynamicUserCard() {
   // Simulate network delay to demonstrate streaming
   await new Promise((resolve) => setTimeout(resolve, 8000));
@@ -14,7 +16,7 @@ export async function DynamicUserCard() {
     <div className="h-48 mb-8 bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-200 dark:border-blue-900/30 rounded-xl shadow-sm p-6 overflow-hidden">
       <div className="flex flex-row items-center gap-6 h-full">
         <div className="relative">
-          <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full border-2 border-blue-500 p-1" />
+          <Image src={user.avatar} alt={user.name} width={96} height={96} className="w-24 h-24 rounded-full border-2 border-blue-500 p-1" />
           <div className="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-2 border-white dark:border-zinc-900 rounded-full"></div>
         </div>
         <div className="flex flex-col gap-1">
