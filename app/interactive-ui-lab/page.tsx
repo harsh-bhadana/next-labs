@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, Image as ImageIcon, Maximize2 } from "lucide-react";
 
 const experiments = [
   {
@@ -9,6 +9,14 @@ const experiments = [
     icon: <ImageIcon className="w-5 h-5" />,
     color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
     borderColor: "border-indigo-500/20"
+  },
+  {
+    name: "Drag-and-Drop Kanban",
+    description: "High-fidelity board with optimistic reordering, server actions, and Framer Motion animations.",
+    href: "/interactive-ui-lab/kanban",
+    icon: <Maximize2 className="w-5 h-5" />,
+    color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+    borderColor: "border-amber-500/20"
   }
 ];
 
