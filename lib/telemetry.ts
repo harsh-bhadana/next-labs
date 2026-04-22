@@ -6,7 +6,7 @@ export type TraceEvent = {
   name: string;
   duration?: number;
   timestamp: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 };
 
 // Singleton to store traces in memory during dev
@@ -26,10 +26,11 @@ class TelemetryStore {
   }
 
   public record(event: Omit<TraceEvent, "id" | "timestamp">) {
+    const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
     const newEvent: TraceEvent = {
       ...event,
-      id: Math.random().toString(36).substring(7),
-      timestamp: Date.now(),
+      id: isBuild ? 'static-id' : Math.random().toString(36).substring(7),
+      timestamp: isBuild ? 0 : Date.now(),
     };
     
     this.traces.unshift(newEvent);

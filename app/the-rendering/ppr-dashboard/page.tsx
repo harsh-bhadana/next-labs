@@ -8,6 +8,7 @@ import { DynamicRecentActivity } from "./components/DynamicRecentActivity";
 import { StatsSkeleton, UserCardSkeleton, RecentActivitySkeleton } from "./components/Skeletons";
 
 
+
 export default function PPRDashboardPage() {
   return (
     <div className="flex h-screen bg-default-50 overflow-hidden">

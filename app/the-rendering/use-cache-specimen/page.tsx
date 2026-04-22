@@ -70,7 +70,7 @@ export default function UseCacheSpecimenPage() {
 
         <section className="flex flex-col gap-4">
           <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            The component below fetches data asynchronously but is marked with the <code className="bg-zinc-200 dark:bg-zinc-800 px-1 py-0.5 rounded text-sm font-mono">"use cache"</code> directive.
+            The component below fetches data asynchronously but is marked with the <code className="bg-zinc-200 dark:bg-zinc-800 px-1 py-0.5 rounded text-sm font-mono">&quot;use cache&quot;</code> directive.
             This tells Next.js to cache the static output of this server component. Reload the page to see that the timestamp remains the same.
           </p>
 

@@ -1,8 +1,8 @@
 import { headers } from "next/headers";
 import Link from "next/link";
-import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle } from "lucide-react";
+import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle, Languages } from "lucide-react";
 
-export const runtime = "nodejs";
+export const dynamic = 'force-dynamic';
 
 export default async function NodeRuntimePage() {
   const start = performance.now();
@@ -145,7 +145,7 @@ export default async function NodeRuntimePage() {
         <div className="p-4 rounded-xl bg-blue-500/5 border border-blue-500/10 flex gap-4 items-center">
           <AlertCircle className="w-5 h-5 text-blue-500" />
           <p className="text-xs text-blue-700 dark:text-blue-500/80 italic">
-            Did you know? Edge Runtime is often used for redirects, A/B testing, and localized rendering because it lives "closer" to the user.
+            Did you know? Edge Runtime is often used for redirects, A/B testing, and localized rendering because it lives &quot;closer&quot; to the user.
           </p>
         </div>
 

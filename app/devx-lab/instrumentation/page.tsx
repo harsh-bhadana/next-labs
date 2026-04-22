@@ -29,7 +29,8 @@ async function triggerEvent(formData: FormData) {
 
 export default async function InstrumentationPage() {
   // Record page render
-  const renderStart = performance.now();
+  const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
+  const renderStart = isBuild ? 0 : performance.now();
   const traces = telemetry.getTraces();
   
   // Record this render event
@@ -37,7 +38,7 @@ export default async function InstrumentationPage() {
   telemetry.record({
     type: "render",
     name: "Instrumentation Dashboard Render",
-    duration: performance.now() - renderStart,
+    duration: isBuild ? 0 : performance.now() - renderStart,
     metadata: { path: "/devx-lab/instrumentation" }
   });
 

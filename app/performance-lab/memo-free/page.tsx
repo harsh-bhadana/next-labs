@@ -51,6 +51,7 @@ export default function MemoFreeLab() {
 
   // High-frequency update loop
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasMounted(true);
     let animationFrameId: number;
     let batchOffset = 0;
