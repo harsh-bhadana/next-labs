@@ -5,11 +5,75 @@ import {
   addTodoAction, 
 } from "./actions";
 import { FormStatusButton, ToggleButton, DeleteButton, ReorderButton } from "./todo-client";
+import { Suspense } from "react";
 
-export default async function ServerCrudPage() {
+async function TodoListContent() {
   await connection();
   const todos = await getTodos();
 
+  return (
+    <section className="flex flex-col gap-3">
+      {todos.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-20 px-6 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 text-zinc-500 bg-zinc-50/50 dark:bg-zinc-900/20">
+          <div className="text-3xl mb-4 opacity-20">🔄</div>
+          <p className="text-sm font-medium uppercase tracking-widest opacity-50">Empty Archive</p>
+        </div>
+      ) : (
+        todos.map((todo, index) => (
+          <div 
+            key={todo.id}
+            className={`
+              group flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 border rounded-2xl transition-all duration-300
+              ${todo.completed 
+                ? "border-zinc-100 dark:border-zinc-800/50 opacity-60" 
+                : "border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/30 hover:shadow-md"
+              }
+            `}
+          >
+            {/* Reorder Buttons */}
+            <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <ReorderButton 
+                id={todo.id} 
+                direction="up" 
+                disabled={index === 0}
+                icon="▲" 
+              />
+              <ReorderButton 
+                id={todo.id} 
+                direction="down" 
+                disabled={index === todos.length - 1}
+                icon="▼" 
+              />
+            </div>
+
+            {/* Toggle Completion */}
+            <ToggleButton id={todo.id} completed={todo.completed} />
+
+            {/* Todo Text */}
+            <span className={`flex-1 text-sm font-medium transition-all ${todo.completed ? "line-through text-zinc-500 italic" : "text-zinc-800 dark:text-zinc-200"}`}>
+              {todo.text}
+            </span>
+
+            {/* Delete Button */}
+            <DeleteButton id={todo.id} />
+          </div>
+        ))
+      )}
+    </section>
+  );
+}
+
+function TodoListSkeleton() {
+  return (
+    <div className="flex flex-col gap-3 animate-pulse">
+      {[1, 2, 3].map(i => (
+        <div key={i} className="h-20 bg-zinc-200 dark:bg-zinc-800 rounded-2xl w-full"></div>
+      ))}
+    </div>
+  );
+}
+
+export default async function ServerCrudPage() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500/30">
       {/* Background Decor */}
@@ -68,54 +132,9 @@ export default async function ServerCrudPage() {
         </section>
 
         {/* Todo List */}
-        <section className="flex flex-col gap-3">
-          {todos.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 px-6 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 text-zinc-500 bg-zinc-50/50 dark:bg-zinc-900/20">
-              <div className="text-3xl mb-4 opacity-20">🔄</div>
-              <p className="text-sm font-medium uppercase tracking-widest opacity-50">Empty Archive</p>
-            </div>
-          ) : (
-            todos.map((todo, index) => (
-              <div 
-                key={todo.id}
-                className={`
-                  group flex items-center gap-4 p-4 bg-white dark:bg-zinc-900 border rounded-2xl transition-all duration-300
-                  ${todo.completed 
-                    ? "border-zinc-100 dark:border-zinc-800/50 opacity-60" 
-                    : "border-zinc-200 dark:border-zinc-800 hover:border-indigo-500/30 hover:shadow-md"
-                  }
-                `}
-              >
-                {/* Reorder Buttons */}
-                <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ReorderButton 
-                    id={todo.id} 
-                    direction="up" 
-                    disabled={index === 0}
-                    icon="▲" 
-                  />
-                  <ReorderButton 
-                    id={todo.id} 
-                    direction="down" 
-                    disabled={index === todos.length - 1}
-                    icon="▼" 
-                  />
-                </div>
-
-                {/* Toggle Completion */}
-                <ToggleButton id={todo.id} completed={todo.completed} />
-
-                {/* Todo Text */}
-                <span className={`flex-1 text-sm font-medium transition-all ${todo.completed ? "line-through text-zinc-500 italic" : "text-zinc-800 dark:text-zinc-200"}`}>
-                  {todo.text}
-                </span>
-
-                {/* Delete Button */}
-                <DeleteButton id={todo.id} />
-              </div>
-            ))
-          )}
-        </section>
+        <Suspense fallback={<TodoListSkeleton />}>
+          <TodoListContent />
+        </Suspense>
 
         {/* Architecture Specs */}
         <section className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
