@@ -30,6 +30,7 @@ async function triggerEvent(formData: FormData) {
 export default async function InstrumentationPage() {
   // Record page render
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
+  // eslint-disable-next-line react-hooks/purity
   const renderStart = isBuild ? 0 : performance.now();
   const traces = telemetry.getTraces();
   
@@ -38,6 +39,7 @@ export default async function InstrumentationPage() {
   telemetry.record({
     type: "render",
     name: "Instrumentation Dashboard Render",
+    // eslint-disable-next-line react-hooks/purity
     duration: isBuild ? 0 : performance.now() - renderStart,
     metadata: { path: "/devx-lab/instrumentation" }
   });

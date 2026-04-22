@@ -1,6 +1,6 @@
 "use client";
 
-import { Reorder, useDragControls, motion } from "framer-motion";
+import { Reorder, useDragControls } from "framer-motion";
 import { KanbanCard as KanbanCardType } from "./actions";
 import { GripVertical, ArrowRightLeft } from "lucide-react";
 
