@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Wrench, Terminal, BarChart3 } from "lucide-react";
+import { ArrowRight, Wrench, BarChart3, Search } from "lucide-react";
 
 const specimens = [
   {
@@ -9,6 +9,14 @@ const specimens = [
     icon: <BarChart3 className="w-5 h-5 text-indigo-500" />,
     color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
     borderColor: "border-indigo-500/20"
+  },
+  {
+    name: "Custom 404 Routing",
+    description: "Demonstrates contextual 404 pages per route segment using notFound() and not-found.tsx boundaries.",
+    href: "/devx-lab/not-found-routing",
+    icon: <Search className="w-5 h-5 text-rose-500" />,
+    color: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+    borderColor: "border-rose-500/20"
   }
 ];
 

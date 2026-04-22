@@ -91,14 +91,6 @@ export default function ViewTransitionDetail({ params }: { params: Promise<{ id:
   return (
     <div className="min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans">
       
-      {/* Morph Style Injection */}
-      <style dangerouslySetInnerHTML={{__html: `
-        ::view-transition-group(*) {
-          animation-duration: 0.5s;
-          animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
-        }
-      `}} />
-
       <main className="h-full w-full">
         <Suspense fallback={
           <div className="h-screen w-full flex items-center justify-center">

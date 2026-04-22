@@ -1,16 +1,6 @@
 "use client";
 
 import React, { useSyncExternalStore } from "react";
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  Clock, 
-  Server, 
-  Zap,
-  Globe,
-  Radio,
-  History
-} from "lucide-react";
 
 // --- The External Store Logic ---
 interface Stock {

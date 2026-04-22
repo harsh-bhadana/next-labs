@@ -42,7 +42,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <article className="text-zinc-700 dark:text-zinc-300 leading-relaxed space-y-6">
           <p>
-            When a route matches but the data doesn't exist (like a blog post that isn't in your database), you can call <code>notFound()</code> to interrupt rendering and show the closest error UI.
+            When a route matches but the data doesn&apos;t exist (like a blog post that isn&apos;t in your database), you can call <code>notFound()</code> to interrupt rendering and show the closest error UI.
           </p>
           <p>
             Because we navigated to <code>/blog/existing-post</code>, the check passed!
