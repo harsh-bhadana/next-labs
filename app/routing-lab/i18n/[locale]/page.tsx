@@ -2,6 +2,10 @@ import Link from "next/link";
 import { getDictionary, Locale } from "@/lib/get-dictionary";
 import { Globe, ArrowLeft, Languages, Server, Zap, ShieldCheck, Map } from "lucide-react";
 
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'es' }, { locale: 'fr' }];
+}
+
 export default async function I18nSpecimenPage({
   params,
 }: {

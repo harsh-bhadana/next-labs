@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { getTodos } from "./data";
+import { connection } from "next/server";
 import { 
   addTodoAction, 
 } from "./actions";
 import { FormStatusButton, ToggleButton, DeleteButton, ReorderButton } from "./todo-client";
 
 export default async function ServerCrudPage() {
+  await connection();
   const todos = await getTodos();
 
   return (

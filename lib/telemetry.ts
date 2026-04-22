@@ -26,10 +26,11 @@ class TelemetryStore {
   }
 
   public record(event: Omit<TraceEvent, "id" | "timestamp">) {
+    const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
     const newEvent: TraceEvent = {
       ...event,
-      id: Math.random().toString(36).substring(7),
-      timestamp: Date.now(),
+      id: isBuild ? 'static-id' : Math.random().toString(36).substring(7),
+      timestamp: isBuild ? 0 : Date.now(),
     };
     
     this.traces.unshift(newEvent);

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ArrowLeft, Zap, Globe, Clock, Activity, AlertTriangle, Languages } from "lucide-react";
 
 export default async function EdgeRuntimePage() {
-  const start = performance.now();
+  const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
+  const start = isBuild ? 0 : performance.now();
   const headersList = await headers();
   
   // Simulation of some small work to ensure we track real measurement
@@ -14,7 +15,7 @@ export default async function EdgeRuntimePage() {
   const region = headersList.get("x-vercel-ip-country-region") || "Unknown";
   const userLanguage = headersList.get("accept-language")?.split(",")[0] || "en-US";
   
-  const end = performance.now();
+  const end = isBuild ? 0 : performance.now();
   const ttfb = (end - start).toFixed(2);
 
   return (
