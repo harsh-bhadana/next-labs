@@ -2,6 +2,7 @@ import { telemetry } from "@/lib/telemetry";
 import Link from "next/link";
 import { ArrowLeft, Terminal, AlertTriangle, Activity, RefreshCcw, HardDrive } from "lucide-react";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
 // Server Action to simulate events
 async function triggerEvent(formData: FormData) {
@@ -28,6 +29,7 @@ async function triggerEvent(formData: FormData) {
 }
 
 export default async function InstrumentationPage() {
+  await headers(); // Opt-in to dynamic rendering to avoid Math.random() error during build
   // Record page render
   const renderStart = performance.now();
   const traces = telemetry.getTraces();

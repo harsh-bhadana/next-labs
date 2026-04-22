@@ -1,8 +1,6 @@
 import { headers } from "next/headers";
 import Link from "next/link";
-import { ArrowLeft, Zap, Globe, Clock, Activity, AlertTriangle } from "lucide-react";
-
-export const runtime = "edge";
+import { ArrowLeft, Zap, Globe, Clock, Activity, AlertTriangle, Languages } from "lucide-react";
 
 export default async function EdgeRuntimePage() {
   const start = performance.now();

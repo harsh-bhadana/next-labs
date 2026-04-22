@@ -11,7 +11,7 @@ export async function register() {
     name: "Server Startup",
     metadata: {
       runtime: process.env.NEXT_RUNTIME,
-      nodeVersion: process.version
+      nodeVersion: process.env.NEXT_RUNTIME === 'nodejs' ? process.version : undefined
     }
   });
 

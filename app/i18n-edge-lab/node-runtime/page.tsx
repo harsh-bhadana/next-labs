@@ -1,8 +1,6 @@
 import { headers } from "next/headers";
 import Link from "next/link";
-import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle } from "lucide-react";
-
-export const runtime = "nodejs";
+import { ArrowLeft, Cpu, Globe, Clock, Activity, AlertCircle, Languages } from "lucide-react";
 
 export default async function NodeRuntimePage() {
   const start = performance.now();
