@@ -2,7 +2,7 @@ import { CheckCircle2, AlertCircle, Clock } from "lucide-react";
 
 export async function DynamicRecentActivity() {
   // Simulate network delay to demonstrate streaming
-  await new Promise((resolve) => setTimeout(resolve, 4000));
+  await new Promise((resolve) => setTimeout(resolve, 12000));
 
   const activities = [
     { id: 1, action: "Deployed new version to production", time: "2 hours ago", icon: <CheckCircle2 size={18} className="text-green-500" />, type: "success" },

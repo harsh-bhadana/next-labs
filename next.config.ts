@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  cacheComponents: false,
+  cacheComponents: true,
   experimental: {
   },
   images: {

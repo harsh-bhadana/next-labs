@@ -2,7 +2,7 @@ import { TrendingUp, Users, DollarSign } from "lucide-react";
 
 export async function DynamicStats() {
   // Simulate network delay to demonstrate streaming
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const stats = [
     { label: "Total Revenue", value: "$45,231.89", icon: <DollarSign size={20} />, trend: "+20.1% from last month" },

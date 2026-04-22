@@ -1,6 +1,6 @@
 export async function DynamicUserCard() {
   // Simulate network delay to demonstrate streaming
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 8000));
 
   const user = {
     name: "Alex Johnson",
