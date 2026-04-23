@@ -723,3 +723,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Polished sidebar navigation components to support mobile screen scales.
 - **Time**: 11:09:28 am
+
+## [2026-04-23] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 12:14:39 pm
