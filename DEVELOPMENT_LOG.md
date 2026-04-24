@@ -729,3 +729,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Merged conflicting styles in globals.css variables.
 - **Time**: 12:14:39 pm
+
+## [2026-04-24] - chore: upgrade project bundle dev-dependencies
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated framework tooling packages to match React 19 stable versions.
+- **Time**: 1:19:35 pm
