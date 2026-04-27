@@ -153,3 +153,8 @@ export default function ZeroJSTable({ searchParams }: { searchParams: Promise<Se
 // Code Separation & Documentation - 2026-04-26 [3:44:35 pm]
 // Feature: Zero-JS Data Table
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-04-26 [9:21:07 am]
+// Feature: Zero-JS Data Table
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
