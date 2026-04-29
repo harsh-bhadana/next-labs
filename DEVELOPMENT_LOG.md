@@ -777,3 +777,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated project specs and localized translation options in readme.md docs.
 - **Time**: 1:50:25 pm
+
+## [2026-04-29] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 3:49:00 pm
