@@ -771,3 +771,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated project specs and localized translation options in readme.md docs.
 - **Time**: 3:44:05 pm
+
+## [2026-04-29] - docs: update API setup instructions inside readme
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated project specs and localized translation options in readme.md docs.
+- **Time**: 1:50:25 pm
