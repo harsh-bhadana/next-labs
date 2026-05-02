@@ -62,3 +62,8 @@ export default function PPRDashboardPage() {
 // Code Separation & Documentation - 2026-05-01 [1:32:00 pm]
 // Feature: PPR Stream Dashboard
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-05-01 [9:26:16 am]
+// Feature: PPR Stream Dashboard
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
