@@ -72,3 +72,8 @@ export default function PPRDashboardPage() {
 // Code Separation & Documentation - 2026-05-01 [3:29:05 pm]
 // Feature: PPR Stream Dashboard
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-05-02 [4:26:54 pm]
+// Feature: PPR Stream Dashboard
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
