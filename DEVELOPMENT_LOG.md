@@ -843,3 +843,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Merged conflicting styles in globals.css variables.
 - **Time**: 11:26:26 am
+
+## [2026-05-08] - docs: update API setup instructions inside readme
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated project specs and localized translation options in readme.md docs.
+- **Time**: 10:53:22 am
