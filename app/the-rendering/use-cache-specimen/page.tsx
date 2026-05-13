@@ -137,3 +137,8 @@ export default function UseCacheSpecimenPage() {
 // Code Separation & Documentation - 2026-05-11 [5:37:49 pm]
 // Feature: use cache Directive
 // Update: Added JSDoc headers clarifying variables scope.
+
+
+// Code Separation & Documentation - 2026-05-12 [2:30:44 pm]
+// Feature: use cache Directive
+// Update: Documented boundary recovery options and custom error scenarios.
