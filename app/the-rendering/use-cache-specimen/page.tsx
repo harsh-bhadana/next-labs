@@ -152,3 +152,8 @@ export default function UseCacheSpecimenPage() {
 // Code Separation & Documentation - 2026-05-13 [4:19:49 pm]
 // Feature: use cache Directive
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-05-14 [10:46:05 am]
+// Feature: use cache Directive
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
