@@ -921,3 +921,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Merged conflicting styles in globals.css variables.
 - **Time**: 11:14:10 am
+
+## [2026-05-18] - style: adjust responsive mobile breakpoints for layout
+
+- **Component**: Refinement & Maintenance
+- **Details**: Polished sidebar navigation components to support mobile screen scales.
+- **Time**: 9:54:08 am
