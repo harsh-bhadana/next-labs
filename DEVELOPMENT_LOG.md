@@ -951,3 +951,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Wrote additional boundary mocks to confirm fallback cards.
 - **Time**: 3:29:30 pm
+
+## [2026-05-21] - chore: upgrade project bundle dev-dependencies
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated framework tooling packages to match React 19 stable versions.
+- **Time**: 3:17:18 pm
