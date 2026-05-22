@@ -120,3 +120,8 @@ export default function InfiniteScrollPage() {
 // Code Separation & Documentation - 2026-05-21 [3:59:25 pm]
 // Feature: Infinite Scroll Actions
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-05-21 [5:48:21 pm]
+// Feature: Infinite Scroll Actions
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
