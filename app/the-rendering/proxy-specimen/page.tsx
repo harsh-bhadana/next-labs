@@ -181,3 +181,8 @@ export default function ProxySpecimenPage() {
 // Code Separation & Documentation - 2026-05-24 [4:36:46 pm]
 // Feature: Proxy Middleware Interceptor
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-05-24 [5:27:00 pm]
+// Feature: Proxy Middleware Interceptor
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
