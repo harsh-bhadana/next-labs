@@ -993,3 +993,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated project specs and localized translation options in readme.md docs.
 - **Time**: 4:02:19 pm
+
+## [2026-05-26] - chore: upgrade project bundle dev-dependencies
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated framework tooling packages to match React 19 stable versions.
+- **Time**: 4:20:14 pm
