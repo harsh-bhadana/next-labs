@@ -1005,3 +1005,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Added developer documentation detailing async status states.
 - **Time**: 1:10:06 pm
+
+## [2026-05-28] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 3:14:33 pm
