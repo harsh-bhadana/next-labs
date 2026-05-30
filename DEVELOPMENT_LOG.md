@@ -1023,3 +1023,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Wrote additional boundary mocks to confirm fallback cards.
 - **Time**: 2:56:04 pm
+
+## [2026-05-30] - docs: add inline comments explaining useActionState
+
+- **Component**: Refinement & Maintenance
+- **Details**: Added developer documentation detailing async status states.
+- **Time**: 10:06:07 am
