@@ -1041,3 +1041,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Added developer documentation detailing async status states.
 - **Time**: 5:23:11 pm
+
+## [2026-06-01] - docs: add inline comments explaining useActionState
+
+- **Component**: Refinement & Maintenance
+- **Details**: Added developer documentation detailing async status states.
+- **Time**: 10:34:02 am
