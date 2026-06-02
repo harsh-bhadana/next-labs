@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Image as ImageIcon, Maximize2 } from "lucide-react";
+import { ArrowRight, Image as ImageIcon, Maximize2, FileText } from "lucide-react";
 
 const experiments = [
   {
@@ -17,6 +17,14 @@ const experiments = [
     icon: <Maximize2 className="w-5 h-5" />,
     color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
     borderColor: "border-amber-500/20"
+  },
+  {
+    name: "Progressive Form Wizard",
+    description: "Multi-step flow built on server actions and useActionState, functioning with JS disabled via page reloads and session cookies.",
+    href: "/interactive-ui-lab/form-wizard",
+    icon: <FileText className="w-5 h-5" />,
+    color: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+    borderColor: "border-rose-500/20"
   }
 ];
 

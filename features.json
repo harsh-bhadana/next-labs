@@ -262,5 +262,20 @@
     "included_in": "Next 15+ / React 19",
     "is_experimental": true,
     "summary": "Demonstrates the power of concurrent rendering. Users can toggle a Jank Mode to see how synchronous state updates freeze a running canvas animation, while React 19 transitions maintain a smooth 60fps."
+  },
+  {
+    "feature_name": "Progressive Form Wizard",
+    "category": "Interactive & UI Lab",
+    "url": "{basepath}/interactive-ui-lab/form-wizard",
+    "purpose": "Showcase progressive enhancement form flows using unified server actions.",
+    "tech_used": [
+      "useActionState",
+      "Server Actions",
+      "Progressive Enhancement",
+      "Cookies Session"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": false,
+    "summary": "Demonstrates multi-step forms utilizing useActionState and Server Actions. Toggling the visual JS-Off simulator runs the wizard via standard HTML post requests and full page SSR reloads, persisting data via session cookies."
   }
 ]
