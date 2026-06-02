@@ -33,6 +33,10 @@ export async function submitStep(
     }
 
     if (Object.keys(errors).length > 0) {
+      if (simulateNoJS) {
+        cookieStore.set("wizard_errors", JSON.stringify({ errors }), { maxAge: 10 });
+        redirect(`/interactive-ui-lab/form-wizard?step=1&jsMode=off`);
+      }
       return { success: false, errors };
     }
 
@@ -55,6 +59,10 @@ export async function submitStep(
     }
 
     if (Object.keys(errors).length > 0) {
+      if (simulateNoJS) {
+        cookieStore.set("wizard_errors", JSON.stringify({ errors }), { maxAge: 10 });
+        redirect(`/interactive-ui-lab/form-wizard?step=2&jsMode=off`);
+      }
       return { success: false, errors };
     }
 
@@ -74,6 +82,14 @@ export async function submitStep(
     const theme = cookieStore.get("wizard_theme")?.value || "";
 
     if (!email || !username) {
+      if (simulateNoJS) {
+        cookieStore.set(
+          "wizard_errors", 
+          JSON.stringify({ error: "Session expired or missing fields. Please go back and refill your credentials." }), 
+          { maxAge: 10 }
+        );
+        redirect(`/interactive-ui-lab/form-wizard?step=3&jsMode=off`);
+      }
       return { 
         success: false, 
         error: "Session expired or missing fields. Please go back and refill your credentials." 
@@ -94,4 +110,9 @@ export async function submitStep(
   }
 
   return { success: false, error: "Invalid action state." };
+}
+
+// Wrapper action for standard browser Form submission to resolve type signature mapping
+export async function submitFormDirect(formData: FormData): Promise<void> {
+  await submitStep(null, formData);
 }

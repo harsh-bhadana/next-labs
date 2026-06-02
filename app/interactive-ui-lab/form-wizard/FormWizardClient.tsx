@@ -1,11 +1,11 @@
 "use client";
 
-import { useActionState, useEffect, useState, useRef } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { User, Shield, FileText, CheckCircle2, Loader2, Sparkles } from "lucide-react";
-import { submitStep, ActionState } from "./actions";
+import { submitStep, submitFormDirect, ActionState } from "./actions";
 
 interface FormWizardClientProps {
   initialStep: number;
@@ -17,6 +17,7 @@ interface FormWizardClientProps {
     theme: string;
     newsletter: boolean;
   };
+  initialErrors?: ActionState | null;
 }
 
 const STEPS = [
@@ -25,11 +26,18 @@ const STEPS = [
   { number: 3, label: "Review & Submit", icon: FileText },
 ];
 
+const stepVariants = {
+  initial: { x: 40, opacity: 0 },
+  animate: { x: 0, opacity: 1 },
+  exit: { x: -40, opacity: 0 }
+};
+
 export function FormWizardClient({
   initialStep,
   initialIsCompleted,
   simulateNoJS,
   draftData,
+  initialErrors = null,
 }: FormWizardClientProps) {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(initialStep);
@@ -47,7 +55,7 @@ export function FormWizardClient({
   }, [initialStep, initialIsCompleted]);
 
   // React 19: useActionState (manages progressive validation errors and actions status)
-  const [state, formAction, isPending] = useActionState(submitStep, null);
+  const [state, formAction, isPending] = useActionState(submitStep, initialErrors);
 
   // Intercept action resolution in JS Mode to handle slide animations & history transitions
   useEffect(() => {
@@ -148,7 +156,7 @@ export function FormWizardClient({
           </div>
         ) : (
           /* Wrap in standard native form. Action points to the client formAction or the server action itself */
-          <form action={simulateNoJS ? undefined : formAction} method={simulateNoJS ? "POST" : undefined} className="flex flex-col gap-6">
+          <form action={simulateNoJS ? submitFormDirect : formAction} method="POST" className="flex flex-col gap-6">
             
             {/* Native fallback form attributes for progressive support if JS disabled */}
             {simulateNoJS && (
@@ -170,9 +178,10 @@ export function FormWizardClient({
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStep}
-                initial={simulateNoJS ? false : { x: 40, opacity: 0 }}
-                animate={simulateNoJS ? false : { x: 0, opacity: 1 }}
-                exit={simulateNoJS ? false : { x: -40, opacity: 0 }}
+                variants={simulateNoJS ? undefined : stepVariants}
+                initial={simulateNoJS ? undefined : "initial"}
+                animate={simulateNoJS ? undefined : "animate"}
+                exit={simulateNoJS ? undefined : "exit"}
                 transition={{ duration: 0.25, ease: "easeInOut" }}
                 className="flex flex-col gap-6"
               >
@@ -194,8 +203,8 @@ export function FormWizardClient({
                         value={emailVal}
                         onChange={handleInputChange}
                         placeholder="john.doe@example.com"
-                        className={`w-full bg-zinc-50 dark:bg-zinc-900 border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium ${
-                          state?.errors?.email ? "border-rose-500" : "border-zinc-200 dark:border-zinc-800"
+                        className={`w-full bg-zinc-50 dark:bg-zinc-950 border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium ${
+                          state?.errors?.email ? "border-rose-500" : "border-zinc-200 dark:border-zinc-900"
                         }`}
                       />
                       {state?.errors?.email && (
@@ -209,8 +218,8 @@ export function FormWizardClient({
                         type="password"
                         name="password"
                         placeholder="••••••••"
-                        className={`w-full bg-zinc-50 dark:bg-zinc-900 border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium ${
-                          state?.errors?.password ? "border-rose-500" : "border-zinc-200 dark:border-zinc-800"
+                        className={`w-full bg-zinc-50 dark:bg-zinc-950 border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium ${
+                          state?.errors?.password ? "border-rose-500" : "border-zinc-200 dark:border-zinc-900"
                         }`}
                       />
                       {state?.errors?.password && (
@@ -235,8 +244,8 @@ export function FormWizardClient({
                         value={usernameVal}
                         onChange={handleInputChange}
                         placeholder="johndoe"
-                        className={`w-full bg-zinc-50 dark:bg-zinc-900 border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium ${
-                          state?.errors?.username ? "border-rose-500" : "border-zinc-200 dark:border-zinc-800"
+                        className={`w-full bg-zinc-50 dark:bg-zinc-950 border rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium ${
+                          state?.errors?.username ? "border-rose-500" : "border-zinc-200 dark:border-zinc-900"
                         }`}
                       />
                       {state?.errors?.username && (
@@ -250,7 +259,7 @@ export function FormWizardClient({
                         name="theme"
                         value={themeVal}
                         onChange={handleInputChange}
-                        className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium"
+                        className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 text-sm font-medium"
                       >
                         <option value="light">Light Theme</option>
                         <option value="dark">Dark Theme</option>
@@ -298,7 +307,7 @@ export function FormWizardClient({
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                  className="px-5 py-2.5 rounded-xl text-sm font-semibold border border-zinc-200 dark:border-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-905 transition-colors"
                 >
                   Back
                 </button>
@@ -310,7 +319,6 @@ export function FormWizardClient({
               {simulateNoJS ? (
                 <button
                   type="submit"
-                  formAction={submitStep}
                   className="px-6 py-2.5 bg-rose-500 hover:bg-rose-600 text-white font-semibold rounded-xl text-sm transition-colors shadow-lg shadow-rose-500/25"
                 >
                   {activeStep === 3 ? "Submit Setup" : "Continue"}
