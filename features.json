@@ -1,0 +1,266 @@
+[
+  {
+    "feature_name": "Animated View Transitions",
+    "category": "Interactive & UI Lab",
+    "url": "{basepath}/interactive-ui-lab/view-transitions",
+    "purpose": "Programmatic transition orchestration with React 19 useViewTransition hook.",
+    "tech_used": [
+      "View Transitions API",
+      "useViewTransition",
+      "CSS Keyframes",
+      "Next.js App Router"
+    ],
+    "included_in": "Next 16+ / React 19",
+    "is_experimental": true,
+    "summary": "Upgrades native view transitions with programmatic orchestration via a custom useViewTransition hook, supporting toggleable Crossfade, Slide, and Morph modes."
+  },
+  {
+    "feature_name": "Modal Gallery",
+    "category": "Routing Lab",
+    "url": "{basepath}/routing-lab/modal-gallery",
+    "purpose": "Implementation of Parallel & Intercepting Routes for a sub-frame modal experience.",
+    "tech_used": [
+      "Parallel Routes",
+      "Intercepting Routes"
+    ],
+    "included_in": "Next 13.3+",
+    "is_experimental": false,
+    "summary": "A sophisticated routing pattern that allows displaying a modal while keeping the underlying page interactive and accessible via its own URL."
+  },
+  {
+    "feature_name": "Zero-State Server CRUD",
+    "category": "Performance Lab",
+    "url": "{basepath}/performance-lab/server-crud",
+    "purpose": "A CRUD application with 0kb client-side state, powered entirely by Server Actions.",
+    "tech_used": [
+      "Server Actions",
+      "revalidatePath()",
+      "Server Components"
+    ],
+    "included_in": "Next 14+",
+    "is_experimental": false,
+    "summary": "Demonstrates a 'Return to Simplicity' model where all state is handled on the server, eliminating client-side complexity and state sync issues."
+  },
+  {
+    "feature_name": "Optimistic Mutations",
+    "category": "Performance Lab",
+    "url": "{basepath}/performance-lab/optimistic-like",
+    "purpose": "Instant UI feedback for server mutations using React 19's useOptimistic.",
+    "tech_used": [
+      "useOptimistic",
+      "useTransition",
+      "Server Actions"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": true,
+    "summary": "Uses the latest React 19 hooks to update the UI immediately upon user action, providing a perceived zero-latency experience despite network roundtrips."
+  },
+  {
+    "feature_name": "Search-as-you-go",
+    "category": "Performance Lab",
+    "url": "{basepath}/performance-lab/search-as-you-go",
+    "purpose": "Fluid search filtering under heavy load using useDeferredValue.",
+    "tech_used": [
+      "useDeferredValue",
+      "useMemo"
+    ],
+    "included_in": "Next 13+ / React 18+",
+    "is_experimental": false,
+    "summary": "Prevents UI blocking during heavy computation (10,000+ items) by deferring non-urgent updates, keeping the input field fluid and responsive."
+  },
+  {
+    "feature_name": "The Memo-Free Dashboard",
+    "category": "Performance Lab",
+    "url": "{basepath}/performance-lab/memo-free",
+    "purpose": "Proving the power of the React Compiler without manual useMemo or useCallback.",
+    "tech_used": [
+      "React Compiler",
+      "Auto-memoization"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": true,
+    "summary": "Showcases the new React Compiler's ability to automatically optimize component rendering, removing the need for manual memoization hooks."
+  },
+  {
+    "feature_name": "Streaming useFormStatus Form",
+    "category": "Performance Lab",
+    "url": "{basepath}/performance-lab/form-status",
+    "purpose": "Zero-useState multi-step forms using React 19 status primitives.",
+    "tech_used": [
+      "useFormStatus",
+      "useActionState",
+      "Server Actions"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": false,
+    "summary": "A sophisticated multi-step checkout flow that manages all loading, disabled, and result states using native React 19 hooks, completely eliminating the need for local useState."
+  },
+  {
+    "feature_name": "BFF Stock Ticker",
+    "category": "Rendering Lab",
+    "url": "{basepath}/the-rendering/bff-stocks",
+    "purpose": "Backend-for-Frontend pattern for real-time aggregated feeds.",
+    "tech_used": [
+      "Route Handlers (BFF)",
+      "useSyncExternalStore",
+      "Edge Caching"
+    ],
+    "included_in": "Next 13+",
+    "is_experimental": false,
+    "summary": "Aggregates multiple mock market APIs into a single, cached Route Handler to reduce network overhead and protect upstream services."
+  },
+  {
+    "feature_name": "Zero-JS Data Table",
+    "category": "Rendering Lab",
+    "url": "{basepath}/the-rendering/zero-js-table",
+    "purpose": "High-performance server-filtered tables using asynchronous searchParams.",
+    "tech_used": [
+      "searchParams",
+      "Server Components",
+      "Suspense"
+    ],
+    "included_in": "Next 13+",
+    "is_experimental": false,
+    "summary": "An interactive data table that supports filtering and pagination entirely through URL parameters and server-side rendering, requiring 0kb of client JS."
+  },
+  {
+    "feature_name": "PPR Dashboard",
+    "category": "Rendering Lab",
+    "url": "{basepath}/the-rendering/ppr-dashboard",
+    "purpose": "Partial Prerendering (PPR) for instant static shells with streamed dynamic content.",
+    "tech_used": [
+      "Partial Prerendering (PPR)",
+      "Streaming",
+      "Suspense boundaries"
+    ],
+    "included_in": "Next 15+",
+    "is_experimental": true,
+    "summary": "A hybrid rendering model that serves a static HTML shell immediately while lazily streaming dynamic components as they finish loading on the server."
+  },
+  {
+    "feature_name": "The 'use cache' Directive",
+    "category": "Rendering Lab",
+    "url": "{basepath}/the-rendering/use-cache-specimen",
+    "purpose": "Experimental component-level caching for granular performance control.",
+    "tech_used": [
+      "\"use cache\" directive",
+      "cacheLife profiles"
+    ],
+    "included_in": "Next 15+",
+    "is_experimental": true,
+    "summary": "Demonstrates the experimental Next.js directive for caching return values of functions or component outputs across requests."
+  },
+  {
+    "feature_name": "Infinite Scroll Native",
+    "category": "Rendering Lab",
+    "url": "{basepath}/the-rendering/infinite-scroll",
+    "purpose": "Progressive enhancement for infinite feeds using useActionState.",
+    "tech_used": [
+      "useActionState",
+      "Server Actions",
+      "Progressive Enhancement"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": true,
+    "summary": "Implements a robust infinite scrolling mechanism using new React 19 state management for actions, ensuring compatibility with and without JavaScript."
+  },
+  {
+    "feature_name": "Proxy Interceptors",
+    "category": "Rendering Lab",
+    "url": "{basepath}/the-rendering/proxy-specimen",
+    "purpose": "Advanced proxy layer for JWT rotation and geo-fencing.",
+    "tech_used": [
+      "Next.js 16 Proxy Layer",
+      "Middleware Interceptors"
+    ],
+    "included_in": "Next 16+",
+    "is_experimental": true,
+    "summary": "Explores bleeding-edge proxying capabilities in Next.js 16 for intercepting and modifying requests at the framework level before they reach the application logic."
+  },
+  {
+    "feature_name": "Pure Next.js i18n",
+    "category": "Routing Lab",
+    "url": "{basepath}/routing-lab/i18n",
+    "purpose": "Scalable multi-language routing without external libraries.",
+    "tech_used": [
+      "[locale] segments",
+      "headers()",
+      "proxy.ts",
+      "Server-side Dictionaries"
+    ],
+    "included_in": "Next 13+",
+    "is_experimental": false,
+    "summary": "Demonstrates a robust internationalization strategy using native Next.js features like dynamic route segments and localized dictionaries, managed at the edge via proxy.ts."
+  },
+  {
+    "feature_name": "Edge Runtime RSC",
+    "category": "i18n & Edge Lab",
+    "url": "{basepath}/i18n-edge-lab/edge-runtime",
+    "purpose": "Sub-50ms TTFB using globally distributed Edge Runtime.",
+    "tech_used": [
+      "runtime = 'edge'",
+      "headers()",
+      "Geo-detection"
+    ],
+    "included_in": "Next 13+",
+    "is_experimental": false,
+    "summary": "Exposes the power of the Edge Runtime for instant localized rendering and geo-header detection at the nearest point of presence."
+  },
+  {
+    "feature_name": "Instrumentation & Tracing",
+    "category": "DevX & Tooling Lab",
+    "url": "{basepath}/devx-lab/instrumentation",
+    "purpose": "Server-side observability and lifecycle hooking.",
+    "tech_used": [
+      "instrumentation.ts",
+      "register()",
+      "onRequestError()"
+    ],
+    "included_in": "Next 15+ (Stable)",
+    "is_experimental": false,
+    "summary": "Hooks into the Next.js server lifecycle to monitor startup performance and capture server-side errors into an observability stream."
+  },
+  {
+    "feature_name": "Custom 404 Routing",
+    "category": "DevX & Tooling Lab",
+    "url": "{basepath}/devx-lab/not-found-routing",
+    "purpose": "Demonstrates how notFound() + not-found.tsx create contextual 404 pages per route segment.",
+    "tech_used": [
+      "notFound()",
+      "not-found.tsx",
+      "Route Segments"
+    ],
+    "included_in": "Next 13+",
+    "is_experimental": false,
+    "summary": "Shows how nested not-found boundaries can provide contextual error designs, with a nested segment having its own entirely different 404 page."
+  },
+  {
+    "feature_name": "Drag-and-Drop Kanban",
+    "category": "Interactive & UI Lab",
+    "url": "{basepath}/interactive-ui-lab/kanban",
+    "purpose": "High-fidelity board with optimistic reordering and persistence.",
+    "tech_used": [
+      "framer-motion (Reorder)",
+      "useOptimistic",
+      "Server Actions"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": true,
+    "summary": "Combines Framer Motion's reordering capabilities with React 19's optimistic updates to create a zero-latency, persistent Kanban experience."
+  },
+  {
+    "feature_name": "Concurrent Priority Scheduler",
+    "category": "Performance Lab",
+    "url": "{basepath}/performance-lab/priority-scheduler",
+    "purpose": "Visualize concurrent rendering priority to keep animations at 60fps.",
+    "tech_used": [
+      "useTransition",
+      "useDeferredValue",
+      "React.Profiler",
+      "Canvas API"
+    ],
+    "included_in": "Next 15+ / React 19",
+    "is_experimental": true,
+    "summary": "Demonstrates the power of concurrent rendering. Users can toggle a Jank Mode to see how synchronous state updates freeze a running canvas animation, while React 19 transitions maintain a smooth 60fps."
+  }
+]

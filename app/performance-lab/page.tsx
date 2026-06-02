@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, ThumbsUp, Zap, FormInput, RefreshCw } from "lucide-react";
+import { ArrowRight, Search, ThumbsUp, Zap, FormInput, RefreshCw, Gauge } from "lucide-react";
 
 const experiments = [
   {
@@ -41,6 +41,14 @@ const experiments = [
     icon: <RefreshCw className="w-5 h-5" />,
     color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
     borderColor: "border-emerald-500/20"
+  },
+  {
+    name: "Concurrent Priority Scheduler",
+    description: "A visual simulation comparing standard synchronous updates (which block animations) vs React 19 concurrent transitions keeping elements fluid.",
+    href: "/performance-lab/priority-scheduler",
+    icon: <Gauge className="w-5 h-5" />,
+    color: "bg-rose-500/10 text-rose-600 dark:text-rose-400",
+    borderColor: "border-rose-500/20"
   }
 ];
 
