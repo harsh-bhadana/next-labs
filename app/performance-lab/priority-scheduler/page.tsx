@@ -1,8 +1,57 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useTransition, useMemo } from "react";
 import Link from "next/link";
-import { ArrowLeft, Play, Pause, RefreshCw, Cpu, Gauge } from "lucide-react";
+import { ArrowLeft, Play, Pause, RefreshCw, Cpu, Gauge, AlertCircle, Database, Search, ArrowUpDown, Clock } from "lucide-react";
+
+// Types
+interface LogItem {
+  id: number;
+  timestamp: string;
+  service: string;
+  code: string;
+  status: "healthy" | "warning" | "critical";
+  load: string;
+  message: string;
+}
+
+// Service definitions
+const SERVICES = [
+  "auth-service",
+  "api-gateway",
+  "billing-engine",
+  "db-connector",
+  "notification-worker",
+  "cache-manager",
+  "search-indexer",
+  "telemetry-aggregator"
+];
+
+const CODES = ["SYS-200", "SYS-304", "ERR-401", "ERR-403", "ERR-500", "WRN-101", "WRN-102", "INF-001"];
+
+// Generate stable mock dataset of 15,000 logs
+const GENERATED_LOGS: LogItem[] = Array.from({ length: 15000 }).map((_, i) => {
+  const service = SERVICES[i % SERVICES.length];
+  const code = CODES[(i * 3) % CODES.length];
+  const isCritical = code.startsWith("ERR-500") || (i % 23 === 0);
+  const isWarning = code.startsWith("WRN") || (i % 7 === 0);
+  const status = isCritical ? "critical" : isWarning ? "warning" : "healthy";
+  
+  const hour = String(Math.floor(Math.random() * 24)).padStart(2, '0');
+  const min = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+  const sec = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+  const timestamp = `${hour}:${min}:${sec}`;
+
+  return {
+    id: i,
+    timestamp,
+    service,
+    code,
+    status,
+    load: `${Math.round(15 + (i % 70))}%`,
+    message: `Worker node executing transaction segment: ${code} - Service: ${service}`
+  };
+});
 
 // Canvas Particle Class for the background simulation
 class Particle {
@@ -65,8 +114,14 @@ export default function PrioritySchedulerPage() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [jankMode, setJankMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [deferredQuery, setDeferredQuery] = useState("");
+  const [sortBy, setSortBy] = useState<"id" | "load" | "service">("id");
+  
+  const [isPending, startTransition] = useTransition();
+
   const [fps, setFps] = useState(60);
   const [fpsHistory, setFpsHistory] = useState<number[]>(Array(40).fill(60));
+  const [renderLatency, setRenderLatency] = useState(0);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
@@ -174,13 +229,80 @@ export default function PrioritySchedulerPage() {
     mouseRef.current.active = false;
   };
 
-  // Mock list items for Commit 1 layout
-  const mockItems = Array.from({ length: 8 }).map((_, i) => ({
-    id: i,
-    name: `System Log Node #${1000 + i}`,
-    status: i % 3 === 0 ? "healthy" : i % 2 === 0 ? "warning" : "critical",
-    load: `${Math.round(20 + Math.random() * 60)}%`,
-  }));
+  // Heavy filter & sort computation
+  const filteredAndSortedLogs = useMemo(() => {
+    const t0 = performance.now();
+
+    // 1. Simulate an artificially heavy calculations block (60ms) to ensure CPU stress
+    const blockStart = performance.now();
+    while (performance.now() - blockStart < 60) {
+      // Artificially block JavaScript thread to drop render priority and trigger jank
+    }
+
+    // 2. Filter 15,000 items
+    let result = GENERATED_LOGS;
+    if (deferredQuery) {
+      const lowerQuery = deferredQuery.toLowerCase();
+      result = GENERATED_LOGS.filter(
+        (log) =>
+          log.service.toLowerCase().includes(lowerQuery) ||
+          log.code.toLowerCase().includes(lowerQuery) ||
+          log.message.toLowerCase().includes(lowerQuery)
+      );
+    }
+
+    // 3. Sort
+    if (sortBy === "load") {
+      result = [...result].sort((a, b) => parseInt(b.load) - parseInt(a.load));
+    } else if (sortBy === "service") {
+      result = [...result].sort((a, b) => a.service.localeCompare(b.service));
+    } else {
+      result = [...result].sort((a, b) => a.id - b.id);
+    }
+
+    const t1 = performance.now();
+    
+    // Safety check to prevent recursive renders since we measure state inside a hook
+    setTimeout(() => {
+      setRenderLatency(Math.round(t1 - t0));
+    }, 0);
+
+    return result.slice(0, 100); // Only render top 100 in DOM for layout stability
+  }, [deferredQuery, sortBy]);
+
+  // Handle query update with scheduler priority routing
+  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setSearchQuery(val);
+
+    if (jankMode) {
+      // Sync update: triggers heavy filter instantly in the same render tick
+      setDeferredQuery(val);
+    } else {
+      // Concurrent update: yields thread back to animation frames
+      startTransition(() => {
+        setDeferredQuery(val);
+      });
+    }
+  };
+
+  // Handle Sort changes with scheduler priority routing
+  const handleSortChange = (newSort: "id" | "load" | "service") => {
+    if (jankMode) {
+      setSortBy(newSort);
+    } else {
+      startTransition(() => {
+        setSortBy(newSort);
+      });
+    }
+  };
+
+  // Reset demo states
+  const handleReset = () => {
+    setSearchQuery("");
+    setDeferredQuery("");
+    setSortBy("id");
+  };
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-6 sm:p-12 md:p-20 relative overflow-hidden">
@@ -239,10 +361,19 @@ export default function PrioritySchedulerPage() {
           {/* Controls & Search Pane */}
           <div className="lg:col-span-5 flex flex-col gap-6 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 p-6 rounded-3xl shadow-sm">
             
-            <h2 className="text-lg font-semibold border-b border-zinc-100 dark:border-zinc-900 pb-3 flex items-center gap-2">
-              <Cpu className="w-5 h-5 text-rose-500" />
-              Scheduler Controls
-            </h2>
+            <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-900 pb-3">
+              <h2 className="text-lg font-semibold flex items-center gap-2">
+                <Cpu className="w-5 h-5 text-rose-500" />
+                Scheduler Controls
+              </h2>
+              <button 
+                onClick={handleReset}
+                className="p-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors"
+                title="Reset Filters"
+              >
+                <RefreshCw className="w-4 h-4" />
+              </button>
+            </div>
 
             {/* Mode Selectors */}
             <div className="flex flex-col gap-3">
@@ -274,44 +405,110 @@ export default function PrioritySchedulerPage() {
             </div>
 
             {/* Search Input */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 relative">
               <label className="text-sm font-semibold text-zinc-500">Filter Dataset</label>
-              <input
-                type="text"
-                placeholder="Search server log codes..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-rose-500/50 transition-all font-medium"
-              />
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+                <input
+                  type="text"
+                  placeholder="Search 15,000 logs (e.g. gateway, critical)..."
+                  value={searchQuery}
+                  onChange={handleQueryChange}
+                  className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl pl-9 pr-4 py-2.5 outline-none focus:ring-2 focus:ring-rose-500/50 transition-all font-medium text-sm"
+                />
+              </div>
               <p className="text-[11px] text-zinc-500 leading-normal">
                 {jankMode
-                  ? "⚠️ Typing runs heavy synchronous filtering immediately, locking the main thread."
-                  : "💡 Typing schedules rendering at a lower priority, keeping the animation thread fluid."}
+                  ? "⚠️ Sync Mode runs heavy 60ms CPU filter loop in the input render thread, blocking main canvas loop."
+                  : "💡 Concurrent Mode defers the 60ms CPU render thread, prioritizing canvas render pipeline first."}
               </p>
             </div>
 
-            {/* Simulation Log Stream */}
-            <div className="flex-1 flex flex-col gap-3 min-h-[250px]">
-              <span className="text-sm font-semibold text-zinc-500">Processed Logs (Sample View)</span>
-              <div className="flex-1 border border-zinc-100 dark:border-zinc-900 rounded-2xl p-4 bg-zinc-50/50 dark:bg-zinc-950 overflow-y-auto max-h-[300px] flex flex-col gap-2 scrollbar-thin">
-                {mockItems.map((item) => (
+            {/* Sorting Toggles */}
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold text-zinc-500">Sort Priority</label>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleSortChange("id")}
+                  className={`px-3 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-1 transition-colors ${
+                    sortBy === "id"
+                      ? "bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 border-transparent"
+                      : "bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 hover:bg-zinc-100"
+                  }`}
+                >
+                  <Clock className="w-3.5 h-3.5" /> Chronological
+                </button>
+                <button
+                  onClick={() => handleSortChange("load")}
+                  className={`px-3 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-1 transition-colors ${
+                    sortBy === "load"
+                      ? "bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 border-transparent"
+                      : "bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 hover:bg-zinc-100"
+                  }`}
+                >
+                  <Cpu className="w-3.5 h-3.5" /> High Load
+                </button>
+                <button
+                  onClick={() => handleSortChange("service")}
+                  className={`px-3 py-1.5 rounded-lg border text-xs font-semibold flex items-center gap-1 transition-colors ${
+                    sortBy === "service"
+                      ? "bg-zinc-900 text-zinc-50 dark:bg-zinc-100 dark:text-zinc-900 border-transparent"
+                      : "bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 hover:bg-zinc-100"
+                  }`}
+                >
+                  <ArrowUpDown className="w-3.5 h-3.5" /> Service Name
+                </button>
+              </div>
+            </div>
+
+            {/* List Stream Container */}
+            <div className="flex-1 flex flex-col gap-3 min-h-[300px] relative">
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-semibold text-zinc-500">Processed Logs (showing top 100)</span>
+                {isPending && (
+                  <span className="text-xs text-rose-500 font-semibold animate-pulse flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                    Scheduling...
+                  </span>
+                )}
+              </div>
+
+              {/* Data list viewport */}
+              <div className={`flex-1 border border-zinc-100 dark:border-zinc-900 rounded-2xl p-4 bg-zinc-50/50 dark:bg-zinc-950/20 overflow-y-auto max-h-[300px] flex flex-col gap-2 scrollbar-thin transition-opacity duration-300 ${
+                isPending ? "opacity-40 select-none pointer-events-none" : "opacity-100"
+              }`}>
+                {filteredAndSortedLogs.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between p-3 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200/60 dark:border-zinc-800/60 text-xs font-mono"
+                    className="flex flex-col p-3 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200/60 dark:border-zinc-800/60 gap-1.5 text-xs"
                   >
-                    <span className="text-zinc-600 dark:text-zinc-400 font-medium">{item.name}</span>
-                    <div className="flex items-center gap-2">
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] capitalize ${
-                        item.status === "healthy" ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20" :
-                        item.status === "warning" ? "bg-amber-500/10 text-amber-600 border border-amber-500/20" :
-                        "bg-rose-500/10 text-rose-600 border border-rose-500/20"
-                      }`}>
-                        {item.status}
-                      </span>
-                      <span className="text-zinc-400 font-bold">{item.load}</span>
+                    <div className="flex items-center justify-between font-mono text-[10px]">
+                      <span className="text-zinc-400">{item.timestamp}</span>
+                      <span className="text-zinc-500 font-bold bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded">{item.code}</span>
                     </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-zinc-800 dark:text-zinc-200 font-semibold font-mono text-[11px]">{item.service}</span>
+                      <div className="flex items-center gap-2">
+                        <span className={`px-2 py-0.5 rounded-full text-[9px] font-semibold capitalize ${
+                          item.status === "healthy" ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/20" :
+                          item.status === "warning" ? "bg-amber-500/10 text-amber-600 border border-amber-500/20" :
+                          "bg-rose-500/10 text-rose-600 border border-rose-500/20"
+                        }`}>
+                          {item.status}
+                        </span>
+                        <span className="text-zinc-400 font-bold font-mono">{item.load}</span>
+                      </div>
+                    </div>
+                    <p className="text-zinc-500 text-[11px] leading-normal">{item.message}</p>
                   </div>
                 ))}
+
+                {filteredAndSortedLogs.length === 0 && (
+                  <div className="flex-1 flex flex-col items-center justify-center text-center p-8 text-zinc-500 gap-2">
+                    <Database className="w-8 h-8 text-zinc-300" />
+                    <span className="text-xs">No matching nodes found inside 15,000 log registry.</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -353,36 +550,55 @@ export default function PrioritySchedulerPage() {
               </div>
             </div>
 
-            {/* Sparkline Graph Card */}
-            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 p-6 rounded-3xl shadow-sm flex flex-col gap-4">
-              <div className="flex justify-between items-center">
+            {/* Latency & Graph telemetry card */}
+            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 p-6 rounded-3xl shadow-sm flex flex-col gap-6">
+              
+              {/* Profile Details */}
+              <div className="grid grid-cols-2 gap-4 border-b border-zinc-100 dark:border-zinc-900 pb-5">
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold">Frame Stability Profile</span>
-                  <span className="text-xs text-zinc-500">Live delta trace of the last 40 frames</span>
+                  <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Thread CPU Wait</span>
+                  <span className="text-2xl font-bold font-mono mt-1 text-rose-500">60 ms</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-mono">
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                  <span>Target: 60fps</span>
+                <div className="flex flex-col">
+                  <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Log Computation Render</span>
+                  <span className={`text-2xl font-bold font-mono mt-1 ${
+                    renderLatency > 100 ? "text-rose-500 animate-pulse" : "text-amber-500"
+                  }`}>
+                    {renderLatency} ms
+                  </span>
                 </div>
               </div>
 
-              {/* Simple SVG Sparkline */}
-              <div className="h-16 w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-900 rounded-xl px-2 py-3">
-                <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 40">
-                  <path
-                    d={`M ${fpsHistory.map((val, idx) => {
-                      const x = (idx / (fpsHistory.length - 1)) * 100;
-                      // Mapping 0-60 fps to height (40 to 0)
-                      const y = 40 - (val / 60) * 35;
-                      return `${x} ${y}`;
-                    }).join(" L ")}`}
-                    fill="none"
-                    stroke="#f43f5e"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <div className="flex flex-col gap-4">
+                <div className="flex justify-between items-center">
+                  <div className="flex flex-col">
+                    <span className="text-sm font-semibold">Frame Stability Profile</span>
+                    <span className="text-xs text-zinc-500">Live delta trace of the last 40 frames</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-xs text-zinc-500 font-mono">
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span>Target: 60fps</span>
+                  </div>
+                </div>
+
+                {/* Simple SVG Sparkline */}
+                <div className="h-16 w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-900 rounded-xl px-2 py-3">
+                  <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 40">
+                    <path
+                      d={`M ${fpsHistory.map((val, idx) => {
+                        const x = (idx / (fpsHistory.length - 1)) * 100;
+                        // Mapping 0-60 fps to height (40 to 0)
+                        const y = 40 - (val / 60) * 35;
+                        return `${x} ${y}`;
+                      }).join(" L ")}`}
+                      fill="none"
+                      stroke="#f43f5e"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
