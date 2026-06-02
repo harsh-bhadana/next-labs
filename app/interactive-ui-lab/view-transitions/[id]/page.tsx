@@ -1,7 +1,7 @@
 import { TransitionLink } from "@/components/TransitionLink";
 import { ArrowLeft, Sparkles, Loader2 } from "lucide-react";
 import Image from "next/image";
-import { galleryItems } from "../page";
+import { galleryItems } from "../data";
 import { Suspense } from "react";
 
 // --- Dynamic Content Component ---

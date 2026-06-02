@@ -1,3 +1,5 @@
+"use client";
+
 import { useViewTransition } from "./TransitionProvider";
 import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
