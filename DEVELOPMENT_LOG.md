@@ -1059,3 +1059,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Updated framework tooling packages to match React 19 stable versions.
 - **Time**: 4:55:51 pm
+
+## [2026-06-03] - docs: add inline comments explaining useActionState
+
+- **Component**: Refinement & Maintenance
+- **Details**: Added developer documentation detailing async status states.
+- **Time**: 2:36:15 pm
