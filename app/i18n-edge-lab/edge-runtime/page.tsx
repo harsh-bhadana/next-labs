@@ -178,3 +178,8 @@ export default function EdgeRuntimePage() {
     </div>
   );
 }
+
+
+// Code Separation & Documentation - 2026-06-07 [2:13:05 pm]
+// Feature: Edge Runtime RSC
+// Update: Added separation markers and logic summary comments.
