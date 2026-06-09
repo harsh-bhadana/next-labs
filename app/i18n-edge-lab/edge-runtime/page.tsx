@@ -193,3 +193,8 @@ export default function EdgeRuntimePage() {
 // Code Separation & Documentation - 2026-06-07 [2:36:48 pm]
 // Feature: Edge Runtime RSC
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-06-08 [4:21:14 pm]
+// Feature: Edge Runtime RSC
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
