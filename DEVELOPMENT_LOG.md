@@ -1107,3 +1107,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Wrote additional boundary mocks to confirm fallback cards.
 - **Time**: 5:16:59 pm
+
+## [2026-06-09] - refactor: clean up styling rules and css variables
+
+- **Component**: Refinement & Maintenance
+- **Details**: Merged conflicting styles in globals.css variables.
+- **Time**: 1:04:47 pm
