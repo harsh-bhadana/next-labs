@@ -208,3 +208,8 @@ export default function EdgeRuntimePage() {
 // Code Separation & Documentation - 2026-06-09 [11:38:07 am]
 // Feature: Edge Runtime RSC
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-06-09 [9:52:38 am]
+// Feature: Edge Runtime RSC
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
