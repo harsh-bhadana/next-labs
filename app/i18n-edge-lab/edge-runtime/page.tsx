@@ -203,3 +203,8 @@ export default function EdgeRuntimePage() {
 // Code Separation & Documentation - 2026-06-08 [11:43:32 am]
 // Feature: Edge Runtime RSC
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-06-09 [11:38:07 am]
+// Feature: Edge Runtime RSC
+// Update: Documented boundary recovery options and custom error scenarios.
