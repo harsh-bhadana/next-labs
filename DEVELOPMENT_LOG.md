@@ -1125,3 +1125,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Polished sidebar navigation components to support mobile screen scales.
 - **Time**: 4:38:31 pm
+
+## [2026-06-10] - chore: upgrade project bundle dev-dependencies
+
+- **Component**: Refinement & Maintenance
+- **Details**: Updated framework tooling packages to match React 19 stable versions.
+- **Time**: 1:40:55 pm
