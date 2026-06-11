@@ -218,3 +218,8 @@ export default function EdgeRuntimePage() {
 // Code Separation & Documentation - 2026-06-09 [10:57:25 am]
 // Feature: Edge Runtime RSC
 // Update: Added JSDoc headers clarifying variables scope.
+
+
+// Code Separation & Documentation - 2026-06-10 [1:38:59 pm]
+// Feature: Edge Runtime RSC
+// Update: Documented boundary recovery options and custom error scenarios.
