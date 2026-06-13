@@ -243,3 +243,8 @@ export default function EdgeRuntimePage() {
 // Code Separation & Documentation - 2026-06-11 [11:32:28 am]
 // Feature: Edge Runtime RSC
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-06-12 [9:46:33 am]
+// Feature: Edge Runtime RSC
+// Update: Documented boundary recovery options and custom error scenarios.
