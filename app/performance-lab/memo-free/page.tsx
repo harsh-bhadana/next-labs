@@ -56,30 +56,37 @@ export default function MemoFreeLab() {
     let animationFrameId: number;
     let batchOffset = 0;
 
+    let lastUpdate = 0;
     const loop = (time: number) => {
-      setTick(t => t + 1);
+      // Keep frame counting running on every requestAnimationFrame tick
+      frameCount.current++;
 
-      setSensors(prev => {
-        const next = [...prev];
-        // Optimization: Update a small batch per frame to minimize churn
-        const updateCount = Math.min(8, GRID_SIZE);
-        for (let i = 0; i < updateCount; i++) {
-          const idx = (batchOffset + i) % GRID_SIZE;
-          const delta = (Math.random() - 0.5) * 6;
-          const newValue = Math.max(0, Math.min(100, next[idx].value + delta));
-          next[idx] = {
-            ...next[idx],
-            value: newValue,
-            trend: delta > 0 ? 'up' : 'down',
-            status: newValue > 85 ? 'critical' : newValue > 65 ? 'warning' : 'active'
-          };
-        }
-        batchOffset = (batchOffset + updateCount) % GRID_SIZE;
-        return next;
-      });
+      // Throttle React state updates to 80ms to prevent main thread blocking
+      if (time - lastUpdate >= 80) {
+        setTick(t => t + 1);
+
+        setSensors(prev => {
+          const next = [...prev];
+          // Optimization: Update a small batch per frame to minimize churn
+          const updateCount = Math.min(8, GRID_SIZE);
+          for (let i = 0; i < updateCount; i++) {
+            const idx = (batchOffset + i) % GRID_SIZE;
+            const delta = (Math.random() - 0.5) * 6;
+            const newValue = Math.max(0, Math.min(100, next[idx].value + delta));
+            next[idx] = {
+              ...next[idx],
+              value: newValue,
+              trend: delta > 0 ? 'up' : 'down',
+              status: newValue > 85 ? 'critical' : newValue > 65 ? 'warning' : 'active'
+            };
+          }
+          batchOffset = (batchOffset + updateCount) % GRID_SIZE;
+          return next;
+        });
+        lastUpdate = time;
+      }
 
       // FPS Calculation
-      frameCount.current++;
       if (time - lastTime.current >= 1000) {
         setFps(frameCount.current);
         frameCount.current = 0;
