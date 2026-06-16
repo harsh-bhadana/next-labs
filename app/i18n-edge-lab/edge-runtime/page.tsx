@@ -3,6 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, Zap, Globe, Activity, AlertTriangle, Languages } from "lucide-react";
 import { Suspense } from "react";
 
+// Note: Exporting runtime = "edge" is commented out because experimental.useCache (Cache Components)
+// is enabled in next.config.ts, and Next.js 16 does not support Edge runtime routes 
+// when the global useCache compiler tier is active.
+// export const runtime = "edge";
+
 async function EdgeRuntimeContent() {
   const headersList = await headers();
   

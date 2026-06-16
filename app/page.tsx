@@ -1,78 +1,104 @@
 import Link from "next/link";
-import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Map, Activity, Globe, Wrench } from "lucide-react";
+import { ArrowRight, Database, LayoutTemplate, Zap, RefreshCw, Shield, Map, Activity, Globe, Wrench, Sparkles, Cpu, Layers, GitBranch, Terminal } from "lucide-react";
 
-const experiments = [
+const labs = [
   {
-    name: "Route Handler as a BFF",
-    description: "A stock ticker that polls an aggregating Route Handler, demonstrating caching and useSyncExternalStore.",
-    href: "/the-rendering/bff-stocks",
-    icon: <Activity className="w-5 h-5 text-amber-500" />,
-    color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-    borderColor: "border-amber-500/20"
+    name: "The Rendering Lab",
+    slug: "the-rendering",
+    description: "Server-side innovations and edge-computing experiments. Showcase of streaming SSR, PPR, component-level caching, and interceptors.",
+    href: "/the-rendering",
+    specimenCount: 6,
+    icon: <Layers className="w-6 h-6 text-emerald-500" />,
+    color: "from-emerald-500/10 to-teal-500/5 text-emerald-600 dark:text-emerald-400",
+    borderColor: "border-emerald-500/20 hover:border-emerald-500/40",
+    glowColor: "group-hover:shadow-emerald-500/5",
+    specimens: [
+      { name: "PPR Dashboard", href: "/the-rendering/ppr-dashboard" },
+      { name: "BFF Stock Ticker", href: "/the-rendering/bff-stocks" },
+      { name: 'The "use cache" Specimen', href: "/the-rendering/use-cache-specimen" },
+      { name: "Proxy Interceptors", href: "/the-rendering/proxy-specimen" },
+      { name: "Zero-JS Data Table", href: "/the-rendering/zero-js-table" },
+      { name: "Infinite Scroll Native", href: "/the-rendering/infinite-scroll" }
+    ]
   },
   {
-    name: "Zero-JS Data Table",
-    description: "A high-performance grid using Server Components and URL SearchParams (async) for fetching and filtering.",
-    href: "/the-rendering/zero-js-table",
-    icon: <Database className="w-5 h-5" />,
-    color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-    borderColor: "border-blue-500/20"
+    name: "The Performance Lab",
+    slug: "performance-lab",
+    description: "Zero-latency patterns, concurrent rendering priority visualizers, React Compiler auto-memoization proof-of-concepts, and optimistic hooks.",
+    href: "/performance-lab",
+    specimenCount: 6,
+    icon: <Cpu className="w-6 h-6 text-rose-500" />,
+    color: "from-rose-500/10 to-pink-500/5 text-rose-600 dark:text-rose-400",
+    borderColor: "border-rose-500/20 hover:border-rose-500/40",
+    glowColor: "group-hover:shadow-rose-500/5",
+    specimens: [
+      { name: "Concurrent Priority Scheduler", href: "/performance-lab/priority-scheduler" },
+      { name: "The Memo-Free Dashboard", href: "/performance-lab/memo-free" },
+      { name: "Streaming useFormStatus Form", href: "/performance-lab/form-status" },
+      { name: "Optimistic Mutations", href: "/performance-lab/optimistic-like" },
+      { name: "Search-as-you-go", href: "/performance-lab/search-as-you-go" },
+      { name: "Zero-State Server CRUD", href: "/performance-lab/server-crud" }
+    ]
   },
   {
-    name: "PPR Dashboard",
-    description: "Uses the stable experimental.ppr to serve a static shell instantly while streaming dynamic user data into Suspense holes.",
-    href: "/the-rendering/ppr-dashboard",
-    icon: <LayoutTemplate className="w-5 h-5" />,
-    color: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
-    borderColor: "border-purple-500/20"
-  },
-  {
-    name: 'The "use cache" Specimen',
-    description: "Demonstrates component-level caching using the new use cache directive and cacheLife profiles.",
-    href: "/the-rendering/use-cache-specimen",
-    icon: <Zap className="w-5 h-5" />,
-    color: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-    borderColor: "border-amber-500/20"
-  },
-  {
-    name: "Specimen 03: The proxy.ts Interceptor",
-    description: "Uses the new Next.js 16 Proxy layer for centralized JWT rotation, geo-fencing, and request fingerprinting.",
-    href: "/the-rendering/proxy-specimen",
-    icon: <Shield className="w-5 h-5" />,
-    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
-    borderColor: "border-indigo-500/20"
-  },
-  {
-    name: "Infinite Scroll w/ useActionState",
-    description: "A list that fetches more items using Server Actions, managing pending state and data without a separate library.",
-    href: "/the-rendering/infinite-scroll",
-    icon: <RefreshCw className="w-5 h-5" />,
-    color: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-    borderColor: "border-emerald-500/20"
+    name: "Interactive & UI Lab",
+    slug: "interactive-ui-lab",
+    description: "Buttery-smooth transitions, optimistic UI updates, Framer Motion board animations, and progressive enhancement multi-step wizards.",
+    href: "/interactive-ui-lab",
+    specimenCount: 3,
+    icon: <Sparkles className="w-6 h-6 text-indigo-500" />,
+    color: "from-indigo-500/10 to-purple-500/5 text-indigo-600 dark:text-indigo-400",
+    borderColor: "border-indigo-500/20 hover:border-indigo-500/40",
+    glowColor: "group-hover:shadow-indigo-500/5",
+    specimens: [
+      { name: "Drag-and-Drop Kanban", href: "/interactive-ui-lab/kanban" },
+      { name: "Animated View Transitions", href: "/interactive-ui-lab/view-transitions" },
+      { name: "Progressive Form Wizard", href: "/interactive-ui-lab/form-wizard" }
+    ]
   },
   {
     name: "The Routing Lab",
-    description: "Advanced patterns including Parallel Routes, Intercepting Routes, and Edge-Runtime orchestration for complex layouts.",
+    slug: "routing-lab",
+    description: "Advanced App Router navigation paradigms, featuring sub-frame modal galleries via Parallel & Intercepting routes.",
     href: "/routing-lab",
-    icon: <Map className="w-5 h-5" />,
-    color: "bg-red-500/10 text-red-600 dark:text-red-400",
-    borderColor: "border-red-500/20"
+    specimenCount: 2,
+    icon: <GitBranch className="w-6 h-6 text-blue-500" />,
+    color: "from-blue-500/10 to-sky-500/5 text-blue-600 dark:text-blue-400",
+    borderColor: "border-blue-500/20 hover:border-blue-500/40",
+    glowColor: "group-hover:shadow-blue-500/5",
+    specimens: [
+      { name: "Modal Gallery", href: "/routing-lab/modal-gallery" },
+      { name: "Pure Next.js i18n", href: "/routing-lab/i18n" }
+    ]
   },
   {
     name: "i18n & Edge Lab",
-    description: "High-performance internationalization leveraging the Edge Runtime for sub-50ms TTFB and global geo-detection.",
+    slug: "i18n-edge-lab",
+    description: "Globally distributed rendering benchmarks. Comparing TTFB and geo-header detection between Edge and Node.js runtimes.",
     href: "/i18n-edge-lab",
-    icon: <Globe className="w-5 h-5" />,
-    color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-    borderColor: "border-blue-500/20"
+    specimenCount: 1,
+    icon: <Globe className="w-6 h-6 text-amber-500" />,
+    color: "from-amber-500/10 to-yellow-500/5 text-amber-600 dark:text-amber-400",
+    borderColor: "border-amber-500/20 hover:border-amber-500/40",
+    glowColor: "group-hover:shadow-amber-500/5",
+    specimens: [
+      { name: "Edge Runtime RSC", href: "/i18n-edge-lab/edge-runtime" }
+    ]
   },
   {
     name: "DevX & Tooling Lab",
-    description: "Deep observability and developer experience experiments, from Instrumentation hooks to bundle analysis.",
+    slug: "devx-lab",
+    description: "Deep observability, runtime diagnostics, startup lifecycle hooking, and nested error-boundary patterns.",
     href: "/devx-lab",
-    icon: <Wrench className="w-5 h-5" />,
-    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
-    borderColor: "border-indigo-500/20"
+    specimenCount: 2,
+    icon: <Terminal className="w-6 h-6 text-violet-500" />,
+    color: "from-violet-500/10 to-fuchsia-500/5 text-violet-600 dark:text-violet-400",
+    borderColor: "border-violet-500/20 hover:border-violet-500/40",
+    glowColor: "group-hover:shadow-violet-500/5",
+    specimens: [
+      { name: "Instrumentation & Tracing", href: "/devx-lab/instrumentation" },
+      { name: "Custom 404 Routing", href: "/devx-lab/not-found-routing" }
+    ]
   }
 ];
 
@@ -82,7 +108,7 @@ export default function Home() {
       
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
-      <main className="relative flex w-full max-w-5xl flex-col items-center justify-start py-20 px-6 sm:px-12 gap-16">
+      <main className="relative flex w-full max-w-6xl flex-col items-center justify-start py-20 px-6 sm:px-12 gap-16">
         
         <header className="flex flex-col items-center gap-6 text-center pt-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-medium">
@@ -90,41 +116,73 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            Next.js 16 Core
+            Next.js 16 + React 19 Core
           </div>
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-            The Rendering Lab
+          <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+            NextJS Experimental Labs
           </h1>
-          <p className="max-w-2xl text-lg sm:text-xl leading-8 text-zinc-600 dark:text-zinc-400">
-            A comprehensive showcase of modern Next.js 15+ and React 19 capabilities, from Partial Prerendering to Server Actions and bleeding-edge caching strategies.
+          <p className="max-w-3xl text-lg sm:text-xl leading-8 text-zinc-600 dark:text-zinc-400">
+            A premium high-performance laboratory for experimental specimens. We isolate advanced architectural patterns, concurrent performance primitives, and edge-native paradigms.
           </p>
         </header>
 
-        <section className="grid w-full grid-cols-1 md:grid-cols-2 gap-6">
-          {experiments.map((exp) => (
-            <Link 
-              key={exp.name}
-              href={exp.href}
-              className="group flex flex-col gap-4 p-6 sm:p-8 bg-white dark:bg-zinc-900/50 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg transition-all duration-300"
+        <section className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {labs.map((lab) => (
+            <div 
+              key={lab.name}
+              className="group flex flex-col justify-between p-6 sm:p-8 bg-white dark:bg-zinc-900/40 rounded-[2rem] border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700/80 hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
             >
-              <div className="flex items-center justify-between">
-                <div className={`p-3 rounded-xl border ${exp.color} ${exp.borderColor}`}>
-                  {exp.icon}
-                </div>
-                <div className="p-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-50 group-hover:bg-zinc-100 dark:group-hover:bg-zinc-900 transition-colors">
-                   <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
+              {/* Subtle hover background glow */}
+              <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10" />
               
-              <div className="flex flex-col gap-2 mt-2">
-                <h2 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-                  {exp.name}
-                </h2>
-                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm">
-                  {exp.description}
-                </p>
+              <div className="flex flex-col gap-5">
+                <div className="flex items-center justify-between">
+                  <div className={`p-3.5 rounded-2xl bg-gradient-to-br ${lab.color} border border-zinc-200/50 dark:border-zinc-800`}>
+                    {lab.icon}
+                  </div>
+                  <span className="text-xs font-mono font-semibold px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 rounded-lg border border-zinc-200/60 dark:border-zinc-700/40">
+                    {lab.specimenCount} SPECIMENS
+                  </span>
+                </div>
+                
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
+                    {lab.name}
+                  </h2>
+                  <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-sm h-[72px] overflow-hidden line-clamp-3">
+                    {lab.description}
+                  </p>
+                </div>
+
+                <div className="h-px bg-zinc-100 dark:bg-zinc-800/60 my-1" />
+
+                {/* Specimen Sub-links */}
+                <div className="flex flex-col gap-2">
+                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-zinc-400 dark:text-zinc-500">Key Specimens</span>
+                  <div className="flex flex-wrap gap-2">
+                    {lab.specimens.map((spec) => (
+                      <Link
+                        key={spec.name}
+                        href={spec.href}
+                        className="text-xs px-2.5 py-1 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 hover:border-blue-500/40 dark:hover:border-blue-400/40 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                      >
+                        {spec.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </Link>
+
+              <div className="mt-8 pt-4">
+                <Link 
+                  href={lab.href}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-blue-500 dark:text-blue-400 group-hover:translate-x-1 transition-transform"
+                >
+                  Enter Lab Explorer
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
           ))}
         </section>
         

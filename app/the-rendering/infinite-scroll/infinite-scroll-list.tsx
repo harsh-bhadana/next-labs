@@ -52,8 +52,37 @@ export function InfiniteScrollList({ initialState }: { initialState: State }) {
         ))}
       </div>
 
-      <form ref={formRef} action={action} className="opacity-0 w-0 h-0 overflow-hidden">
-        <button type="submit" disabled={isPending} tabIndex={-1}>
+      <noscript>
+        <style>{`
+          .noscript-submit-form {
+            opacity: 1 !important;
+            width: auto !important;
+            height: auto !important;
+            overflow: visible !important;
+            display: flex !important;
+            justify-content: center !important;
+            margin: 2rem 0 !important;
+          }
+          .noscript-submit-button {
+            padding: 0.75rem 1.5rem !important;
+            background-color: #262626 !important;
+            color: #f5f5f5 !important;
+            border: 1px solid #404040 !important;
+            border-radius: 0.75rem !important;
+            font-size: 0.875rem !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.2s !important;
+          }
+          .noscript-submit-button:hover {
+            background-color: #404040 !important;
+            border-color: #525252 !important;
+          }
+        `}</style>
+      </noscript>
+
+      <form ref={formRef} action={action} className="opacity-0 w-0 h-0 overflow-hidden noscript-submit-form">
+        <button type="submit" disabled={isPending} tabIndex={-1} className="noscript-submit-button">
           Load More
         </button>
       </form>

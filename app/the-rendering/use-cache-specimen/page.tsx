@@ -3,13 +3,14 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 
+import { cacheLife } from "next/cache";
+
 // This function simulates a slow DB/API call and caches the result for 1 hour.
 // 1. It must be async
-// 2. We use &apos;use cache&apos; directive to tell Next.js to cache the component&apos;s output or data.
+// 2. We use 'use cache' directive to tell Next.js to cache the component's output or data.
 async function getCachedData() {
-  // Use cache directive removed as it's unstable in this environment.
-  // Using a custom or predefined profile like 'hours'
-  // cacheLife('hours'); // Next 15+ has experimental cacheLife profiles
+  "use cache";
+  cacheLife("hours");
 
   await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate slow fetch
 

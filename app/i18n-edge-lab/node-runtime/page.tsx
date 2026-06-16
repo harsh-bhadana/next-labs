@@ -3,6 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, Cpu, Globe, Activity, AlertCircle, Languages } from "lucide-react";
 import { Suspense } from "react";
 
+// Note: Exporting runtime = "nodejs" is commented out because experimental.useCache (Cache Components)
+// is enabled in next.config.ts, and Next.js 16 does not support custom runtime segment config
+// when the global useCache compiler tier is active.
+// export const runtime = "nodejs";
+
 async function NodeRuntimeContent() {
   const headersList = await headers();
   
