@@ -164,3 +164,8 @@ export default async function InstrumentationPage() {
 // Code Separation & Documentation - 2026-06-15 [3:57:59 pm]
 // Feature: Instrumentation observer
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-06-15 [5:07:25 pm]
+// Feature: Instrumentation observer
+// Update: Added separation markers and logic summary comments.
