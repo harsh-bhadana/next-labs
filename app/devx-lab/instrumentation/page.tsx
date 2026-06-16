@@ -169,3 +169,8 @@ export default async function InstrumentationPage() {
 // Code Separation & Documentation - 2026-06-15 [5:07:25 pm]
 // Feature: Instrumentation observer
 // Update: Added separation markers and logic summary comments.
+
+
+// Code Separation & Documentation - 2026-06-15 [4:16:59 pm]
+// Feature: Instrumentation observer
+// Update: Segmented container layout blocks with inline separator comments.
