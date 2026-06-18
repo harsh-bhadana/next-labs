@@ -174,3 +174,8 @@ export default async function InstrumentationPage() {
 // Code Separation & Documentation - 2026-06-15 [4:16:59 pm]
 // Feature: Instrumentation observer
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-06-17 [9:27:12 am]
+// Feature: Instrumentation observer
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
