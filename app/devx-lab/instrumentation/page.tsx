@@ -184,3 +184,8 @@ export default async function InstrumentationPage() {
 // Code Separation & Documentation - 2026-06-18 [11:32:40 am]
 // Feature: Instrumentation observer
 // Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
+
+
+// Code Separation & Documentation - 2026-06-18 [4:49:23 pm]
+// Feature: Instrumentation observer
+// Update: Documented boundary recovery options and custom error scenarios.
