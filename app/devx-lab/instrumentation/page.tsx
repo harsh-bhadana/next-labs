@@ -189,3 +189,8 @@ export default async function InstrumentationPage() {
 // Code Separation & Documentation - 2026-06-18 [4:49:23 pm]
 // Feature: Instrumentation observer
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-06-18 [2:10:13 pm]
+// Feature: Instrumentation observer
+// Update: Added JSDoc headers clarifying variables scope.
