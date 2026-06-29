@@ -123,3 +123,8 @@ export default function KanbanPage() {
 // Code Separation & Documentation - 2026-06-27 [4:13:31 pm]
 // Feature: Drag-and-Drop Kanban Board
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-06-28 [10:05:05 am]
+// Feature: Drag-and-Drop Kanban Board
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
