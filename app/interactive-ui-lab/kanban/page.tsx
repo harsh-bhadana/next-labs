@@ -138,3 +138,8 @@ export default function KanbanPage() {
 // Code Separation & Documentation - 2026-06-29 [11:43:42 am]
 // Feature: Drag-and-Drop Kanban Board
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-06-29 [10:39:45 am]
+// Feature: Drag-and-Drop Kanban Board
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
