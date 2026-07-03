@@ -1329,3 +1329,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Added developer documentation detailing async status states.
 - **Time**: 9:27:08 am
+
+## [2026-07-03] - chore: update build script triggers and linter rules
+
+- **Component**: Refinement & Maintenance
+- **Details**: Aligned typescript checks and linter options in eslint config files.
+- **Time**: 3:52:21 pm
