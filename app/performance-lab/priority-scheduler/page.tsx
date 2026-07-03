@@ -638,3 +638,8 @@ export default function PrioritySchedulerPage() {
 // Code Separation & Documentation - 2026-07-02 [3:44:56 pm]
 // Feature: Concurrent Priority Scheduler
 // Update: Segmented container layout blocks with inline separator comments.
+
+
+// Code Separation & Documentation - 2026-07-02 [11:01:46 am]
+// Feature: Concurrent Priority Scheduler
+// Update: Documented boundary recovery options and custom error scenarios.
