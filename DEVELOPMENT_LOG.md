@@ -1335,3 +1335,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Aligned typescript checks and linter options in eslint config files.
 - **Time**: 3:52:21 pm
+
+## [2026-07-04] - docs: add inline comments explaining useActionState
+
+- **Component**: Refinement & Maintenance
+- **Details**: Added developer documentation detailing async status states.
+- **Time**: 5:42:20 pm
