@@ -668,3 +668,8 @@ export default function PrioritySchedulerPage() {
 // Code Separation & Documentation - 2026-07-03 [12:52:20 pm]
 // Feature: Concurrent Priority Scheduler
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-07-04 [2:50:16 pm]
+// Feature: Concurrent Priority Scheduler
+// Update: Added JSDoc headers clarifying variables scope.
