@@ -1353,3 +1353,9 @@ Chronological diary of the Next-Labs codebase feature implementations, testing s
 - **Component**: Refinement & Maintenance
 - **Details**: Merged conflicting styles in globals.css variables.
 - **Time**: 12:29:06 pm
+
+## [2026-07-07] - chore: update build script triggers and linter rules
+
+- **Component**: Refinement & Maintenance
+- **Details**: Aligned typescript checks and linter options in eslint config files.
+- **Time**: 10:40:35 am
