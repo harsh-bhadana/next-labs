@@ -140,3 +140,8 @@ export default function ProgressiveWizardPage({
     </div>
   );
 }
+
+
+// Code Separation & Documentation - 2026-07-07 [1:07:18 pm]
+// Feature: Progressive Wizard Form
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
