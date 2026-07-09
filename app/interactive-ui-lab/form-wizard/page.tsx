@@ -155,3 +155,8 @@ export default function ProgressiveWizardPage({
 // Code Separation & Documentation - 2026-07-07 [11:17:22 am]
 // Feature: Progressive Wizard Form
 // Update: Added JSDoc headers clarifying variables scope.
+
+
+// Code Separation & Documentation - 2026-07-08 [11:04:42 am]
+// Feature: Progressive Wizard Form
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
