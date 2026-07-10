@@ -165,3 +165,8 @@ export default function ProgressiveWizardPage({
 // Code Separation & Documentation - 2026-07-09 [3:10:31 pm]
 // Feature: Progressive Wizard Form
 // Update: Documented boundary recovery options and custom error scenarios.
+
+
+// Code Separation & Documentation - 2026-07-09 [1:44:31 pm]
+// Feature: Progressive Wizard Form
+// Update: Added contextual logic explanations regarding concurrent rendering and React Server Components.
