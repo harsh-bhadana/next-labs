@@ -1,14 +1,22 @@
 import Link from "next/link";
 import { StocksDashboard } from "./StockTicker";
 
+// ==========================================
+// Main Component Implementation
+// ==========================================
+
+/**
+ * BffStocksPage showcases the Backend-for-Frontend (BFF) pattern.
+ * Aggregates mock financial data APIs into a single Next.js Route Handler and syncs
+ * data updates client-side using React's useSyncExternalStore.
+ */
 export default function BffStocksPage() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-100 font-sans selection:bg-amber-500/30">
-      {/* Background Decor */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(245,158,11,0.03)_0%,transparent_50%)] pointer-events-none" />
       
       <div className="relative max-w-5xl mx-auto px-6 py-20 flex flex-col gap-12">
-        {/* Header */}
+        {/* Navigation & Titles */}
         <header className="flex flex-col gap-6">
           <Link
             href="/"
@@ -41,7 +49,7 @@ export default function BffStocksPage() {
         {/* Dashboard Component */}
         <StocksDashboard />
 
-        {/* Architecture Specs */}
+        {/* Technical Architecture Specs */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-4">
             <h3 className="font-bold text-sm uppercase tracking-wider">🖥️ Aggregation</h3>

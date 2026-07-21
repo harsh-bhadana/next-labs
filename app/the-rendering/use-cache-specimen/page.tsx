@@ -1,18 +1,21 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-
-
 import { cacheLife } from "next/cache";
 
-// This function simulates a slow DB/API call and caches the result for 1 hour.
-// 1. It must be async
-// 2. We use 'use cache' directive to tell Next.js to cache the component's output or data.
+// ==========================================
+// Caching Queries
+// ==========================================
+
+/**
+ * Simulates a slow API response. Uses Next.js 15+ "use cache" directive
+ * to cache the returned object values at the component level for 1 hour.
+ */
 async function getCachedData() {
   "use cache";
   cacheLife("hours");
 
-  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate slow fetch
+  await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate database query delay
 
   return {
     timestamp: new Date().toISOString(),
@@ -20,6 +23,13 @@ async function getCachedData() {
   };
 }
 
+// ==========================================
+// Sub-Components
+// ==========================================
+
+/**
+ * CachedComponent loads the cached async payload and renders status metrics.
+ */
 async function CachedComponent() {
   const data = await getCachedData();
 
@@ -46,10 +56,19 @@ async function CachedComponent() {
   );
 }
 
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * UseCacheSpecimenPage renders the cache lifecycle test page.
+ */
 export default function UseCacheSpecimenPage() {
   return (
     <main className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-8 sm:p-20">
       <div className="max-w-2xl mx-auto flex flex-col gap-8">
+        
+        {/* Navigation & Titles */}
         <header className="flex flex-col gap-6">
           <Link
             href="/"
@@ -69,6 +88,7 @@ export default function UseCacheSpecimenPage() {
           </div>
         </header>
 
+        {/* Caching Test Viewport */}
         <section className="flex flex-col gap-4">
           <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
             The component below fetches data asynchronously but is marked with the <code className="bg-zinc-200 dark:bg-zinc-800 px-1 py-0.5 rounded text-sm font-mono">&quot;use cache&quot;</code> directive.
@@ -88,6 +108,7 @@ export default function UseCacheSpecimenPage() {
             <CachedComponent />
           </Suspense>
         </section>
+
       </div>
     </main>
   );

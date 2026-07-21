@@ -7,8 +7,15 @@ import { DynamicUserCard } from "./components/DynamicUserCard";
 import { DynamicRecentActivity } from "./components/DynamicRecentActivity";
 import { StatsSkeleton, UserCardSkeleton, RecentActivitySkeleton } from "./components/Skeletons";
 
+// ==========================================
+// Main Component Implementation
+// ==========================================
 
-
+/**
+ * PPRDashboardPage utilizes Partial Prerendering (PPR) in Next.js.
+ * Renders static components (Sidebar, header shell) instantly, while wrapping
+ * slower dynamic server components in Suspense boundaries to stream them progressively.
+ */
 export default function PPRDashboardPage() {
   return (
     <div className="flex h-screen bg-default-50 overflow-hidden">

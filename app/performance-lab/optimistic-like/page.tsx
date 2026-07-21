@@ -5,22 +5,43 @@ import Link from "next/link";
 import { ArrowLeft, ThumbsUp, Database } from "lucide-react";
 import { likePostAction } from "./actions";
 
-export default function OptimisticLikePage() {
-  // The actual source of truth (e.g. state fetched from DB)
-  const [likes, setLikes] = useState(42);
-  const [isPending, startTransition] = useTransition();
+// ==========================================
+// Main Component
+// ==========================================
 
-  // useOptimistic hook returns [optimisticState, addOptimisticAction]
-  // It updates the optimisticState immediately and reverts if the transition fails
+/**
+ * OptimisticLikePage demonstrates React 19's useOptimistic hook.
+ * Click updates are reflected on the client instantly while database mutations
+ * complete asynchronously in the background.
+ */
+export default function OptimisticLikePage() {
+  // ------------------------------------------
+  // State & Transitions
+  // ------------------------------------------
+  const [likes, setLikes] = useState(42);                // Database source of truth state
+  const [isPending, startTransition] = useTransition();    // Transition handler wrapping server actions
+
+  // ------------------------------------------
+  // Optimistic Hook Setup
+  // ------------------------------------------
+  
+  /**
+   * useOptimistic returns [optimisticState, addOptimisticAction]
+   * Updates state instantly on invocation and falls back automatically if the action rejects.
+   */
   const [optimisticLikes, addOptimisticLike] = useOptimistic(
     likes,
     (state, amount: number) => state + amount
   );
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-8 sm:p-20">
       <div className="max-w-2xl mx-auto flex flex-col gap-10">
         
+        {/* Navigation & Title */}
         <header className="flex flex-col gap-6">
           <Link
             href="/performance-lab"
@@ -41,8 +62,8 @@ export default function OptimisticLikePage() {
           </div>
         </header>
 
+        {/* Dynamic Card Interaction */}
         <section className="flex flex-col gap-8">
-          
           <div className="flex flex-col gap-4 p-8 items-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm">
             <h2 className="text-2xl font-bold tracking-tight">Aesthetic Post</h2>
             <p className="text-zinc-500 text-center max-w-sm">
@@ -74,6 +95,7 @@ export default function OptimisticLikePage() {
             </div>
           </div>
 
+          {/* State Synchronization Inspector */}
           <div className="flex flex-col gap-4 p-6 bg-zinc-100 dark:bg-zinc-950 rounded-xl border border-zinc-200 dark:border-zinc-800 font-mono text-sm">
             <div className="flex items-center gap-2 text-zinc-500 mb-2 font-sans font-medium uppercase tracking-wider text-xs">
               <Database className="w-4 h-4" /> State Inspector
@@ -97,8 +119,8 @@ export default function OptimisticLikePage() {
               </span>
             </div>
           </div>
-
         </section>
+
       </div>
     </div>
   );

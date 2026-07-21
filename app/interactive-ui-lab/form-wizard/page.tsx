@@ -4,7 +4,14 @@ import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { FormWizardClient } from "./FormWizardClient";
 
-// Dynamic component loader for reading cookies and searchParams inside Suspense
+// ==========================================
+// Sub-Components
+// ==========================================
+
+/**
+ * WizardLoader reads multi-step session states from cookies and renders
+ * the client wizard flow. Operates inside a Suspense boundaries context.
+ */
 async function WizardLoader({
   searchParams,
 }: {
@@ -15,7 +22,7 @@ async function WizardLoader({
   const isCompleted = params.step === "completed";
   const simulateNoJS = params.jsMode === "off";
 
-  // Read session data from cookies
+  // Read draft session input values from cookies
   const cookieStore = await cookies();
   const draftData = {
     email: cookieStore.get("wizard_email")?.value || "",
@@ -24,20 +31,20 @@ async function WizardLoader({
     newsletter: cookieStore.get("wizard_newsletter")?.value === "true",
   };
 
-  // Read progressive validation errors if any
+  // Retrieve validated error logs if present
   const errorsCookie = cookieStore.get("wizard_errors")?.value;
   let initialErrors = null;
   if (errorsCookie) {
     try {
       initialErrors = JSON.parse(errorsCookie);
     } catch (e) {
-      // ignore
+      // Ignore invalid JSON format cookies
     }
   }
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Action Panel for simulated JS state */}
+      {/* Simulation Toggle Panel */}
       <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4 shadow-sm">
         <div className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300">
           <span className="relative flex h-2 w-2">
@@ -76,7 +83,7 @@ async function WizardLoader({
         </div>
       </div>
 
-      {/* Form Wizard Client Component */}
+      {/* Form Wizard Client Panel */}
       <FormWizardClient
         initialStep={step}
         initialIsCompleted={isCompleted}
@@ -88,6 +95,13 @@ async function WizardLoader({
   );
 }
 
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * ProgressiveWizardPage renders the multi-step progressive form layout view.
+ */
 export default function ProgressiveWizardPage({
   searchParams,
 }: {
@@ -95,8 +109,6 @@ export default function ProgressiveWizardPage({
 }) {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-6 sm:p-12 md:p-20 relative overflow-hidden">
-      
-      {/* Background radial glow */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-rose-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-4xl mx-auto flex flex-col gap-8 relative z-10">
@@ -126,7 +138,7 @@ export default function ProgressiveWizardPage({
           </div>
         </header>
 
-        {/* Suspense boundary for dynamic session content */}
+        {/* Wizard Loader Viewport inside Suspense bounds */}
         <Suspense fallback={
           <div className="flex flex-col items-center justify-center p-20 gap-4">
             <Loader2 className="w-10 h-10 animate-spin text-rose-500" />

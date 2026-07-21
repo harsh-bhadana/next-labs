@@ -3,12 +3,15 @@ import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
+// ==========================================
+// Metadata & Config
+// ==========================================
+
 export const metadata: Metadata = {
     title: "Specimen Lab | Zero-JS Data Table",
     description: "Advanced server-side filtering experiment with 0kb client-side JavaScript logic.",
 };
 
-// Mock Data
 const specimens = [
     { id: 1, name: "Bio-Logic Processor", status: "Stable", tech: "Organic" },
     { id: 2, name: "Neural Link v4", status: "Testing", tech: "Cybernetic" },
@@ -23,11 +26,18 @@ const statusStyles: Record<string, string> = {
     Critical: "bg-rose-500/10 text-rose-400 border-rose-500/20",
 };
 
-// --- Dynamic Table Component ---
+// ==========================================
+// Sub-Components
+// ==========================================
+
 interface SearchParams {
     q?: string;
 }
 
+/**
+ * TableContent handles search filtering entirely on the server
+ * by reading the URL query searchParams.
+ */
 async function TableContent({ searchParams }: { searchParams: Promise<SearchParams> }) {
     const awaitedParams = await searchParams;
     const query = awaitedParams.q?.toLowerCase() || "";
@@ -39,7 +49,7 @@ async function TableContent({ searchParams }: { searchParams: Promise<SearchPara
 
     return (
         <div className="space-y-12">
-            {/* Standard HTML Form - Works without hydration */}
+            {/* Standard HTML Form - Works 100% without client-side hydration */}
             <form method="GET" className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto w-full">
                 <input
                     name="q"
@@ -55,6 +65,7 @@ async function TableContent({ searchParams }: { searchParams: Promise<SearchPara
                 </button>
             </form>
 
+            {/* Specimen Output Table */}
             <div className="overflow-hidden border border-slate-800 rounded-2xl shadow-2xl shadow-black/50 bg-slate-900/50">
                 <table className="w-full text-sm text-left border-collapse">
                     <thead>
@@ -95,7 +106,14 @@ async function TableContent({ searchParams }: { searchParams: Promise<SearchPara
     );
 }
 
-// --- Main Page ---
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * ZeroJSTable renders the page, wrapping the table content in a Suspense boundary
+ * to support progressive streaming when database queries are resolving.
+ */
 export default function ZeroJSTable({ searchParams }: { searchParams: Promise<SearchParams> }) {
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-slate-100 p-8 md:p-16 lg:p-24 flex flex-col items-center font-sans">

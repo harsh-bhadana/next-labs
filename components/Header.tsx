@@ -4,9 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FlaskConical, LayoutTemplate, Zap, Sparkles, Map, Globe, Wrench } from "lucide-react";
 
-export function Header() {
-  const pathname = usePathname();
+// ==========================================
+// Main Component
+// ==========================================
 
+/**
+ * Header component rendering the main persistent navigation bar.
+ * Uses client-side router detection to highlight the active route.
+ */
+export function Header() {
+  // ------------------------------------------
+  // Hooks & Route State
+  // ------------------------------------------
+  const pathname = usePathname(); // Retrieves current URL path to map active styling states
+
+  // ------------------------------------------
+  // Navigation Configuration
+  // ------------------------------------------
   const links = [
     { href: "/", label: "Rendering Labs", icon: FlaskConical },
     { href: "/performance-lab", label: "The Performance Lab", icon: Zap },
@@ -16,6 +30,9 @@ export function Header() {
     { href: "/interactive-ui-lab", label: "Interactive & UI Lab", icon: Sparkles },
   ];
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-black/80 backdrop-blur-md">
       <div className="flex h-14 items-center px-4 sm:px-8 gap-4 sm:gap-8 overflow-x-auto whitespace-nowrap scrollbar-hide">

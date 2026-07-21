@@ -4,7 +4,10 @@ import { useState, useDeferredValue, useMemo } from "react";
 import Link from "next/link";
 import { ArrowLeft, Search } from "lucide-react";
 
-// Generate stable mocked data
+// ==========================================
+// Static Mock Data Generator
+// ==========================================
+
 const MOCK_ITEMS = Array.from({ length: 10000 }).map((_, i) => ({
   id: i,
   title: `Performance Item ${i}`,
@@ -12,22 +15,36 @@ const MOCK_ITEMS = Array.from({ length: 10000 }).map((_, i) => ({
   value: `VAL-${i.toString(36).padStart(4, '0')}`,
 }));
 
+// ==========================================
+// Main Component Implementation
+// ==========================================
+
+/**
+ * PerformanceLabPage provides a search-as-you-go user interface
+ * utilizing React 19's useDeferredValue to maintain responsive inputs.
+ */
 export default function PerformanceLabPage() {
+  // ------------------------------------------
+  // State & Deferred Values
+  // ------------------------------------------
   const [query, setQuery] = useState("");
   
-  // React 19: useDeferredValue(value, initialValue)
-  // The initialValue lets us provide a value for the initial render so the component isn't blocked.
+  /**
+   * useDeferredValue defers non-urgent state updates, keeping the primary input responsive
+   * even during high-load render computations.
+   */
   const deferredQuery = useDeferredValue(query, "");
 
-  // An artificially heavy filtering operation
+  // ------------------------------------------
+  // Heavy Filtration Operation
+  // ------------------------------------------
   const filteredItems = useMemo(() => {
-    if (!deferredQuery) return MOCK_ITEMS.slice(0, 100); // just show some
+    if (!deferredQuery) return MOCK_ITEMS.slice(0, 100);
 
-    // eslint-disable-next-line react-hooks/purity
+    // Simulate an artificially heavy rendering task (20ms thread block)
     const start = performance.now();
-    // eslint-disable-next-line react-hooks/purity
     while (performance.now() - start < 20) {
-      // Artificially block the thread for 20ms to simulate complex logic per render
+      // Blocks JS thread to demonstrate concurrent yield behaviors
     }
 
     return MOCK_ITEMS.filter(
@@ -38,12 +55,16 @@ export default function PerformanceLabPage() {
     ).slice(0, 100);
   }, [deferredQuery]);
 
-  const isStale = query !== deferredQuery;
+  const isStale = query !== deferredQuery; // Indicators if current input and resolved search values differ
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-8 sm:p-20">
       <div className="max-w-4xl mx-auto flex flex-col gap-10">
         
+        {/* Navigation & Header */}
         <header className="flex flex-col gap-6">
           <Link
             href="/"
@@ -64,6 +85,7 @@ export default function PerformanceLabPage() {
           </div>
         </header>
 
+        {/* Interactive Search Grid */}
         <section className="flex flex-col gap-6">
           <div className="relative w-full max-w-lg">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
@@ -111,6 +133,7 @@ export default function PerformanceLabPage() {
             )}
           </div>
         </section>
+
       </div>
     </div>
   );

@@ -1,6 +1,10 @@
 import { KanbanColumn } from "./actions";
 import KanbanClient from "./KanbanClient";
 
+// ==========================================
+// Static Mock Data
+// ==========================================
+
 const INITIAL_DATA: KanbanColumn[] = [
   {
     id: "todo",
@@ -29,6 +33,14 @@ const INITIAL_DATA: KanbanColumn[] = [
   },
 ];
 
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * KanbanPage acts as the entry page for the drag-and-drop Kanban specimen.
+ * Feeds mocked data to the client-side component which manages optimistic layout syncs.
+ */
 export default function KanbanPage() {
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-50 p-8 md:p-12">

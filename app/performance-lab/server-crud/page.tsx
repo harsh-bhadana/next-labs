@@ -1,14 +1,20 @@
 import Link from "next/link";
 import { getTodos } from "./data";
 import { connection } from "next/server";
-import { 
-  addTodoAction, 
-} from "./actions";
+import { addTodoAction } from "./actions";
 import { FormStatusButton, ToggleButton, DeleteButton, ReorderButton } from "./todo-client";
 import { Suspense } from "react";
 
+// ==========================================
+// Sub-Components
+// ==========================================
+
+/**
+ * TodoListContent resolves the asynchronous data fetching from the database
+ * and renders the lists of tasks with interactive status actions.
+ */
 async function TodoListContent() {
-  await connection();
+  await connection(); // Force dynamic server rendering
   const todos = await getTodos();
 
   return (
@@ -30,7 +36,7 @@ async function TodoListContent() {
               }
             `}
           >
-            {/* Reorder Buttons */}
+            {/* Reorder Actions */}
             <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
               <ReorderButton 
                 id={todo.id} 
@@ -46,15 +52,15 @@ async function TodoListContent() {
               />
             </div>
 
-            {/* Toggle Completion */}
+            {/* Toggle Completion State */}
             <ToggleButton id={todo.id} completed={todo.completed} />
 
-            {/* Todo Text */}
+            {/* Todo Text Entry */}
             <span className={`flex-1 text-sm font-medium transition-all ${todo.completed ? "line-through text-zinc-500 italic" : "text-zinc-800 dark:text-zinc-200"}`}>
               {todo.text}
             </span>
 
-            {/* Delete Button */}
+            {/* Delete Mutation Button */}
             <DeleteButton id={todo.id} />
           </div>
         ))
@@ -63,6 +69,9 @@ async function TodoListContent() {
   );
 }
 
+/**
+ * Loading skeleton component for the server todo list resolver.
+ */
 function TodoListSkeleton() {
   return (
     <div className="flex flex-col gap-3 animate-pulse">
@@ -73,22 +82,30 @@ function TodoListSkeleton() {
   );
 }
 
+// ==========================================
+// Page Entry Point
+// ==========================================
+
+/**
+ * ServerCrudPage showcases zero-client-state React Server Component CRUD
+ * using native React Server Actions for mutations.
+ */
 export default async function ServerCrudPage() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500/30">
-      {/* Background Decor */}
+      {/* Decorative background radial gradients */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.05)_0%,transparent_50%)] pointer-events-none" />
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(236,72,153,0.05)_0%,transparent_50%)] pointer-events-none" />
 
       <div className="relative max-w-2xl mx-auto px-6 py-20 flex flex-col gap-12">
-        {/* Header */}
+        {/* Navigation & Header Banners */}
         <header className="flex flex-col gap-6">
-            <Link
-              href="/performance-lab"
-              className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-            >
-              ← Back to Performance Lab
-            </Link>
+          <Link
+            href="/performance-lab"
+            className="group flex w-fit items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            ← Back to Performance Lab
+          </Link>
 
           <div className="flex flex-col gap-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 w-fit rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-medium">
@@ -112,7 +129,7 @@ export default async function ServerCrudPage() {
           </div>
         </header>
 
-        {/* Add Todo Form */}
+        {/* Add Todo Form Submission Section */}
         <section>
           <form action={addTodoAction} className="relative group">
             <input
@@ -131,12 +148,12 @@ export default async function ServerCrudPage() {
           </form>
         </section>
 
-        {/* Todo List */}
+        {/* Todo List Content with dynamic Suspense boundaries */}
         <Suspense fallback={<TodoListSkeleton />}>
           <TodoListContent />
         </Suspense>
 
-        {/* Architecture Specs */}
+        {/* Architecture specifications panel */}
         <section className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-5 rounded-2xl bg-zinc-900/5 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col gap-3">
             <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
@@ -157,7 +174,7 @@ export default async function ServerCrudPage() {
           </div>
         </section>
 
-        {/* Technical Explainer */}
+        {/* Technical Explainer Callout */}
         <div className="flex items-start gap-3 p-5 rounded-2xl bg-indigo-500/5 border border-indigo-500/10">
           <div className="flex flex-col gap-1">
             <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">💡 Why this matters?</h4>

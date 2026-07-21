@@ -3,7 +3,13 @@ import Link from "next/link";
 import { ArrowLeft, Terminal, AlertTriangle, Activity, RefreshCcw, HardDrive } from "lucide-react";
 import { redirect } from "next/navigation";
 
-// Server Action to simulate events
+// ==========================================
+// Server Actions
+// ==========================================
+
+/**
+ * Server Action that records synthetic events or triggers server-side exceptions.
+ */
 async function triggerEvent(formData: FormData) {
   "use server";
   
@@ -11,8 +17,7 @@ async function triggerEvent(formData: FormData) {
   
   if (type === "slow") {
     const start = performance.now();
-    // Simulate slow work
-    await new Promise(resolve => setTimeout(resolve, 800));
+    await new Promise(resolve => setTimeout(resolve, 800)); // Simulate slow database query
     telemetry.record({
       type: "action",
       name: "Slow Database Query Simulation",
@@ -20,37 +25,40 @@ async function triggerEvent(formData: FormData) {
       metadata: { query: "SELECT * FROM heavy_data", rows: 15302 }
     });
   } else if (type === "error") {
-    // This will trigger onRequestError in instrumentation.ts
-    throw new Error("Simulated Server-Side Crash");
+    throw new Error("Simulated Server-Side Crash"); // Triggers onRequestError in instrumentation.ts
   }
   
   redirect("/devx-lab/instrumentation");
 }
 
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * InstrumentationPage monitors startup performance and captures
+ * server-side error events into a telemetry stream.
+ */
 export default async function InstrumentationPage() {
-  // Record page render
   const isBuild = process.env.NEXT_PHASE === 'phase-production-build' || process.env.NEXT_PHASE === 'phase-production-server';
-  // eslint-disable-next-line react-hooks/purity
   const renderStart = isBuild ? 0 : performance.now();
   const traces = telemetry.getTraces();
   
-  // Record this render event
-  // Note: This will show up on the NEXT refresh since this is an RSC that already started rendering
+  // Record this render event in the server telemetry store
   telemetry.record({
     type: "render",
     name: "Instrumentation Dashboard Render",
-    // eslint-disable-next-line react-hooks/purity
     duration: isBuild ? 0 : performance.now() - renderStart,
     metadata: { path: "/devx-lab/instrumentation" }
   });
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black selection:bg-indigo-500/30">
-      
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(79,70,229,0.05)_0%,transparent_50%)] pointer-events-none"></div>
 
       <main className="relative flex w-full max-w-4xl flex-col items-start justify-start py-20 px-6 sm:px-12 gap-10">
         
+        {/* Navigation */}
         <Link 
           href="/devx-lab"
           className="group flex items-center gap-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors text-sm font-medium"
@@ -59,6 +67,7 @@ export default async function InstrumentationPage() {
           Back to Lab
         </Link>
 
+        {/* Header Section */}
         <header className="flex flex-col gap-6 w-full">
           <div className="inline-flex items-center gap-2 px-3 py-1 self-start rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider">
             <Terminal className="w-3.5 h-3.5" />
@@ -72,7 +81,7 @@ export default async function InstrumentationPage() {
           </p>
         </header>
 
-        {/* Controls */}
+        {/* Interactive Simulation Controls */}
         <section className="w-full flex flex-wrap gap-4">
           <form action={triggerEvent}>
             <input type="hidden" name="type" value="slow" />
@@ -96,7 +105,7 @@ export default async function InstrumentationPage() {
           </Link>
         </section>
 
-        {/* Traces Dashboard */}
+        {/* Traces Log Dashboard View */}
         <section className="w-full flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-50 flex items-center gap-2">

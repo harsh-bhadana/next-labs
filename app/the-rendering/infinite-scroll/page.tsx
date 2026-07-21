@@ -4,7 +4,14 @@ import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
-// --- Dynamic Content Component ---
+// ==========================================
+// Sub-Components
+// ==========================================
+
+/**
+ * InfiniteScrollContent fetches the initial page offset data on the server
+ * and renders the client-side infinite scroller tracker.
+ */
 async function InfiniteScrollContent() {
   const initialState = await fetchMoreItems({
     items: [],
@@ -15,11 +22,19 @@ async function InfiniteScrollContent() {
   return <InfiniteScrollList initialState={initialState} />;
 }
 
-// --- Main Page ---
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * InfiniteScrollPage renders the infinite list viewport inside Suspense bounds.
+ */
 export default function InfiniteScrollPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 font-[family-name:var(--font-geist-sans)]">
       <div className="max-w-2xl mx-auto px-6 py-24 space-y-12">
+        
+        {/* Page Titles */}
         <div className="space-y-4 flex flex-col items-start">
           <Link
             href="/"
@@ -38,6 +53,7 @@ export default function InfiniteScrollPage() {
           </div>
         </div>
 
+        {/* Dynamic Stream viewport */}
         <Suspense fallback={
           <div className="flex flex-col items-center justify-center p-12 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
              <Loader2 className="w-8 h-8 animate-spin text-zinc-400 mb-2" />
@@ -46,6 +62,7 @@ export default function InfiniteScrollPage() {
         }>
           <InfiniteScrollContent />
         </Suspense>
+        
       </div>
     </div>
   );

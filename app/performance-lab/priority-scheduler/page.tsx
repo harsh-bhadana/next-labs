@@ -4,7 +4,10 @@ import { useState, useEffect, useRef, useTransition, useMemo } from "react";
 import Link from "next/link";
 import { ArrowLeft, Play, Pause, RefreshCw, Cpu, Gauge, AlertCircle, Database, Search, ArrowUpDown, Clock } from "lucide-react";
 
-// Types
+// ==========================================
+// Types & Core Configurations
+// ==========================================
+
 interface LogItem {
   id: number;
   timestamp: string;
@@ -15,7 +18,6 @@ interface LogItem {
   message: string;
 }
 
-// Service definitions
 const SERVICES = [
   "auth-service",
   "api-gateway",
@@ -53,7 +55,14 @@ const GENERATED_LOGS: LogItem[] = Array.from({ length: 15000 }).map((_, i) => {
   };
 });
 
-// Canvas Particle Class for the background simulation
+// ==========================================
+// Canvas Particle Simulation Engine
+// ==========================================
+
+/**
+ * Particle entity responsible for animating visual nodes on the canvas.
+ * Repels cursor movement and bounces off container bounds.
+ */
 class Particle {
   x: number;
   y: number;
@@ -75,11 +84,11 @@ class Particle {
     this.x += this.vx;
     this.y += this.vy;
 
-    // Bounce off walls
+    // Bounce off bounds
     if (this.x < 0 || this.x > width) this.vx *= -1;
     if (this.y < 0 || this.y > height) this.vy *= -1;
 
-    // Interactive mouse repulsion
+    // Repulsion force from interactive mouse cursor coordinates
     if (mouse.active) {
       const dx = this.x - mouse.x;
       const dy = this.y - mouse.y;
@@ -91,7 +100,7 @@ class Particle {
       }
     }
 
-    // Speed limits
+    // Limit maximum particle speed
     const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
     if (speed > 3) {
       this.vx = (this.vx / speed) * 3;
@@ -106,23 +115,37 @@ class Particle {
     ctx.shadowBlur = 6;
     ctx.shadowColor = this.color;
     ctx.fill();
-    ctx.shadowBlur = 0; // Reset shadow for efficiency
+    ctx.shadowBlur = 0; // Reset shadow for layout performance efficiency
   }
 }
 
+// ==========================================
+// Main Component Implementation
+// ==========================================
+
+/**
+ * PrioritySchedulerPage tracks FPS logs and filters data using concurrent transitions.
+ */
 export default function PrioritySchedulerPage() {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [jankMode, setJankMode] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [deferredQuery, setDeferredQuery] = useState("");
-  const [sortBy, setSortBy] = useState<"id" | "load" | "service">("id");
+  // ------------------------------------------
+  // UI & Demo Settings State
+  // ------------------------------------------
+  const [isPlaying, setIsPlaying] = useState(true);          // Toggles active particle rendering ticks
+  const [jankMode, setJankMode] = useState(false);            // Simulates sync state blocking rendering
+  const [searchQuery, setSearchQuery] = useState("");        // Controlled query input string
+  const [deferredQuery, setDeferredQuery] = useState("");    // Deferred query bound to transitions
+  const [sortBy, setSortBy] = useState<"id" | "load" | "service">("id"); // Active sorting criteria
   
   const [isPending, startTransition] = useTransition();
 
+  // ------------------------------------------
+  // Performance Telemetry Stats
+  // ------------------------------------------
   const [fps, setFps] = useState(60);
   const [fpsHistory, setFpsHistory] = useState<number[]>(Array(40).fill(60));
   const [renderLatency, setRenderLatency] = useState(0);
 
+  // Refs for tracking canvas state and telemetry markers
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
   const animationFrameRef = useRef<number | null>(null);
@@ -130,7 +153,9 @@ export default function PrioritySchedulerPage() {
   const frameCountRef = useRef(0);
   const fpsIntervalRef = useRef<number>(0);
 
-  // Initialize and run Particle Canvas
+  // ------------------------------------------
+  // Particle Canvas Lifecycle Setup
+  // ------------------------------------------
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -158,7 +183,7 @@ export default function PrioritySchedulerPage() {
         fpsIntervalRef.current = timestamp;
       }
 
-      // Compute FPS
+      // Compute FPS metrics every 500ms
       frameCountRef.current++;
       const elapsed = timestamp - fpsIntervalRef.current;
       if (elapsed >= 500) {
@@ -171,11 +196,11 @@ export default function PrioritySchedulerPage() {
 
       lastTimeRef.current = timestamp;
 
-      // Clear Canvas
-      ctx.fillStyle = "rgba(9, 9, 11, 0.2)"; // trailing fade effect
+      // Clear Canvas with alpha value to create trailing traces
+      ctx.fillStyle = "rgba(9, 9, 11, 0.2)";
       ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
-      // Draw Connection Lines between close particles
+      // Draw connection lines between neighboring particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -193,7 +218,7 @@ export default function PrioritySchedulerPage() {
         }
       }
 
-      // Update and Draw Particles
+      // Update and draw particles within layout viewport
       particles.forEach((p) => {
         if (isPlaying) {
           p.update(canvas.clientWidth, canvas.clientHeight, mouseRef.current);
@@ -214,6 +239,9 @@ export default function PrioritySchedulerPage() {
     };
   }, [isPlaying]);
 
+  // ------------------------------------------
+  // Cursor coordinate trackers
+  // ------------------------------------------
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -229,17 +257,19 @@ export default function PrioritySchedulerPage() {
     mouseRef.current.active = false;
   };
 
-  // Heavy filter & sort computation
+  // ------------------------------------------
+  // Heavy Computation Block
+  // ------------------------------------------
   const filteredAndSortedLogs = useMemo(() => {
     const t0 = performance.now();
 
-    // 1. Simulate an artificially heavy calculations block (60ms) to ensure CPU stress
+    // Simulate an artificially heavy computation thread freeze (60ms)
     const blockStart = performance.now();
     while (performance.now() - blockStart < 60) {
-      // Artificially block JavaScript thread to drop render priority and trigger jank
+      // Blocks JS thread to drop frame rate metrics and trigger jank
     }
 
-    // 2. Filter 15,000 items
+    // Filter 15,000 items
     let result = GENERATED_LOGS;
     if (deferredQuery) {
       const lowerQuery = deferredQuery.toLowerCase();
@@ -251,7 +281,7 @@ export default function PrioritySchedulerPage() {
       );
     }
 
-    // 3. Sort
+    // Sort items
     if (sortBy === "load") {
       result = [...result].sort((a, b) => parseInt(b.load) - parseInt(a.load));
     } else if (sortBy === "service") {
@@ -267,10 +297,12 @@ export default function PrioritySchedulerPage() {
       setRenderLatency(Math.round(t1 - t0));
     }, 0);
 
-    return result.slice(0, 100); // Only render top 100 in DOM for layout stability
+    return result.slice(0, 100); // Render top 100 logs in the DOM list viewport
   }, [deferredQuery, sortBy]);
 
-  // Handle query update with scheduler priority routing
+  // ------------------------------------------
+  // Scheduler Priority Routers
+  // ------------------------------------------
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setSearchQuery(val);
@@ -286,7 +318,6 @@ export default function PrioritySchedulerPage() {
     }
   };
 
-  // Handle Sort changes with scheduler priority routing
   const handleSortChange = (newSort: "id" | "load" | "service") => {
     if (jankMode) {
       setSortBy(newSort);
@@ -297,17 +328,18 @@ export default function PrioritySchedulerPage() {
     }
   };
 
-  // Reset demo states
   const handleReset = () => {
     setSearchQuery("");
     setDeferredQuery("");
     setSortBy("id");
   };
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-6 sm:p-12 md:p-20 relative overflow-hidden">
       
-      {/* Background radial glow */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-6xl mx-auto flex flex-col gap-8 relative z-10">
@@ -338,7 +370,7 @@ export default function PrioritySchedulerPage() {
               </p>
             </div>
             
-            {/* Real-time FPS Badge */}
+            {/* FPS Badge */}
             <div className="flex items-center gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 rounded-2xl shadow-sm self-start md:self-auto">
               <div className="flex flex-col">
                 <span className="text-xs text-zinc-500 font-medium uppercase tracking-wider">Main Loop FPS</span>
@@ -355,10 +387,10 @@ export default function PrioritySchedulerPage() {
           </div>
         </header>
 
-        {/* Dashboard Layout */}
+        {/* Dashboard Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Controls & Search Pane */}
+          {/* Scheduler Controls */}
           <div className="lg:col-span-5 flex flex-col gap-6 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 p-6 rounded-3xl shadow-sm">
             
             <div className="flex justify-between items-center border-b border-zinc-100 dark:border-zinc-900 pb-3">
@@ -513,13 +545,9 @@ export default function PrioritySchedulerPage() {
             </div>
           </div>
 
-          {/* Canvas & Graph Pane */}
+          {/* Interactive Visualizer Canvas */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            
-            {/* Visualizer Canvas */}
             <div className="relative h-[320px] sm:h-[400px] bg-zinc-950 border border-zinc-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between p-6">
-              
-              {/* Canvas element */}
               <canvas
                 ref={canvasRef}
                 onMouseMove={handleMouseMove}
@@ -527,7 +555,6 @@ export default function PrioritySchedulerPage() {
                 className="absolute inset-0 w-full h-full cursor-crosshair"
               />
 
-              {/* Top Controls Overlay */}
               <div className="relative z-10 flex justify-between items-center w-full">
                 <span className="text-xs font-semibold bg-zinc-900/80 text-zinc-300 border border-zinc-800 px-3 py-1 rounded-full backdrop-blur-sm">
                   Interactive Core Loop
@@ -542,7 +569,6 @@ export default function PrioritySchedulerPage() {
                 </button>
               </div>
 
-              {/* Bottom Instructions Overlay */}
               <div className="relative z-10 self-start text-left bg-zinc-900/80 border border-zinc-800/80 px-4 py-2.5 rounded-2xl max-w-sm backdrop-blur-sm">
                 <p className="text-[11px] text-zinc-400 leading-normal">
                   Hover your cursor inside the canvas. The particles will react to mouse coordinates at 60Hz. Under synchronous load, the animation will freeze.
@@ -550,10 +576,8 @@ export default function PrioritySchedulerPage() {
               </div>
             </div>
 
-            {/* Latency & Graph telemetry card */}
+            {/* Live Telemetry Profiler */}
             <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 p-6 rounded-3xl shadow-sm flex flex-col gap-6">
-              
-              {/* Profile Details */}
               <div className="grid grid-cols-2 gap-4 border-b border-zinc-100 dark:border-zinc-900 pb-5">
                 <div className="flex flex-col">
                   <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Thread CPU Wait</span>
@@ -581,13 +605,11 @@ export default function PrioritySchedulerPage() {
                   </div>
                 </div>
 
-                {/* Simple SVG Sparkline */}
                 <div className="h-16 w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-900 rounded-xl px-2 py-3">
                   <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 40">
                     <path
                       d={`M ${fpsHistory.map((val, idx) => {
                         const x = (idx / (fpsHistory.length - 1)) * 100;
-                        // Mapping 0-60 fps to height (40 to 0)
                         const y = 40 - (val / 60) * 35;
                         return `${x} ${y}`;
                       }).join(" L ")}`}

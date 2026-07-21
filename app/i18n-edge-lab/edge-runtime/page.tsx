@@ -8,23 +8,32 @@ import { Suspense } from "react";
 // when the global useCache compiler tier is active.
 // export const runtime = "edge";
 
+// ==========================================
+// Sub-Components
+// ==========================================
+
+/**
+ * EdgeRuntimeContent resolves geo-headers and localized parameters
+ * directly from edge-injected request headers.
+ */
 async function EdgeRuntimeContent() {
   const headersList = await headers();
   
-  // Simulation of some small work
+  // Simulate a brief database query/resolving operation
   await new Promise(resolve => setTimeout(resolve, 300)); 
   
+  // Retrieve location information injected at the CDN/Edge boundary
   const country = headersList.get("x-vercel-ip-country") || "Unknown";
   const city = headersList.get("x-vercel-ip-city") || "Unknown";
   const region = headersList.get("x-vercel-ip-country-region") || "Unknown";
   const userLanguage = headersList.get("accept-language")?.split(",")[0] || "en-US";
   
-  const end = 45; // Simulated latency
+  const end = 45; // Simulated low latency in milliseconds
   const ttfb = end.toFixed(2);
 
   return (
     <div className="w-full flex flex-col gap-10">
-        {/* Hero Performance Card */}
+        {/* Performance Latency Tracker Card */}
         <div className="w-full p-8 bg-zinc-900 text-zinc-50 rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl -mr-20 -mt-20 rounded-full"></div>
           
@@ -62,7 +71,7 @@ async function EdgeRuntimeContent() {
           </div>
         </div>
 
-        {/* Comparison Panel */}
+        {/* Runtime Comparison Panel */}
         <section className="w-full flex flex-col gap-6">
           <div className="flex items-center gap-3">
              <Activity className="w-5 h-5 text-zinc-500" />
@@ -70,7 +79,7 @@ async function EdgeRuntimeContent() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Edge Card */}
+            {/* Edge Runtime Details */}
             <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border-2 border-blue-500 shadow-sm flex flex-col gap-4">
                <div className="flex items-center justify-between">
                   <span className="text-sm font-bold text-blue-500 uppercase tracking-widest">Edge (Current)</span>
@@ -92,7 +101,7 @@ async function EdgeRuntimeContent() {
                </ul>
             </div>
 
-            {/* Node Card */}
+            {/* Standard Node.js Details */}
             <Link 
               href="/i18n-edge-lab/node-runtime"
               className="p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col gap-4 group"
@@ -122,6 +131,9 @@ async function EdgeRuntimeContent() {
   );
 }
 
+/**
+ * Loading skeleton component for Edge runtime dashboard content blocks.
+ */
 function EdgeRuntimeSkeleton() {
   return (
     <div className="w-full flex flex-col gap-10 animate-pulse">
@@ -134,10 +146,16 @@ function EdgeRuntimeSkeleton() {
   );
 }
 
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * EdgeRuntimePage configures layouts to benchmark TTFB and localized edge rendering.
+ */
 export default function EdgeRuntimePage() {
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black selection:bg-blue-500/30">
-      
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.05)_0%,transparent_50%)] pointer-events-none"></div>
 
       <main className="relative flex w-full max-w-4xl flex-col items-start justify-start py-20 px-6 sm:px-12 gap-10">

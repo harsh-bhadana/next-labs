@@ -21,9 +21,14 @@ import {
   type StepResult,
 } from "./actions";
 
-// ─── The key component ────────────────────────────────────────────────────────
-// This button reads form status from the NEAREST parent <form>.
-// Zero props needed. Zero state management. Pure React 19.
+// ==========================================
+// Form Primitives
+// ==========================================
+
+/**
+ * SubmitButton component that intercepts the form status of its nearest parent form boundary.
+ * Renders loading indicators and disables state dynamically without explicit parent state hooks.
+ */
 function SubmitButton({ label, icon }: { label: string; icon: React.ReactNode }) {
   const { pending } = useFormStatus();
 
@@ -48,7 +53,6 @@ function SubmitButton({ label, icon }: { label: string; icon: React.ReactNode })
       )}
       {pending ? "Processing…" : label}
 
-      {/* Shine effect */}
       {!pending && (
         <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       )}
@@ -56,7 +60,10 @@ function SubmitButton({ label, icon }: { label: string; icon: React.ReactNode })
   );
 }
 
-// ─── Global progress bar that also reads useFormStatus ─────────────────────────
+/**
+ * GlobalProgressBar reads form submission states from useFormStatus.
+ * Mounts a progress animator at the top of the browser window.
+ */
 function GlobalProgressBar() {
   const { pending } = useFormStatus();
 
@@ -69,7 +76,9 @@ function GlobalProgressBar() {
   );
 }
 
-// ─── Input that disables itself during submission ──────────────────────────────
+/**
+ * Input field component that disables itself dynamically during parent form submissions.
+ */
 function FormInput({
   label,
   name,
@@ -115,7 +124,9 @@ function FormInput({
   );
 }
 
-// ─── Textarea that disables itself during submission ─────────────────────────
+/**
+ * Textarea component that disables input during parent form action submission.
+ */
 function FormTextarea({
   label,
   name,
@@ -156,7 +167,13 @@ function FormTextarea({
   );
 }
 
-// ─── Step result banner ──────────────────────────────────────────────────────
+// ==========================================
+// Step Notification Banner
+// ==========================================
+
+/**
+ * StepResultBanner displays the status response returned from Server Actions.
+ */
 function StepResultBanner({ result }: { result: StepResult }) {
   return (
     <div
@@ -190,8 +207,14 @@ function StepResultBanner({ result }: { result: StepResult }) {
   );
 }
 
-// ─── Self-contained Step Card ────────────────────────────────────────────────
-// Each card owns its state via useActionState — zero parent state needed.
+// ==========================================
+// Container Step Card
+// ==========================================
+
+/**
+ * StepCard encapsulates a single form wizard stage. Uses React 19 useActionState
+ * to resolve action responses without requiring centralized layout hooks.
+ */
 function StepCard({
   number,
   title,
@@ -209,11 +232,7 @@ function StepCard({
   fields: React.ReactNode;
   submitLabel: string;
 }) {
-  // useActionState: the React 19 way to manage form results.
-  // The server action receives (prevState, formData) automatically.
-  // No useState, no setX, no onSubmit handler, no wrapper.
   const [result, formAction] = useActionState(serverAction, null);
-
   const isCompleted = result?.success;
 
   return (
@@ -226,7 +245,6 @@ function StepCard({
         }
       `}
     >
-      {/* Step header */}
       <div className="flex items-center gap-4 px-6 py-5 border-b border-zinc-800/50">
         <div
           className={`
@@ -254,15 +272,10 @@ function StepCard({
         )}
       </div>
 
-      {/* The <form> — useFormStatus children read from THIS form boundary */}
       <form action={formAction} className="p-6 flex flex-col gap-5">
-        {/* GlobalProgressBar reads pending from this <form> */}
         <GlobalProgressBar />
-
         {fields}
-
         {result && <StepResultBanner result={result} />}
-
         <SubmitButton
           label={submitLabel}
           icon={<ChevronRight className="w-4 h-4" />}
@@ -272,18 +285,21 @@ function StepCard({
   );
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// MAIN PAGE — Zero useState. Zero setX. Pure composition.
-// ═══════════════════════════════════════════════════════════════════════════════
+// ==========================================
+// Main Page component
+// ==========================================
+
+/**
+ * FormStatusPage renders a multi-step checkout form wizard
+ * using streaming hooks for state management.
+ */
 export default function FormStatusPage() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-blue-500/30">
-      {/* Background */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,#1e1b4b15_0%,transparent_60%)] pointer-events-none" />
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
       <div className="relative max-w-3xl mx-auto px-6 py-16 flex flex-col gap-12">
-        {/* Header */}
         <header className="flex flex-col gap-6">
           <Link
             href="/performance-lab"
@@ -327,7 +343,6 @@ export default function FormStatusPage() {
           </div>
         </header>
 
-        {/* Step forms — each is fully self-contained */}
         <div className="flex flex-col gap-6">
           <StepCard
             number={1}
@@ -395,7 +410,6 @@ export default function FormStatusPage() {
           />
         </div>
 
-        {/* Architecture explainer */}
         <div className="flex flex-col gap-4 p-6 bg-black/40 backdrop-blur-sm rounded-2xl border border-zinc-800">
           <div className="flex items-start gap-3">
             <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5 text-indigo-400" />
@@ -417,7 +431,6 @@ export default function FormStatusPage() {
         </div>
       </div>
 
-      {/* CSS for progress bar animation */}
       <style>{`
         @keyframes progress-bar {
           0% { width: 0%; margin-left: 0%; }

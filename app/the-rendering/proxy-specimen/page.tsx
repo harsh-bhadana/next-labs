@@ -3,12 +3,18 @@ import { Shield, Fingerprint, Globe, RefreshCcw, ArrowLeft, Lock, ShieldCheck, M
 import Link from "next/link";
 import { Suspense } from "react";
 
+// ==========================================
+// Sub-Components
+// ==========================================
 
-// --- Dynamic Content Component ---
+/**
+ * ProxyContent reads HTTP request headers injected by proxy.ts
+ * and outputs the security fingerprinting, geo-fencing, and token status.
+ */
 async function ProxyContent() {
   const headerList = await headers();
   
-  // Extract data injected by proxy.ts
+  // Extract custom headers set by the boundary proxy layer
   const fingerprint = headerList.get("x-lab-fingerprint") || "Not Generated";
   const geo = headerList.get("x-lab-geo") || "Undisclosed";
   const isRotated = headerList.get("x-token-rotated") === "true";
@@ -17,7 +23,7 @@ async function ProxyContent() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-700">
       
-      {/* Card: Request Fingerprinting */}
+      {/* Request Fingerprint Card */}
       <div className="group p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500">
         <div className="flex items-start justify-between mb-8">
           <div className="p-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-700 group-hover:bg-blue-500 group-hover:text-white group-hover:border-blue-400 transition-colors duration-500">
@@ -32,7 +38,7 @@ async function ProxyContent() {
         </code>
       </div>
 
-      {/* Card: Geo-Fencing */}
+      {/* Geo-Fencing Analysis Card */}
       <div className="group p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl hover:shadow-emerald-500/5 transition-all duration-500">
         <div className="flex items-start justify-between mb-8">
           <div className="p-3 rounded-2xl bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-700 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-400 transition-colors duration-500">
@@ -57,7 +63,7 @@ async function ProxyContent() {
         </div>
       </div>
 
-      {/* Card: JWT Rotation */}
+      {/* JWT Rotation Card */}
       <div className="md:col-span-2 group p-8 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:shadow-2xl hover:shadow-purple-500/5 transition-all duration-500 overflow-hidden relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/5 blur-[100px] pointer-events-none group-hover:bg-purple-500/10 transition-colors duration-500"></div>
         
@@ -100,16 +106,20 @@ async function ProxyContent() {
   );
 }
 
-// --- Main Page ---
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * ProxySpecimenPage displays details on centralized proxy middleware processing.
+ */
 export default function ProxySpecimenPage() {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-100 font-sans selection:bg-blue-500/30">
-      {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
       <main className="relative max-w-4xl mx-auto py-16 px-6 sm:px-12 flex flex-col gap-12">
         
-        {/* Navigation */}
         <Link 
           href="/" 
           className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors group w-fit"
@@ -118,7 +128,6 @@ export default function ProxySpecimenPage() {
           Back to Lab
         </Link>
 
-        {/* Header */}
         <header className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
              <div className="p-2 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
@@ -134,7 +143,6 @@ export default function ProxySpecimenPage() {
           </p>
         </header>
 
-        {/* Interactive Visualization w/ Suspense */}
         <Suspense fallback={
           <div className="flex flex-col items-center justify-center p-20 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl">
              <Loader2 className="w-10 h-10 animate-spin text-blue-500 mb-4" />
@@ -144,7 +152,6 @@ export default function ProxySpecimenPage() {
           <ProxyContent />
         </Suspense>
 
-        {/* Informational Section */}
         <section className="mt-8 p-10 rounded-[40px] bg-gradient-to-br from-zinc-900 to-zinc-950 text-zinc-400 border border-zinc-800 shadow-2xl">
            <h4 className="text-zinc-100 font-bold text-lg mb-4 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-blue-500" />

@@ -2,14 +2,27 @@ import Link from "next/link";
 import { getDictionary, Locale } from "@/lib/get-dictionary";
 import { Globe, ArrowLeft, Languages, Server, Zap, ShieldCheck, Map } from "lucide-react";
 
+// ==========================================
+// Static Generation
+// ==========================================
+
 export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'es' }, { locale: 'fr' }];
 }
 
+// ==========================================
+// Main Page Implementation
+// ==========================================
+
+/**
+ * I18nSpecimenPage displays multi-language translations.
+ * Reads the active locale parameter from Next.js dynamic routing segments
+ * and loads localized dictionaries on the server.
+ */
 export default async function I18nSpecimenPage({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string }>; // Route parameter containing the current language locale code
 }) {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
@@ -22,7 +35,6 @@ export default async function I18nSpecimenPage({
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-zinc-50 font-sans dark:bg-black selection:bg-indigo-500/30">
-      {/* Background Decor */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(79,70,229,0.05)_0%,transparent_50%)] pointer-events-none"></div>
       
       <main className="relative flex w-full max-w-4xl flex-col items-start justify-start py-20 px-6 sm:px-12 gap-12">
@@ -36,7 +48,7 @@ export default async function I18nSpecimenPage({
           {dict.specimen.back_to_lab}
         </Link>
 
-        {/* Header */}
+        {/* Header Section */}
         <header className="flex flex-col gap-6 w-full">
           <div className="inline-flex items-center gap-2 px-3 py-1 self-start rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider">
             <Globe className="w-3.5 h-3.5" />
@@ -50,7 +62,7 @@ export default async function I18nSpecimenPage({
           </p>
         </header>
 
-        {/* Content Section */}
+        {/* Interactive Layout Panel */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mt-4">
           
           {/* Language Switcher Card */}
@@ -65,7 +77,7 @@ export default async function I18nSpecimenPage({
                    {dict.specimen.switch_language}
                 </h2>
                 <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                  {dict.specimen.current_locale}: <span className="text-indigo-500">{locales.find(l => l.code === locale)?.name}</span>
+                   {dict.specimen.current_locale}: <span className="text-indigo-500">{locales.find(l => l.code === locale)?.name}</span>
                 </p>
              </div>
 
@@ -89,7 +101,7 @@ export default async function I18nSpecimenPage({
              </div>
           </section>
 
-          {/* Technical Explainer */}
+          {/* Technical features explainer */}
           <section className="grid grid-cols-1 gap-4">
             <div className="p-5 rounded-2xl bg-zinc-100 dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 flex gap-4 items-start">
               <div className="p-2 rounded-lg bg-white dark:bg-zinc-800 text-indigo-500 border border-zinc-200 dark:border-zinc-700">

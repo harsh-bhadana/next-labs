@@ -3,10 +3,19 @@ import Image from "next/image";
 import { photos } from "./data";
 import { ArrowLeft, Camera, ExternalLink, Maximize2 } from "lucide-react";
 
+// ==========================================
+// Main Component Implementation
+// ==========================================
+
+/**
+ * RoutingLabPage renders the main modal gallery interface.
+ * Implements Next.js Parallel Routing slots combined with Intercepting Route folders
+ * to present an overlay experience without shifting the main page context.
+ */
 export default function RoutingLabPage() {
   return (
     <main className="max-w-7xl mx-auto px-6 py-20 flex flex-col gap-12">
-      {/* Header */}
+      {/* Page Header */}
       <header className="flex flex-col gap-6">
         <Link
           href="/routing-lab"
@@ -37,7 +46,7 @@ export default function RoutingLabPage() {
         </div>
       </header>
 
-      {/* Gallery Grid */}
+      {/* Gallery Photo Grid */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {photos.map((photo) => (
           <Link
@@ -54,7 +63,7 @@ export default function RoutingLabPage() {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             
-            {/* Overlay */}
+            {/* Hover information overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">
@@ -70,7 +79,6 @@ export default function RoutingLabPage() {
               </p>
             </div>
 
-            {/* Accent Corner */}
             <div className={`absolute top-4 right-4 p-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 transition-all delay-100 scale-90 group-hover:scale-100`}>
               <Camera className="w-4 h-4 text-white" />
             </div>
@@ -78,7 +86,7 @@ export default function RoutingLabPage() {
         ))}
       </section>
 
-      {/* Architecture Alert */}
+      {/* Parallel Routing Architecture Specs Card */}
       <div className="mt-12 p-8 rounded-3xl bg-zinc-900 border border-zinc-800 flex flex-col gap-4">
         <div className="flex items-center gap-3 text-indigo-400">
            <ExternalLink className="w-5 h-5" />

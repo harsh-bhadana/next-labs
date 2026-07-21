@@ -3,32 +3,63 @@
 import React, { createContext, useContext, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
+// ==========================================
+// Types & Interfaces
+// ==========================================
+
+/**
+ * Supported transition modes for page routing animations.
+ */
 export type TransitionMode = "crossfade" | "slide" | "morph";
 
+/**
+ * Context interface managing active view transition mode and hook status.
+ */
 interface TransitionContextType {
-  mode: TransitionMode;
-  setMode: (mode: TransitionMode) => void;
-  startViewTransition: (navigate: () => void) => void;
-  isPending: boolean;
+  mode: TransitionMode;                           // The current transition animation mode
+  setMode: (mode: TransitionMode) => void;        // Setter to switch transition animation modes
+  startViewTransition: (navigate: () => void) => void; // Trigger function wrapping router actions
+  isPending: boolean;                             // React 19 transition pending status indicator
 }
 
+// Create transition context with undefined default
 const TransitionContext = createContext<TransitionContextType | undefined>(undefined);
 
+// ==========================================
+// Component Implementation
+// ==========================================
+
+/**
+ * Provider wrapping the application to supply View Transition API orchestration.
+ */
 export function TransitionProvider({ children }: { children: React.ReactNode }) {
-  const [mode, setMode] = useState<TransitionMode>("morph");
-  const [isPending, startTransition] = useTransition();
+  // ------------------------------------------
+  // State & Hooks
+  // ------------------------------------------
+  const [mode, setMode] = useState<TransitionMode>("morph"); // Controls the active keyframe animation stylesheet
+  const [isPending, startTransition] = useTransition();      // Wraps Next.js route updates in concurrent transitions
   const router = useRouter();
 
+  // ------------------------------------------
+  // Orchestration Methods
+  // ------------------------------------------
+
+  /**
+   * Executes a page navigation callback inside the browser's startViewTransition API.
+   * Falls back to a standard layout update if the API is unsupported.
+   */
   const startViewTransition = (navigate: () => void) => {
+    // Check browser compatibility for modern View Transitions API
     if (!document.startViewTransition) {
       navigate();
       return;
     }
 
-    // Apply mode-specific class to root element
+    // Apply mode-specific class to root document to select correct CSS keyframes
     document.documentElement.classList.remove("vt-crossfade", "vt-slide", "vt-morph");
     document.documentElement.classList.add(`vt-${mode}`);
 
+    // Trigger the view transition callback updating DOM elements
     const transition = document.startViewTransition(() => {
       return new Promise<void>((resolve) => {
         startTransition(() => {
@@ -41,11 +72,13 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
     });
 
     transition.finished.finally(() => {
-      // Clean up after transition
-      // We don't remove it immediately to allow the transition to finish
+      // Clean up after transition completes (optional hook)
     });
   };
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <TransitionContext.Provider value={{ mode, setMode, startViewTransition, isPending }}>
       <style dangerouslySetInnerHTML={{__html: `
@@ -100,6 +133,13 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
   );
 }
 
+// ==========================================
+// Consumer Hooks
+// ==========================================
+
+/**
+ * Hook to consume active View Transition API parameters.
+ */
 export function useViewTransition() {
   const context = useContext(TransitionContext);
   if (!context) {

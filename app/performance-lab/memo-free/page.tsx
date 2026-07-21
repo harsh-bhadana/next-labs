@@ -12,7 +12,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-// --- Types & Constants ---
+// ==========================================
+// Types & Core Configurations
+// ==========================================
+
 const GRID_SIZE = 50;
 
 type SensorData = {
@@ -22,7 +25,10 @@ type SensorData = {
   trend: 'up' | 'down' | 'stable';
 };
 
-// --- Helpers (Static to avoid compiler re-compute) ---
+// ==========================================
+// Static Helpers
+// ==========================================
+
 const generateInitialData = (random = false): SensorData[] =>
   Array.from({ length: GRID_SIZE }, (_, i) => ({
     id: i,
@@ -39,8 +45,18 @@ const getStatusColor = (status: string) => {
   }
 };
 
-// --- Main Specimen Page ---
+// ==========================================
+// Main Component Implementation
+// ==========================================
+
+/**
+ * MemoFreeLab component demonstrates React Compiler automatic optimization.
+ * Renders a high-frequency grid layout without manual useMemo or useCallback hooks.
+ */
 export default function MemoFreeLab() {
+  // ------------------------------------------
+  // Hooks & Telemetry State
+  // ------------------------------------------
   const [hasMounted, setHasMounted] = useState(false);
   const [sensors, setSensors] = useState<SensorData[]>(() => generateInitialData(false));
   const [tick, setTick] = useState(0);
@@ -49,25 +65,24 @@ export default function MemoFreeLab() {
   const frameCount = useRef(0);
   const lastTime = useRef(0);
 
-  // High-frequency update loop
+  // ------------------------------------------
+  // High-Frequency Update Loop
+  // ------------------------------------------
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasMounted(true);
     let animationFrameId: number;
     let batchOffset = 0;
-
     let lastUpdate = 0;
+
     const loop = (time: number) => {
-      // Keep frame counting running on every requestAnimationFrame tick
       frameCount.current++;
 
-      // Throttle React state updates to 80ms to prevent main thread blocking
+      // Throttle React state updates to 80ms to avoid locking UI
       if (time - lastUpdate >= 80) {
         setTick(t => t + 1);
 
         setSensors(prev => {
           const next = [...prev];
-          // Optimization: Update a small batch per frame to minimize churn
           const updateCount = Math.min(8, GRID_SIZE);
           for (let i = 0; i < updateCount; i++) {
             const idx = (batchOffset + i) % GRID_SIZE;
@@ -86,7 +101,7 @@ export default function MemoFreeLab() {
         lastUpdate = time;
       }
 
-      // FPS Calculation
+      // Live FPS calculations
       if (time - lastTime.current >= 1000) {
         setFps(frameCount.current);
         frameCount.current = 0;
@@ -104,20 +119,25 @@ export default function MemoFreeLab() {
     return <div className="min-h-screen bg-zinc-950" />;
   }
 
-  // --- HANDLER ---
+  // ------------------------------------------
+  // Event Handlers
+  // ------------------------------------------
   const handleReset = () => {
     setSensors(generateInitialData());
     setTick(0);
   };
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-blue-500/30 overflow-hidden flex flex-col">
-
-      {/* Dynamic Background Effect */}
+      
+      {/* Background Decorators */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,#1d4ed808_0%,transparent_70%)] pointer-events-none"></div>
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
-      {/* Header */}
+      {/* Persistent Navigation */}
       <nav className="relative z-10 border-b border-zinc-900 bg-black/50 backdrop-blur-md px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <Link href="/" className="p-2 hover:bg-zinc-900 rounded-xl transition-colors">
@@ -147,10 +167,10 @@ export default function MemoFreeLab() {
         </div>
       </nav>
 
-      {/* Main Content */}
+      {/* Main Workspace Panels */}
       <main className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-px bg-zinc-900 h-[calc(100vh-65px)]">
-
-        {/* Sensor Grid Workspace */}
+        
+        {/* Workspace Grid */}
         <section className="bg-zinc-950 p-6 overflow-y-auto custom-scrollbar">
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 xl:grid-cols-8 gap-3">
             {sensors.map((sensor) => (
@@ -162,9 +182,8 @@ export default function MemoFreeLab() {
           </div>
         </section>
 
-        {/* Analytics Sidebar */}
+        {/* Analytics Telemetry Sidebar */}
         <aside className="bg-black/40 backdrop-blur-xl p-8 flex flex-col gap-8 border-l border-zinc-900 overflow-y-auto">
-
           <div className="space-y-4">
             <h3 className="text-xs font-mono uppercase tracking-widest text-zinc-500 flex items-center gap-2">
               <Gauge className="w-3 h-3" />
@@ -216,7 +235,6 @@ export default function MemoFreeLab() {
               Proving that expensive re-render cycles are a thing of the past. The compiler understands your component tree and only updates what truly changed.
             </p>
           </div>
-
         </aside>
 
       </main>
@@ -224,7 +242,10 @@ export default function MemoFreeLab() {
   );
 }
 
-// --- Sub-Component (NOT Memoized) ---
+// ==========================================
+// Sub-Component (No manual memoization)
+// ==========================================
+
 function SensorCard({ sensor }: { sensor: SensorData }) {
   const colorClass = getStatusColor(sensor.status);
 

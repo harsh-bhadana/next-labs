@@ -7,15 +7,33 @@ import Link from "next/link";
 import Image from "next/image";
 import { galleryItems } from "./data";
 
+// ==========================================
+// Main Component
+// ==========================================
+
+/**
+ * ViewTransitionsGallery renders an interactive layout showcasing
+ * different animation modes (crossfade, slide, morph) powered by
+ * the experimental View Transitions API combined with React 19.
+ */
 export default function ViewTransitionsGallery() {
+  // ------------------------------------------
+  // Hooks & Context State
+  // ------------------------------------------
   const { mode, setMode } = useViewTransition();
 
+  // ------------------------------------------
+  // Static Configuration
+  // ------------------------------------------
   const modes: { id: TransitionMode; label: string; icon: any; description: string }[] = [
     { id: "crossfade", label: "Crossfade", icon: Layers, description: "Smooth root opacity transition" },
     { id: "slide", label: "Slide", icon: MoveRight, description: "Content slides across the screen" },
     { id: "morph", label: "Morph", icon: Maximize2, description: "Elements warp to new positions" },
   ];
 
+  // ------------------------------------------
+  // Render Layout
+  // ------------------------------------------
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 font-sans p-8 sm:p-20">
       
